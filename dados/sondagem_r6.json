@@ -1,0 +1,611 @@
+{
+ "rodada": 6,
+ "gerado_em": "2026-11-04T13:41:01-03:00",
+ "ambiente": "GitHub Actions",
+ "resumo": {
+  "ok": 13,
+  "falha": 3,
+  "nao_testado": 0
+ },
+ "fontes": [
+  {
+   "id": "cauc_csv",
+   "nome": "CAUC municipios (Tesouro Transparente): situacao dos itens de saude",
+   "url": "https://www.tesourotransparente.gov.br/ckan/dataset/72b5f371-0c35-4613-8076-c99c821a6410/resource/07af297a-5e59-494a-a88a-55ddfd2f4b01/download/relatorio-situacao-de-varios-entes---municipios---uf-todas---abrangencia-1.csv",
+   "ms": 7118,
+   "status": 200,
+   "bytes": 1944713,
+   "data_da_pesquisa": "Data da Pesquisa: 30/10/2026",
+   "municipios": 5569,
+   "colunas": 35,
+   "itens_presentes": [
+    "5.2",
+    "3.2.4",
+    "3.2.2",
+    "5.1"
+   ],
+   "situacao": {
+    "5.2": {
+     "data": 5569
+    },
+    "3.2.4": {
+     "pendente (!)": 1015,
+     "data": 4554
+    },
+    "3.2.2": {
+     "data": 5086,
+     "pendente (!)": 483
+    },
+    "5.1": {
+     "data": 5538,
+     "pendente (!)": 31
+    }
+   },
+   "datas_item_5_2": {
+    "30/10/26": 5569
+   },
+   "por_uf_5_2": {
+    "AC": {
+     "data": 22
+    },
+    "AL": {
+     "data": 102
+    },
+    "AM": {
+     "data": 62
+    },
+    "AP": {
+     "data": 16
+    },
+    "BA": {
+     "data": 417
+    },
+    "CE": {
+     "data": 184
+    },
+    "ES": {
+     "data": 78
+    },
+    "GO": {
+     "data": 246
+    },
+    "MA": {
+     "data": 217
+    },
+    "MG": {
+     "data": 853
+    },
+    "MS": {
+     "data": 79
+    },
+    "MT": {
+     "data": 142
+    },
+    "PA": {
+     "data": 144
+    },
+    "PB": {
+     "data": 223
+    },
+    "PE": {
+     "data": 184
+    },
+    "PI": {
+     "data": 224
+    },
+    "PR": {
+     "data": 399
+    },
+    "RJ": {
+     "data": 92
+    },
+    "RN": {
+     "data": 167
+    },
+    "RO": {
+     "data": 52
+    },
+    "RR": {
+     "data": 15
+    },
+    "RS": {
+     "data": 497
+    },
+    "SC": {
+     "data": 295
+    },
+    "SE": {
+     "data": 75
+    },
+    "SP": {
+     "data": 645
+    },
+    "TO": {
+     "data": 139
+    }
+   },
+   "exemplos": {
+    "Montanha": {
+     "ibge": "3203502",
+     "populacao": "17854",
+     "5.2": "30/10/26",
+     "3.2.4": "30/11/26",
+     "3.2.2": "30/11/26",
+     "5.1": "30/01/27"
+    },
+    "Vitória": {
+     "ibge": "3205309",
+     "populacao": "325453",
+     "5.2": "30/10/26",
+     "3.2.4": "30/11/26",
+     "3.2.2": "30/11/26",
+     "5.1": "30/01/27"
+    }
+   },
+   "ok": true
+  },
+  {
+   "id": "cauc_ckan",
+   "nome": "Tesouro Transparente: API do catalogo (CAUC)",
+   "url": "https://www.tesourotransparente.gov.br/ckan/api/3/action/package_show?id=72b5f371-0c35-4613-8076-c99c821a6410",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 6472,
+   "tipo": "application/json;charset=utf-8",
+   "tamanho_http": "6354",
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 6354,
+   "campos": [
+    "help",
+    "success",
+    "result"
+   ],
+   "registros": null,
+   "recursos": [
+    {
+     "nome": "Metadados CAUC Estados e DF",
+     "formato": "PDF",
+     "atualizado": "2025-03-06"
+    },
+    {
+     "nome": "Metadados CAUC Municípios",
+     "formato": "PDF",
+     "atualizado": "2025-03-06"
+    },
+    {
+     "nome": "Relatório da situação dos estados e do DF no CAUC",
+     "formato": "CSV",
+     "atualizado": "2026-10-30"
+    },
+    {
+     "nome": "Relatório da situação dos municípios no CAUC",
+     "formato": "CSV",
+     "atualizado": "2026-10-30"
+    }
+   ],
+   "atualizado_conjunto": "2026-11-03"
+  },
+  {
+   "id": "leitos_2026",
+   "nome": "Leitos SUS 2026 (zip): colunas e tamanho",
+   "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/Leitos_csv_2026.zip",
+   "ms": 1927,
+   "status": 200,
+   "arquivos_no_zip": [
+    [
+     "Leitos_2026.csv",
+     21631614
+    ]
+   ],
+   "codificacao": "latin-1",
+   "separador": ";",
+   "colunas": [
+    "COMP",
+    "REGIAO",
+    "UF",
+    "CO_IBGE",
+    "MUNICIPIO",
+    "MOTIVO_DESABILITACAO",
+    "CNES",
+    "NOME_ESTABELECIMENTO",
+    "RAZAO_SOCIAL",
+    "TP_GESTAO",
+    "CO_TIPO_UNIDADE",
+    "DS_TIPO_UNIDADE",
+    "NATUREZA_JURIDICA",
+    "DESC_NATUREZA_JURIDICA",
+    "NO_LOGRADOURO",
+    "NU_ENDERECO",
+    "NO_COMPLEMENTO",
+    "NO_BAIRRO",
+    "CO_CEP",
+    "NU_TELEFONE",
+    "NO_EMAIL",
+    "LEITOS_EXISTENTES",
+    "LEITOS_SUS",
+    "UTI_TOTAL_EXIST",
+    "UTI_TOTAL_SUS",
+    "UTI_ADULTO_EXIST",
+    "UTI_ADULTO_SUS",
+    "UTI_PEDIATRICO_EXIST",
+    "UTI_PEDIATRICO_SUS",
+    "UTI_NEONATAL_EXIST",
+    "UTI_NEONATAL_SUS",
+    "UTI_QUEIMADO_EXIST",
+    "UTI_QUEIMADO_SUS",
+    "UTI_CORONARIANA_EXIST",
+    "UTI_CORONARIANA_SUS"
+   ],
+   "amostra": [
+    "\"202601\";\"NORDESTE\";\"PE\";\"260290\";\"CABO DE SANTO AGOSTINHO\";;\"0000027\";\"CASA DE SAUDE SANTA HELENA\";\"CASA DE SAUDE E MATERNIDADE SANTA HELENA LTDA\";\"M\";\"05\";\"HOSPITAL GERAL\";\"2062\";\"HOSPITAL_PRIVADO\";\"AVN PRESIDENTE GETULIO VARGAS\";\"428\";;\"CENTRO\";\"54505560\";\"(81)35210355\";;\"64\";\"0\";\"0\";\"0\";\"0\";\"0\";",
+    "\"202601\";\"NORDESTE\";\"PE\";\"260290\";\"CABO DE SANTO AGOSTINHO\";;\"0000035\";\"HOSPITAL MENDO SAMPAIO\";\"PREFEITURA MUNICIPAL DO CABO DE SANTO AGOSTINHO\";\"M\";\"05\";\"HOSPITAL GERAL\";\"1244\";\"HOSPITAL_PÚBLICO\";\"BR 101 SUL KM 33\";\"S/N\";;\"CHARNECA\";\"54535430\";\"(81)35210857\";;\"29\";\"29\";\"0\";\"0\";\"0\";\"0\";\"0\";\"0\";\"0\";"
+   ],
+   "linhas": 64839,
+   "ok": true
+  },
+  {
+   "id": "ans_cobertura",
+   "nome": "ANS PDA: taxa_de_cobertura_de_planos_de_saude-047",
+   "url": "https://dadosabertos.ans.gov.br/FTP/PDA/taxa_de_cobertura_de_planos_de_saude-047/",
+   "ms": 1061,
+   "status": 200,
+   "arquivos": [
+    "dicionario-pda-047-taxa_de_cobertura_de_planos_de_saude.ods",
+    "pda-047-taxa_cobertura.csv"
+   ],
+   "total_arquivos": 2,
+   "lido": "pda-047-taxa_cobertura.csv",
+   "arquivo": "pda-047-taxa_cobertura.csv",
+   "codificacao": "latin-1",
+   "separador": ";",
+   "colunas": [
+    "PERIODO",
+    "CD_MUNICIPIO",
+    "NM_MUNICIPIO",
+    "CD_UF",
+    "SG_UF",
+    "CD_RM",
+    "NM_RM",
+    "SEXO",
+    "FAIXA_ETARIA",
+    "BENEF_ASSISTENCIA_MEDICA",
+    "BENEF_EXCLUS_ODONTOLOGICO",
+    "BENEF_TOTAL",
+    "POPULACAO",
+    "TX_COBERT_ASSISTENCIA_MEDICA",
+    "TX_COBERT_EXCLUSIVAMENTE_ODONTOLOGICO",
+    "TX_COBERT_TOTAL"
+   ],
+   "amostra": [
+    "\"2026\";\"120005\";\"Assis Brasil\";\"12\";\"AC\";\"00000\";\"Fora Da Região Metropolitana\";\"FEMININO\";\"Até 1 ano\";\"0\";\"0\";\"0\";\"0\";0,0000;0,0000;0,0000",
+    "\"2026\";\"120020\";\"Cruzeiro Do Sul\";\"12\";\"AC\";\"00000\";\"Fora Da Região Metropolitana\";\"FEMININO\";\"Até 1 ano\";\"11\";\"2\";\"13\";\"0\";0,0000;0,0000;0,0000"
+   ],
+   "ok": true
+  },
+  {
+   "id": "ans_regiao",
+   "nome": "ANS PDA: dados_de_beneficiarios_por_regiao_geografica",
+   "url": "https://dadosabertos.ans.gov.br/FTP/PDA/dados_de_beneficiarios_por_regiao_geografica/",
+   "ms": 1043,
+   "status": 200,
+   "arquivos": [
+    "benef_regiao_geog.zip",
+    "dicionario_de_dados_beneficiarios_por_regiao_geografica.pdf"
+   ],
+   "total_arquivos": 2,
+   "lido": "benef_regiao_geog.zip",
+   "arquivo": "tb_br_2509.csv",
+   "codificacao": "utf-8-sig",
+   "separador": ";",
+   "colunas": [
+    "ID_CMPT",
+    "SEXO",
+    "TP_VIGENCI",
+    "SG_UF",
+    "CD_CAPITAL",
+    "CD_RM",
+    "CD_ABRG",
+    "CD_CONTR",
+    "CD_SEGMENT",
+    "MODALIDADE",
+    "CD_FAIXA_E",
+    "NR_BENEF_T",
+    "NR_BENEF_M",
+    "NR_BENEF_O"
+   ],
+   "amostra": [
+    "2025-09;M;P;PR;000000;00000;4;1;04;23;99;1;0;1",
+    "2025-09;M;P;SP;000000;35030;4;1;06;25;99;1;1;0"
+   ],
+   "ok": true
+  },
+  {
+   "id": "ans_consolidado",
+   "nome": "ANS PDA: informacoes_consolidadas_de_beneficiarios-024",
+   "url": "https://dadosabertos.ans.gov.br/FTP/PDA/informacoes_consolidadas_de_beneficiarios-024/",
+   "ms": 711,
+   "status": 200,
+   "arquivos": [],
+   "total_arquivos": 0,
+   "ok": false
+  },
+  {
+   "id": "sisab_dicionario",
+   "nome": "SISAB: dicionario dos indicadores (xlsx)",
+   "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicadores_desempenho/PDA_2024_2026_etapa_1__dicionario_de_dados_indicadores_desempenho.xlsx",
+   "ms": 804,
+   "status": 200,
+   "abas": [
+    "DICIONARIO"
+   ],
+   "textos": [
+    "Ministério da Saúde (MS)",
+    "Secretaria de Atenção Primária à Saúde (SAPS)",
+    "Dicionário de dados",
+    "VARIÁVEL",
+    "DESCRIÇÃO",
+    "TIPO",
+    "FONTE",
+    "UF",
+    "Sigla da UF",
+    "Texto",
+    "IBGE",
+    "Código IBGE do Munícipio",
+    "Munícipio",
+    "Nome do município",
+    "Numerador",
+    "Apresenta a quantidade de pessoas presentes no denominador que foi acompanhada com os registros mínimos estabelecidos nas Notas Técnicas dos Indicadores de Dese",
+    "Numérico",
+    "SISAB",
+    "YYYY Qd (%)",
+    "Valor do Indicador no Quadrimestre",
+    "Percentual",
+    "Denominador Identificado",
+    "Apresenta a quantidade de pessoas identificadas a partir do acompanhamento na APS",
+    "Denominador Estimado",
+    "Quantidade de pessoas estimadas para acompanhamento de cada indicador",
+    "Cadastro",
+    "Usuários com cadastro vinculado às equipes do município",
+    "Base Externa",
+    "Apresenta o percentual arredondado de alcance dos denominadores informados sobre os denominadores estimados (Identificado/Estimado). Este cálculo define qual de",
+    "População",
+    "Estimativa populacional do IBGE para o ano",
+    "Competência",
+    "Competência de referência",
+    "Denominador Utilizado",
+    "Denominador adotado, considerando o estimado ou o identificado.",
+    "Condição da Equipe",
+    "Situação da equipe (geral, homologadas, válidas)",
+    "Valor da base externa utilizado para o cálculo do denominador estimado, considerando o percentual referente a PNS 2019 ou a quantidade de nascidos vivos referen",
+    "INDICADORES DE DESEMPENHO DO PROGRAMA PREVINE BRASIL [Portaria Nº 2.979, de novembro de 2019]"
+   ],
+   "ok": true
+  },
+  {
+   "id": "emendas_csv",
+   "nome": "Emendas (CSV completo, funcao Saude): valor com UF e municipio",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares/UNICO",
+   "ms": 894,
+   "status": 200,
+   "bytes_zip": 32535934,
+   "arquivo": "EmendasParlamentares.csv",
+   "linhas_lidas": 94769,
+   "anos": {
+    "2025": {
+     "linhas": 2179,
+     "pago": 22413962330,
+     "pago_com_uf": 0,
+     "pago_com_municipio": 761187872,
+     "linhas_sem_uf": 2179,
+     "sem_uf_localidades": {
+      "MÚLTIPLO": 20630488787,
+      "SÃO PAULO (UF)": 300486297,
+      "MARANHÃO (UF)": 117434270,
+      "MATO GROSSO (UF)": 116832960,
+      "ALAGOAS (UF)": 97606111,
+      "BOA VISTA - RR": 95297923,
+      "CUIABÁ - MT": 64697410,
+      "MATO GROSSO DO SUL (UF)": 61247419
+     },
+     "tipos": {
+      "Emenda Individual - Transferências com Finali": 11613017949,
+      "Emenda de Bancada": 5583714478,
+      "Emenda de Comissão": 5217229903
+     },
+     "pct_valor_com_uf": 0.0,
+     "pct_valor_com_municipio": 3.4
+    },
+    "2026": {
+     "linhas": 2065,
+     "pago": 19260098840,
+     "pago_com_uf": 0,
+     "pago_com_municipio": 406733477,
+     "linhas_sem_uf": 2065,
+     "sem_uf_localidades": {
+      "MÚLTIPLO": 18194214117,
+      "MATO GROSSO (UF)": 183719659,
+      "ALAGOAS (UF)": 76870699,
+      "SÃO PAULO (UF)": 69321897,
+      "PARANÁ (UF)": 56529889,
+      "BAHIA (UF)": 51881004,
+      "Nacional": 46454404,
+      "AMAZONAS (UF)": 42150447
+     },
+     "tipos": {
+      "Emenda Individual - Transferências com Finali": 9717597423,
+      "Emenda de Comissão": 4920821190,
+      "Emenda de Bancada": 4621680227
+     },
+     "pct_valor_com_uf": 0.0,
+     "pct_valor_com_municipio": 2.1
+    }
+   },
+   "ok": true
+  },
+  {
+   "id": "transferencias_csv",
+   "nome": "Transferencias da Uniao (CSV mensal): funcao Saude por municipio",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/transferencias/202610",
+   "tamanho_http": "4764521",
+   "ms": 873,
+   "status": 200,
+   "bytes_zip": 4764521,
+   "arquivo": "202610_Transferencias.csv",
+   "linhas_lidas": 184052,
+   "linhas_saude": 74897,
+   "total_saude": 12433055019,
+   "por_tipo": {
+    "Legais, Voluntárias e Específicas": 12433055019
+   },
+   "por_tipo_favorecido": {
+    "Administração Pública": 11547475669,
+    "Entidades Sem Fins Lucrativos": 805159852,
+    "Organizações Internacionais": 29657050,
+    "Entidades Empresariais Privadas": 22388931,
+    "Administração Pública Estadual ou do Dis": 15220210,
+    "Administração Pública Municipal": 12817165,
+    "Sem Informação": 336142
+   },
+   "ufs_com_valor": 27,
+   "municipios_distintos": 5570,
+   "municipios_casados_com_ibge": 5549,
+   "pct_casados": 99.6,
+   "nao_casados_amostra": [
+    "BELEM DE SAO FRANCISCO-PE",
+    "BRASOPOLIS-MG",
+    "CAMPO GRANDE (EX-AUGUSTO SEVERO)-RN",
+    "COUTO DE MAGALHAES-TO",
+    "DONA EUSEBIA-MG",
+    "ELDORADO DOS CARAJAS-PA",
+    "FORTALEZA DO TABOCAO-TO",
+    "IGUARACI-PE"
+   ],
+   "valor_com_municipio_pct": 74.6,
+   "ok": true
+  },
+  {
+   "id": "dca_escala",
+   "nome": "SICONFI DCA: 60 municipios em paralelo (tempo, falhas e entrega)",
+   "pedidos": 60,
+   "status": {
+    "200": 60
+   },
+   "ok": true,
+   "taxa_erro": 0.0,
+   "mediana_ms": 1114,
+   "p95_ms": 1540,
+   "retry_after": [],
+   "com_despesa_saude": 60,
+   "sem_entrega_dca": 0,
+   "pct_entrega": 100.0,
+   "pedidos_por_segundo": 5.02,
+   "minutos_para_5570": 18.5
+  },
+  {
+   "id": "arbo_grandes",
+   "nome": "InfoDengue: chikungunya e zika em municipios grandes",
+   "resultados": {
+    "chikungunya Rio de Janeiro": 43,
+    "chikungunya Sao Paulo": 43,
+    "chikungunya Goiania": 43,
+    "chikungunya Belo Horizonte": 43,
+    "chikungunya Recife": 43,
+    "zika Rio de Janeiro": 0,
+    "zika Sao Paulo": 0,
+    "zika Goiania": 0,
+    "zika Belo Horizonte": 0,
+    "zika Recife": 0
+   },
+   "ok": true
+  },
+  {
+   "id": "conasems_next",
+   "nome": "CONASEMS: rota de dados do Next.js (_next/data)",
+   "build_id_presente": true,
+   "data_tipo": "dict",
+   "data_chaves": [
+    "success",
+    "response",
+    "errors"
+   ],
+   "notas_na_home": [],
+   "rota_next_data": {
+    "status": 200,
+    "erro": null
+   },
+   "ok": true
+  },
+  {
+   "id": "siops_tabnet",
+   "nome": "SIOPS: consulta de indicadores municipais (TabNet)",
+   "url": "https://siops-asp.datasus.gov.br/CGI/tabcgi.exe?SIOPS/serhist/municipio/mIndicadores.def",
+   "metodo": "GET",
+   "nota": "procura de acesso aos indicadores do SIOPS",
+   "tentativas": 1,
+   "status": null,
+   "ms": 61082,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "URLError: <urlopen error timed out>"
+  },
+  {
+   "id": "siops_tabnet_http",
+   "nome": "SIOPS: consulta de indicadores municipais (HTTP)",
+   "url": "http://siops-asp.datasus.gov.br/CGI/deftohtm.exe?SIOPS/serhist/municipio/mIndicadores.def",
+   "metodo": "GET",
+   "nota": "procura de acesso aos indicadores do SIOPS",
+   "tentativas": 1,
+   "status": null,
+   "ms": 61097,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "URLError: <urlopen error timed out>"
+  },
+  {
+   "id": "siops_cons",
+   "nome": "SIOPS: portal de consultas",
+   "url": "http://siops.datasus.gov.br/consleirespfiscal.php",
+   "metodo": "GET",
+   "nota": "procura de acesso aos indicadores do SIOPS",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 2312,
+   "tipo": "text/html",
+   "tamanho_http": "44574",
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 44574,
+   "inicio": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"> <html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"pt-BR\" xml:lang=\"pt-BR\"> <h"
+  },
+  {
+   "id": "convenios_400",
+   "nome": "API de convenios: variacoes do pedido e mensagem de erro",
+   "variacoes": {
+    "so_pagina": {
+     "status": 400,
+     "inicio": "{\"Erro na API\":\"Para usar filtros em convênios, escolha um período de até 1 mês ou um convenente ou um órgão/entidade ou uma localidade (município ou estado-UF)"
+    },
+    "datas": {
+     "status": 200,
+     "inicio": "[{\"id\":353607313,\"dataReferencia\":\"2026-10-23\",\"dataInicioVigencia\":\"2005-12-30\",\"dataFinalVigencia\":\"2006-12-31\",\"dataPublicacao\":\"2005-12-30\",\"dataUltimaLiber"
+    },
+    "datas_vigencia": {
+     "status": 200,
+     "inicio": "[{\"id\":353643217,\"dataReferencia\":\"2026-10-23\",\"dataInicioVigencia\":\"2019-12-31\",\"dataFinalVigencia\":\"2026-10-22\",\"dataPublicacao\":\"2020-01-09\",\"dataUltimaLiber"
+    },
+    "ultima_liberacao": {
+     "status": 200,
+     "inicio": "[{\"id\":353634706,\"dataReferencia\":\"2026-10-23\",\"dataInicioVigencia\":\"2024-05-20\",\"dataFinalVigencia\":\"2028-05-20\",\"dataPublicacao\":\"2024-05-22\",\"dataUltimaLiber"
+    }
+   },
+   "ok": true
+  }
+ ]
+}
