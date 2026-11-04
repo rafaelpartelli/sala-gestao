@@ -432,7 +432,63 @@ async function rLeitos() {
   }
 }
 
-// ---------- 15% em saude (LC 141/2012): fontes que compoem a base e calculo do minimo ----------
+// ---------- 15% em saude (SIOPS, LC 141/2012) ----------
+const SIOPS_FONTES = [['iptu', 'IPTU (Imposto Predial e Territorial Urbano)', 'CF art. 156, I'], ['itbi', 'ITBI (transmissão de bens imóveis)', 'CF art. 156, II'], ['iss', 'ISS (serviços de qualquer natureza)', 'CF art. 156, III'],
+  ['irrf', 'IRRF sobre rendimentos pagos pelo município', 'CF art. 158, I'], ['fpm', 'Fundo de Participação dos Municípios (FPM)', 'CF art. 159, I, b'], ['itr', 'Cota-parte do ITR', 'CF art. 158, II'],
+  ['ipva', 'Cota-parte do IPVA (50%)', 'CF art. 158, III'], ['icms', 'Cota-parte do ICMS (25%)', 'CF art. 158, IV'], ['ipi', 'Cota-parte do IPI exportação', 'CF art. 159, § 3º'],
+  ['comp', 'Compensações financeiras de impostos e transferências', 'LC 141/2012, art. 6']];
+async function bloco15(alvo, ufs) {
+  const SR = D.siopsRes;
+  alvo.append(el('h3', null, `Aplicação em saúde e base dos 15%: ${nomeTerritorio()}`),
+    el('p', null, 'O município deve aplicar em ações e serviços públicos de saúde (ASPS), com recursos próprios, no mínimo 15% da receita de impostos e das transferências constitucionais e legais (LC 141/2012, art. 6 e 7). As fontes abaixo compõem a base. Repasses do SUS (fundo a fundo), convênios e emendas não entram na base.'));
+  if (!SR) {
+    alvo.append(verTabela('Ver as fontes da base', ['Fonte vinculada aos 15%', 'Base legal'], SIOPS_FONTES.map(([, n, l]) => [n, l]), []), aviso('Os valores do SIOPS ainda não foram coletados. O cálculo aparece aqui quando a coleta rodar.'));
+    return;
+  }
+  const ix = Object.fromEntries(SR.campos.map((c, i) => [c, i]));
+  const rotuloPeriodo = v => `${v[ix.bimestre]}º bimestre de ${v[ix.ano]}`;
+  if (S.uf === 'BR') {
+    const lin = ufs.map(u => ({u, x: SR.ufs[u]})).filter(l => l.x?.com_dado).sort((a, b) => b.x.abaixo_15 / b.x.com_dado - a.x.abaixo_15 / a.x.com_dado);
+    alvo.append(el('p', null, `Percentual aplicado em saúde pelos municípios no exercício ${SR.exercicio_anterior} (despesa liquidada sobre a base de cálculo). Estados com maior parcela de municípios abaixo de 15%:`),
+      ranking(lin.slice(0, 10).map(l => ({nome: UF_NOMES[l.u], valor: l.x.abaixo_15 / l.x.com_dado, rotulo: `${pct(l.x.abaixo_15 / l.x.com_dado, 1)} (${inteiro(l.x.abaixo_15)} de ${inteiro(l.x.com_dado)})`})), {max: 1}),
+      verTabela('Ver os 27 estados em tabela', ['Estado', 'Municípios com dado', 'Abaixo de 15%', 'Mediana do percentual aplicado'], lin.map(l => [UF_NOMES[l.u], inteiro(l.x.com_dado), inteiro(l.x.abaixo_15), decimal(l.x.pct_mediano, 1) + '%']), [1, 2, 3]));
+    alvo.append(el('p', {class: 'fonte'}, `Fonte: ${SR.fonte}. Coleta em ${dataBR(SR.gerado_em)}. ${SR.observacao || ''} Escolha um estado e um município para ver as fontes da base e o cálculo.`));
+    return;
+  }
+  const U = await siopsUF(S.uf);
+  if (!U) { alvo.append(aviso('Os dados do SIOPS deste estado ainda não foram coletados.')); return; }
+  if (!S.mun) {
+    const x = SR.ufs[S.uf];
+    const lista = Object.entries(U.m).map(([c, o]) => ({c, v: o.anterior})).filter(l => l.v && l.v[ix.pct_liquidado] != null).sort((a, b) => a.v[ix.pct_liquidado] - b.v[ix.pct_liquidado]);
+    alvo.append(el('div', {class: 'kpis'}, kpi('Municípios com dado no SIOPS', inteiro(x.com_dado), `de ${inteiro(x.municipios)} municípios`, 'em'),
+      kpi('Abaixo do mínimo de 15%', inteiro(x.abaixo_15), x.com_dado ? pct(x.abaixo_15 / x.com_dado, 1) + ' dos municípios com dado' : null, 'em'),
+      kpi('Mediana do percentual aplicado', decimal(x.pct_mediano, 1) + '%', `Exercício ${SR.exercicio_anterior}, despesa liquidada`, 'em')));
+    alvo.append(el('h3', null, 'Dez municípios com menor percentual aplicado'), ranking(lista.slice(0, 10).map(l => ({nome: nomeMun(l.c), valor: l.v[ix.pct_liquidado], rotulo: decimal(l.v[ix.pct_liquidado], 1) + '%'})), {max: 40}),
+      verTabela('Ver todos os municípios em tabela', ['Município', 'Base de cálculo', 'Mínimo (15%)', 'Aplicado (liquidado)', '% aplicado', 'Situação'], lista.map(l => [nomeMun(l.c), moeda(l.v[ix.base]), moeda(l.v[ix.minimo]), moeda(l.v[ix.aplicado_liquidado]), decimal(l.v[ix.pct_liquidado], 1) + '%', l.v[ix.pct_liquidado] >= 15 ? 'Acima de 15%' : 'Abaixo de 15%']), [1, 2, 3, 4]));
+    alvo.append(el('p', {class: 'fonte'}, `Fonte: ${SR.fonte}. Coleta em ${dataBR(U.gerado_em)}. ${SR.observacao || ''}`));
+    return;
+  }
+  const o = U.m[S.mun];
+  if (!o || (!o.anterior && !o.atual)) { alvo.append(aviso('Este município não tem demonstrativo de saúde homologado no SIOPS para os exercícios coletados.')); return; }
+  const cartao = (v, titulo) => {
+    const pl = v[ix.pct_liquidado], ok = pl != null && pl >= 15;
+    return el('div', {class: 'cartao-mun'}, el('h4', null, `${titulo}: ${rotuloPeriodo(v)} (homologado em ${v[ix.homologado_em]})`),
+      el('div', {class: 'kpis'}, kpi('Base de cálculo dos 15%', moeda(v[ix.base]), 'Impostos e transferências constitucionais', 'em'), kpi('Mínimo a aplicar (15%)', moeda(v[ix.minimo]), null, 'em'),
+        kpi('Aplicado em saúde (liquidado)', moeda(v[ix.aplicado_liquidado]), `Empenhado ${moeda(v[ix.aplicado_empenhado])}; pago ${moeda(v[ix.aplicado_pago])}`, 'em'),
+        kpi('Percentual aplicado', decimal(pl, 2) + '%', ok ? `Acima do mínimo de 15%, com folga de ${decimal(pl - 15, 2)} pontos` : `Abaixo do mínimo de 15% em ${decimal(15 - pl, 2)} pontos`, 'em')),
+      el('p', {class: 'fonte'}, `Pelo empenhado: ${decimal(v[ix.pct_empenhado], 2)}%. Pelo pago: ${decimal(v[ix.pct_pago], 2)}%.`));
+  };
+  const ref = o.anterior || o.atual;
+  if (o.anterior) alvo.append(cartao(o.anterior, 'Último exercício'));
+  if (o.atual) alvo.append(cartao(o.atual, 'Exercício atual (parcial)'));
+  const total = ref[ix.base];
+  alvo.append(el('h4', null, 'Fontes de recursos vinculadas aos 15%'),
+    ranking(SIOPS_FONTES.map(([k, n]) => ({nome: n, valor: ref[ix[k]] || 0, rotulo: `${moeda(ref[ix[k]] || 0)} (${total ? pct((ref[ix[k]] || 0) / total, 0) : ''})`})).sort((a, b) => b.valor - a.valor)),
+    verTabela('Ver as fontes em tabela', ['Fonte', 'Base legal', 'Receita realizada', '% da base'], SIOPS_FONTES.map(([k, n, l]) => [n, l, moeda(ref[ix[k]] || 0), total ? pct((ref[ix[k]] || 0) / total, 1) : 'sem dado']), [2, 3]));
+  alvo.append(aviso('O enquadramento final no limite considera as regras dos arts. 24 e 25 da LC 141/2012 (restos a pagar e diferenças de exercícios anteriores). Confira o demonstrativo oficial no SIOPS antes de decidir.'),
+    el('p', {class: 'fonte'}, `Fonte: ${SR.fonte}. Coleta em ${dataBR(U.gerado_em)}. O exercício anterior usa o 5º bimestre, o último com dados no SIOPS.`));
+}
+
 // ---------- transferencias federais, despesa e regularidade ----------
 async function rRecursos() {
   const alvo = limpar($('rec')), fonte = $('fonte-rec');
