@@ -1,4 +1,4 @@
-name: Sondar fontes da Sala de Gestao (rodada 5, tudo de uma vez)
+name: Rodada 5 - sondar todas as fontes (Sala de Gestao)
 
 on:
   workflow_dispatch:
