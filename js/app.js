@@ -4,6 +4,7 @@ import {icone, preencherIcones} from './icones.js';
 import {revelar, semMovimento} from './efeitos.js';
 import {montarMapa} from './mapa.js';
 import {montarJornada} from './jornada.js';
+import {indicadores} from './indicadores.js';
 import {localizar, descobrirTerritorio} from './geo.js';
 
 const D = {};       // dados carregados
@@ -34,7 +35,7 @@ const semana = se => se ? `${String(se).slice(4)}/${String(se).slice(0, 4)}` : '
 
 // ---------- carga ----------
 const ARQUIVOS = {terr: 'dados/territorio.json', dengueRes: 'dados/dengue_resumo.json', chikRes: 'dados/chikungunya_resumo.json', redeRes: 'dados/rede_resumo.json',
-  profRes: 'dados/profissionais_resumo.json', equipes: 'dados/equipes.json', equip: 'dados/equipamentos.json', leitos: 'dados/leitos.json', fin: 'dados/financiamento.json', em: 'dados/emendas.json',
+  profRes: 'dados/profissionais_resumo.json', equipes: 'dados/equipes.json', equip: 'dados/equipamentos.json', base15: 'dados/base15.json', leitos: 'dados/leitos.json', fin: 'dados/financiamento.json', em: 'dados/emendas.json',
   transf: 'dados/transferencias.json', desp: 'dados/despesa.json', cauc: 'dados/cauc.json', ans: 'dados/ans.json', aps: 'dados/aps_meta.json',
   notas: 'dados/notas.json', port: 'dados/portarias.json'};
 
@@ -209,8 +210,10 @@ async function rHospitais(alvo) {
   const cont = {};
   lista.forEach(h => { cont[h[4]] = (cont[h[4]] || 0) + 1; });
   const resumo = NAT.filter(n => cont[n]).map(n => `${inteiro(cont[n])} ${n.toLowerCase()}`).join(', ');
-  alvo.append(el('h3', null, `Hospitais em ${nomeTerritorio()}`), el('p', null, `${inteiro(lista.length)} hospitais ativos: ${resumo}.`),
-    verTabela(`Ver os hospitais (${inteiro(lista.length)})`, ['Hospital', 'Município', 'Tipo', 'Natureza', 'Atende SUS'], lista.slice(0, 500).map(h => [h[1], nomeMun(h[2]), TIPO_HOSP[h[3]] || 'Hospital', h[4], h[5] ? 'Sim' : 'Não']), []));
+  const ge = {}; lista.forEach(h => { const k = h[6] || 'Outra'; ge[k] = (ge[k] || 0) + 1; });
+  const gestao = ['Municipal', 'Estadual', 'Federal', 'Privada'].filter(k => ge[k]).map(k => `${inteiro(ge[k])} ${k === 'Privada' ? 'privados' : k === 'Federal' ? 'federais' : k === 'Estadual' ? 'de gestão estadual' : 'de gestão municipal'}`).join(', ');
+  alvo.append(el('h3', null, `Hospitais em ${nomeTerritorio()}`), el('p', null, `${inteiro(lista.length)} hospitais ativos: ${resumo}.`), gestao ? el('p', null, `Por esfera administrativa: ${gestao}.`) : null,
+    verTabela(`Ver os hospitais (${inteiro(lista.length)})`, ['Hospital', 'Município', 'Tipo', 'Natureza', 'Esfera', 'Atende SUS'], lista.slice(0, 500).map(h => [h[1], nomeMun(h[2]), TIPO_HOSP[h[3]] || 'Hospital', h[4], h[6] || '', h[5] ? 'Sim' : 'Não']), []));
 }
 
 // Equipamentos (CNES, arquivos EQ): grupos, disponibilidade ao SUS e participacao por natureza.
@@ -231,7 +234,38 @@ function rEquipamentos(alvo) {
     verTabela('Equipamentos em tabela', ['Grupo', 'Existentes', 'Em uso', 'Disponíveis ao SUS'], linhas.map(([t, v]) => [tipos[t] || `Grupo ${t}`, inteiro(v[0]), inteiro(v[1]), inteiro(v[2])]), [1, 2, 3]));
 }
 
-// ---------- financiamento ----------
+// ---------- financiamento: recursos ordinarios (fundo a fundo) e emendas, gestao estadual e municipal ----------
+// Metodologia do Radar de Recursos (partelli.pro/fundo): repasses fundo a fundo em valor bruto, divididos em Manutencao (custeio regular) e
+// Estruturacao da Rede (investimento); emendas parlamentares a parte, pelo ano da proposta (proposto, empenhado, pago). Fundo Estadual separado dos municipais.
+const recursosUF = uf => uf === 'BR' ? null : carregar(`dados/recursos/${uf}.json`);
+const nomeComp = c => { const t = String(c || '').toLowerCase().replace(/ - fundo rio doce/, ' (Fundo Rio Doce)').replace(/\bsus\b/, 'SUS'); return t.charAt(0).toUpperCase() + t.slice(1); };
+const somaRec = lista => {
+  const a = {fb: 0, fl: 0, fe: 0, fm: 0, s: 0, em: [0, 0, 0], eq: 0, comp: {}};
+  lista.filter(Boolean).forEach(o => { a.fb += o.fb; a.fl += o.fl; a.fe += o.fe; a.fm += o.fm; a.s += o.s; a.eq += o.eq || 0;
+    for (let i = 0; i < 3; i++) a.em[i] += o.em?.[i] || 0;
+    (o.comp || []).forEach(([ci, b, v]) => { const k = ci + '|' + b; a.comp[k] = (a.comp[k] || 0) + v; }); });
+  return a;
+};
+const GESTOES = [['mun', 'Gestão municipal'], ['est', 'Gestão estadual']];
+
+function blocoRecursos(alvo, o, {titulo, pop, comp}) {
+  const pc = (v, t) => t ? pct(v / t, 0) : null;
+  alvo.append(el('h3', null, titulo),
+    el('p', {class: 'rotulo-bloco'}, 'Recursos ordinários: repasses fundo a fundo do Ministério da Saúde (valor bruto no ano)'),
+    el('div', {class: 'kpis'},
+      kpi('Total fundo a fundo', moeda(o.fb), pop ? 'R$ ' + decimal(o.fb / pop, 0) + ' por habitante' : null, 'fin'),
+      kpi('Manutenção (custeio regular)', moeda(o.fm), pc(o.fm, o.fb) && pc(o.fm, o.fb) + ' do total', 'fin'),
+      kpi('Estruturação da rede (investimento)', moeda(o.fe), pc(o.fe, o.fb) && pc(o.fe, o.fb) + ' do total', 'fin'),
+      kpi('Saldo em conta', moeda(o.s), o.fb ? 'Índice de saldo: ' + pct(o.s / o.fb, 0) + ' do repasse do ano' : null, 'fin')),
+    el('p', {class: 'rotulo-bloco'}, 'Emendas parlamentares (pelo ano da proposta, à parte dos repasses ordinários)'),
+    el('div', {class: 'kpis'},
+      kpi('Emendas propostas', moeda(o.em[0]), o.eq ? `${inteiro(o.eq)} ${o.eq === 1 ? 'proposta' : 'propostas'}` : null, 'rec'),
+      kpi('Emendas empenhadas', moeda(o.em[1]), o.em[0] ? pct(o.em[1] / o.em[0], 0) + ' da proposta' : null, 'rec'),
+      kpi('Emendas pagas', moeda(o.em[2]), o.em[0] ? pct(o.em[2] / o.em[0], 0) + ' da proposta' : null, 'rec')));
+  const cl = Object.entries(o.comp).map(([k, v]) => { const [ci, b] = k.split('|'); return {nome: nomeComp(comp[ci]) + (+b ? ' (estruturação)' : ''), valor: v, rotulo: moeda(v)}; }).sort((a, b) => b.valor - a.valor);
+  if (cl.length) alvo.append(el('h4', null, 'Distribuição por componente'), ranking(cl.slice(0, 8)));
+}
+
 async function rFin() {
   const alvo = limpar($('fin')), fonte = $('fonte-fin');
   if (!D.fin) { fonte.textContent = ''; return indisponivel(alvo); }
@@ -239,26 +273,57 @@ async function rFin() {
   fonte.textContent = `Fonte: ${D.fin.fonte}. Extração do InvestSUS em ${meta.gerado}. Baixado em ${dataBR(D.fin.baixado_em)}. Valores oficiais nos Painéis InvestSUS do FNS.`;
   const dd = dias(D.fin.baixado_em);
   if (dd != null && dd > 10) alvo.append(aviso(`Atenção: os dados de financiamento foram baixados há ${dd} dias.`));
-  if (S.mun) {
-    alvo.append(el('p', null, 'O detalhe por município (repasses, saldos e emendas) está no Radar de Recursos. ', el('a', {href: 'https://partelli.pro/gestor/recursos/'}, 'Abrir o Radar de Recursos'), '.'));
+  alvo.append(el('p', {class: 'fonte'}, 'Como ler: recursos ordinários são os repasses fundo a fundo (valor bruto no ano), divididos em Manutenção e Estruturação da rede. As emendas parlamentares vêm de outro painel do InvestSUS, são contadas pelo ano da proposta e não devem ser somadas aos repasses ordinários. O Fundo Estadual de Saúde é separado dos fundos municipais.'));
+  if (S.uf === 'BR') {
+    const x = ufs.map(u => f[u]).filter(Boolean), s = c => x.reduce((a, b) => a + (b[c] || 0), 0);
+    alvo.append(el('div', {class: 'kpis'},
+      kpi('Repasses ordinários: total fundo a fundo', moeda(s('fb')), `Ano ${x[0].anoFaf}`),
+      kpi('Gestão estadual (fundos estaduais)', moeda(s('fbEst')), s('fb') ? pct(s('fbEst') / s('fb'), 0) + ' do total' : null),
+      kpi('Gestão municipal (fundos municipais)', moeda(s('fb') - s('fbEst')), s('fb') ? pct((s('fb') - s('fbEst')) / s('fb'), 0) + ' do total' : null),
+      kpi('Saldo em contas', moeda(s('s')), `Em ${x[0].saldoData}`),
+      kpi('Emendas propostas', moeda(s('ep')), `Ano ${x[0].anoEm}`),
+      kpi('Emendas empenhadas', moeda(s('ee'))),
+      kpi('Emendas pagas', moeda(s('eg')), s('ep') ? pct(s('eg') / s('ep'), 0) + ' da proposta' : null)));
+    const lin = ufs.map(u => ({u, v: f[u]?.pop ? (f[u].fb - (f[u].fbEst || 0)) / f[u].pop : null})).filter(l => l.v != null).sort((a, b) => b.v - a.v);
+    alvo.append(el('h3', null, 'Dez estados com maior repasse ordinário aos municípios por habitante'),
+      ranking(lin.slice(0, 10).map(l => ({nome: UF_NOMES[l.u], valor: l.v, rotulo: 'R$ ' + decimal(l.v, 0)}))),
+      verTabela('Ver os 27 estados em tabela', ['Estado', 'Municípios', 'Ordinário municipal', 'Ordinário estadual', 'Saldo', 'Emendas pagas'], ufs.map(u => f[u] && [UF_NOMES[u], inteiro(f[u].mun), moeda(f[u].fb - (f[u].fbEst || 0)), moeda(f[u].fbEst), moeda(f[u].s), moeda(f[u].eg)]).filter(Boolean), [1, 2, 3, 4, 5]));
     return;
   }
-  const x = ufs.map(u => f[u]).filter(Boolean), s = c => x.reduce((a, b) => a + (b[c] || 0), 0);
-  alvo.append(el('div', {class: 'kpis'},
-    kpi('Repasses fundo a fundo', moeda(s('fb')), `Ano ${x[0].anoFaf}`),
-    kpi('Parte do governo estadual', moeda(s('fbEst')), 'Dentro do total de repasses'),
-    kpi('Saldo em contas', moeda(s('s')), `Em ${x[0].saldoData}`),
-    kpi('Emendas: proposta', moeda(s('ep')), `Ano ${x[0].anoEm}`),
-    kpi('Emendas: empenhado', moeda(s('ee'))),
-    kpi('Emendas: pago', moeda(s('eg')), s('ep') ? pct(s('eg') / s('ep'), 0) + ' da proposta' : null)));
-  if (S.uf === 'BR') {
-    const lin = ufs.map(u => ({u, v: f[u]?.pop ? f[u].fb / f[u].pop : null})).filter(l => l.v != null).sort((a, b) => b.v - a.v);
-    alvo.append(el('h3', null, 'Dez estados com maior repasse fundo a fundo por habitante no ano'),
-      ranking(lin.slice(0, 10).map(l => ({nome: UF_NOMES[l.u], valor: l.v, rotulo: 'R$ ' + decimal(l.v, 0)}))),
-      verTabela('Ver os 27 estados em tabela', ['Estado', 'Municípios', 'Repasses', 'Saldo', 'Emendas pagas'], ufs.map(u => f[u] && [UF_NOMES[u], inteiro(f[u].mun), moeda(f[u].fb), moeda(f[u].s), moeda(f[u].eg)]).filter(Boolean), [1, 2, 3, 4]));
-  } else {
-    alvo.append(el('p', {class: 'fonte'}, `${f[S.uf].mun} municípios e o governo estadual. Detalhe por município no `, el('a', {href: 'https://partelli.pro/gestor/recursos/'}, 'Radar de Recursos'), '.'));
+  const R = await recursosUF(S.uf);
+  if (!R) { alvo.append(aviso('O detalhe por município deste estado ainda não foi coletado. Veja o ')); alvo.lastChild.append(el('a', {href: 'https://partelli.pro/gestor/recursos/'}, 'Radar de Recursos'), '.'); return; }
+  const nomeUF = UF_NOMES[S.uf], mun = Object.entries(R.m);
+  if (S.mun) {
+    const m = R.m[S.mun];
+    if (!m) return alvo.append(aviso('Este município não tem registro de repasses no Radar de Recursos.'));
+    const pop = D.munAtual?.pop, ordem = mun.filter(([c]) => MUN.get(c)?.pop).map(([c, v]) => [c, v.fb / MUN.get(c).pop]).sort((a, b) => b[1] - a[1]);
+    blocoRecursos(alvo, somaRec([m]), {titulo: `Gestão municipal: ${nomeTerritorio()}`, pop, comp: R.comp});
+    if (pop) { const pos = ordem.findIndex(([c]) => c === S.mun) + 1; alvo.append(el('p', {class: 'fonte'}, `Repasse ordinário por habitante: ${pos}º entre ${inteiro(ordem.length)} municípios de ${nomeUF}.`)); }
+    if (R.est) {
+      const e = R.est, mf = somaRec(mun.map(([, v]) => v));
+      alvo.append(el('h3', null, `Para diferenciar: gestão estadual em ${nomeUF}`),
+        el('div', {class: 'kpis'},
+          kpi('Fundo Estadual de Saúde: fundo a fundo', moeda(e.fb), 'Gestão estadual, fora do município', 'fin'),
+          kpi('Todos os fundos municipais do estado', moeda(mf.fb), `${inteiro(mun.length)} municípios`, 'fin'),
+          kpi('Este município no total dos municípios', pct(m.fb / mf.fb, 1), 'Participação no repasse ordinário municipal', 'fin')));
+    }
+    return;
   }
+  const gest = S.gestao || 'mun';
+  alvo.append(el('div', {class: 'chips', role: 'group', 'aria-label': 'Gestão'}, GESTOES.map(([k, rot]) =>
+    el('button', {class: 'chip', type: 'button', 'aria-pressed': String(k === gest), onclick: () => { S.gestao = k; rFin(); }}, rot))));
+  const pop = D.terr?.por_uf[S.uf]?.pop_soma;
+  if (gest === 'est') {
+    if (!R.est) return alvo.append(aviso('Sem dados do Fundo Estadual para este estado.'));
+    blocoRecursos(alvo, somaRec([R.est]), {titulo: `Gestão estadual: Fundo Estadual de Saúde de ${nomeUF}`, pop: null, comp: R.comp});
+    alvo.append(el('p', {class: 'fonte'}, 'O Fundo Estadual é separado dos dados da capital pela esfera administrativa registrada no InvestSUS.'));
+    return;
+  }
+  blocoRecursos(alvo, somaRec(mun.map(([, v]) => v)), {titulo: `Gestão municipal: soma dos ${inteiro(mun.length)} fundos municipais de ${nomeUF}`, pop, comp: R.comp});
+  const linhas = mun.map(([c, v]) => ({c, v, pc: MUN.get(c)?.pop ? v.fb / MUN.get(c).pop : null})).sort((a, b) => b.v.fb - a.v.fb);
+  alvo.append(el('h3', null, 'Dez municípios com maior repasse ordinário no ano'), ranking(linhas.slice(0, 10).map(x => ({nome: nomeMun(x.c), valor: x.v.fb, rotulo: moeda(x.v.fb)}))),
+    verTabela('Ver todos os municípios em tabela', ['Município', 'Ordinário (fundo a fundo)', 'Por habitante', 'Saldo em conta', 'Índice de saldo', 'Emendas pagas', '% pago das emendas'],
+      linhas.map(x => [nomeMun(x.c), moeda(x.v.fb), x.pc != null ? 'R$ ' + decimal(x.pc, 0) : 'sem dado', moeda(x.v.s), x.v.fb ? pct(x.v.s / x.v.fb, 0) : 'sem dado', moeda(x.v.em[2]), x.v.em[0] ? pct(x.v.em[2] / x.v.em[0], 0) : 'sem proposta']), [1, 2, 3, 4, 5, 6]));
 }
 
 // ---------- emendas da Uniao ----------
@@ -366,13 +431,39 @@ async function rLeitos() {
   }
 }
 
+// ---------- 15% em saude (LC 141/2012): fontes que compoem a base e calculo do minimo ----------
+const FONTES15 = [['iptu', 'IPTU (Imposto Predial e Territorial Urbano)', 'CF art. 156, I'], ['itbi', 'ITBI (transmissão de bens imóveis)', 'CF art. 156, II'], ['iss', 'ISS (serviços de qualquer natureza)', 'CF art. 156, III'],
+  ['irrf', 'IRRF sobre rendimentos pagos pelo município', 'CF art. 158, I'], ['itr', 'Cota-parte do ITR', 'CF art. 158, II'], ['ipva', 'Cota-parte do IPVA (50%)', 'CF art. 158, III'],
+  ['icms', 'Cota-parte do ICMS (25%)', 'CF art. 158, IV'], ['ipi', 'Cota-parte do IPI exportação', 'CF art. 159, § 3º'], ['fpm', 'Fundo de Participação dos Municípios (FPM)', 'CF art. 159, I, b']];
+function bloco15(alvo, ufs) {
+  const B = D.base15;
+  alvo.append(el('h3', null, `Base de cálculo dos 15% em saúde: ${nomeTerritorio()}`),
+    el('p', null, 'O município deve aplicar em ações e serviços públicos de saúde, com recursos próprios, no mínimo 15% da arrecadação dos impostos municipais e das transferências constitucionais (LC 141/2012, art. 6 e 7). As fontes abaixo compõem esta base. Repasses do SUS (fundo a fundo), convênios e emendas não entram na base.'));
+  if (!B) {
+    alvo.append(tabelaSimples(['Fonte vinculada aos 15%', 'Base legal'], FONTES15.map(([, n, l]) => [n, l])), aviso('Os valores por município ainda não foram coletados. O cálculo aparece aqui quando a coleta da receita (SICONFI, DCA Anexo I-C) rodar.'));
+    return;
+  }
+  const ordem = B.ordem, v = S.mun ? B.mun[S.mun] : (() => { const a = new Array(ordem.length).fill(0); ufs.forEach(u => (B.ufs[u] || []).forEach((x, i) => { a[i] += x; })); return a; })();
+  if (!v) { alvo.append(aviso('Sem receita declarada no SICONFI para este município no exercício, por isso não foi possível calcular a base.')); return; }
+  const total = v.reduce((a, b) => a + b, 0), minimo = total * 0.15;
+  const linhas = FONTES15.map(([k, n, l]) => { const x = v[ordem.indexOf(k)] || 0; return [n, l, moeda(x), total ? pct(x / total, 0) : 'sem dado']; });
+  alvo.append(el('div', {class: 'kpis'}, kpi('Base de cálculo dos 15%', moeda(total), `Receitas realizadas em ${B.exercicio}`, 'em'), kpi('Mínimo a aplicar em saúde (15%)', moeda(minimo), 'Com recursos próprios', 'em')),
+    ranking(FONTES15.map(([k, n]) => ({nome: n, valor: v[ordem.indexOf(k)] || 0, rotulo: moeda(v[ordem.indexOf(k)] || 0)})).sort((a, b) => b.valor - a.valor).slice(0, 9)),
+    verTabela('Ver as fontes em tabela', ['Fonte', 'Base legal', 'Valor', '% da base'], linhas, [2, 3]));
+  const desp = S.mun ? D.desp?.mun?.[S.mun]?.[2] : (D.desp ? ufs.reduce((a, u) => a + (D.desp.ufs[u]?.[2] || 0), 0) : null);
+  if (desp && total) alvo.append(el('p', null, `Referência: a despesa paga em saúde (todas as fontes, exercício ${D.desp.exercicio}) equivale a ${pct(desp / total, 0)} desta base. Esse número não é o percentual da LC 141: a despesa total inclui os repasses do SUS, e o percentual legal considera só recursos próprios.`));
+  alvo.append(aviso('Cálculo preliminar. O percentual efetivamente aplicado, para comparar com o mínimo de 15%, está no SIOPS e ainda não foi integrado. Dívida ativa, multas e juros dos impostos ficam fora desta base até a conferência das contas.'),
+    el('p', {class: 'fonte'}, `Fonte: ${B.fonte}. Coleta em ${dataBR(B.gerado_em)}. ${inteiro(B.municipios_com_base)} de ${inteiro(B.municipios_consultados)} municípios com receita declarada.`));
+}
+const tabelaSimples = (cols, linhas) => verTabela('Ver as fontes em tabela', cols, linhas, []);
+
 // ---------- transferencias federais, despesa e regularidade ----------
 async function rRecursos() {
   const alvo = limpar($('rec')), fonte = $('fonte-rec');
-  if (!D.transf && !D.desp && !D.cauc) { fonte.textContent = ''; return indisponivel(alvo); }
+  if (!D.transf && !D.desp && !D.cauc && !D.base15) { fonte.textContent = ''; return indisponivel(alvo); }
   const ufs = ufsAlvo(), pop = popAlvo();
   fonte.textContent = [D.transf && `Transferências: ${D.transf.fonte}, coleta em ${dataBR(D.transf.gerado_em)}`, D.desp && `Despesa: ${D.desp.fonte}, exercício ${D.desp.exercicio}`,
-    D.cauc && `CAUC: ${D.cauc.fonte}, pesquisa de ${dataBR(D.cauc.data_pesquisa)}`].filter(Boolean).join('. ') + '.';
+    D.cauc && `CAUC: ${D.cauc.fonte}, pesquisa de ${dataBR(D.cauc.data_pesquisa)}`, D.base15 && `Base dos 15%: ${D.base15.fonte}, exercício ${D.base15.exercicio}`].filter(Boolean).join('. ') + '.';
   if (D.transf) {
     const T = D.transf, n = T.meses.length, serie = S.mun ? (T.mun[S.mun] || new Array(n).fill(0)) : somaVet(T.ufs, ufs, n), soma = serie.reduce((a, b) => a + b, 0);
     alvo.append(el('h3', null, `Transferências da União em saúde: ${nomeTerritorio()}`),
@@ -422,6 +513,7 @@ async function rRecursos() {
     alvo.append(el('p', {class: 'fonte'}, 'O arquivo do CAUC mostra a situação de cada item (regular ou pendente). Não traz percentuais de aplicação nem a descrição dos itens. ',
       el('a', {href: 'https://www.gov.br/tesouronacional/pt-br/estados-e-municipios/cauc', rel: 'noopener'}, 'CAUC no Tesouro Nacional'), '.'));
   }
+  bloco15(alvo, ufs);
 }
 
 // ---------- planos privados de saude ----------
@@ -541,10 +633,51 @@ const PARADAS = [
 ];
 const popAlvoUF = () => ufsAlvo().reduce((a, u) => a + (D.terr?.por_uf[u]?.pop_soma || 0), 0);
 
+// ---------- ficha do municipio: todas as informacoes do municipio escolhido, comparadas com o estado ----------
+const SECOES_FICHA = [['mapa', 'Mapa'], ['dengue', 'Dengue'], ['rede', 'Rede'], ['pessoal', 'Profissionais'], ['leitos', 'Leitos'], ['fin', 'Recursos'], ['rec', 'CAUC e 15%'], ['planos', 'Planos privados']];
+async function rFicha() {
+  const sec = $('mod-ficha'), alvo = limpar($('ficha'));
+  if (!S.mun || !D.munAtual || !D.terr) { sec.hidden = true; return; }
+  sec.hidden = false;
+  const m = D.munAtual, uf = S.uf, nomeUF = UF_NOMES[uf];
+  $('h-ficha-nome').textContent = `Ficha de ${m.nome} (${uf})`;
+  $('fonte-ficha').textContent = 'Reúne em um lugar os números do município e compara com o estado. Cada bloco abaixo traz a fonte e o detalhe.';
+  const defs = indicadores({D, profUF, redeUF, dengueUF, chikUF, recursosUF});
+  const cards = [kpi('População (SICONFI)', inteiro(m.pop), m.capital ? 'Capital do estado' : `${nomeUF}: ${inteiro(D.terr.por_uf[uf]?.pop_soma)} habitantes`, 'pessoal')];
+  const [dg, rd, ps] = await Promise.all([dengueUF(uf), redeUF(uf), Promise.all(defs.map(async d => d.mun ? [d.id, await d.mun(uf).catch(() => null)] : [d.id, null]))]);
+  const porId = Object.fromEntries(ps);
+  const linha = dg?.m.find(x => x[0] === m.cod);
+  if (linha && linha[2]) cards.push(kpi('Dengue: nível de alerta', 'Nível ' + linha[2], `Semana ${semana(dg.se)}`));
+  const r = rd?.m?.[m.cod];
+  if (r) {
+    cards.push(kpi('Estabelecimentos de saúde ativos', inteiro(r.ativos), 'CNES'));
+    const nat = r.nat || {}, pub = nat['Pública'] || 0, sfl = nat['Privada sem fins lucrativos'] || 0, cfl = nat['Privada com fins lucrativos'] || 0;
+    if (r.ativos) cards.push(kpi('Públicos, filantrópicos e privados', `${pct(pub / r.ativos, 0)} públicos`, `${inteiro(sfl)} sem fins lucrativos (inclui filantrópicos), ${inteiro(cfl)} com fins lucrativos`, 'rede'));
+    const gerais = r.esfera || {};
+    cards.push(kpi('Gestão estadual e municipal na rede', `${inteiro(gerais.Municipal || 0)} municipais`, `${inteiro(gerais.Estadual || 0)} estaduais, ${inteiro(gerais.Federal || 0)} federais`, 'rede'));
+    const hosp = Object.values(r.gn?.Hospitais || {}).reduce((a, b) => a + b, 0);
+    if (hosp) cards.push(kpi('Hospitais', inteiro(hosp), 'Hospital geral, especializado e hospital-dia', 'leitos'));
+  }
+  defs.forEach(d => {
+    const mapa = porId[d.id], v = mapa?.[m.cod];
+    if (v == null || !isFinite(v) || d.id === 'cauc' || ['dengue', 'chik'].includes(d.id) && !linha) return;
+    const vals = Object.values(mapa).filter(x => x != null && isFinite(x)).sort((a, b) => b - a);
+    const pos = vals.indexOf(v) + 1, fmtM = d.fmtM || d.fmt, fmtU = d.fmt, ufv = d.uf(uf);
+    const rotM = d.rotM || d.rot;
+    cards.push(kpi(rotM, fmtM(v), `${pos}º entre ${inteiro(vals.length)} municípios${ufv != null && !d.rotM ? `. ${nomeUF}: ${fmtU(ufv)}` : ''}`, d.ico));
+  });
+  const base = D.base15?.mun?.[m.cod];
+  if (base) { const tot = base.reduce((a, b) => a + b, 0); cards.push(kpi('Mínimo de 15% da base em saúde', moeda(tot * 0.15), `Base: ${moeda(tot)} (receitas de impostos e transferências, LC 141/2012)`, 'em')); }
+  const caucP = D.cauc?.mun?.[m.cod];
+  if (D.cauc) cards.push(kpi('Pendências no CAUC', inteiro((caucP || []).length), caucP?.length ? `Itens: ${caucP.join(', ')}` : 'Nenhum item pendente', 'em'));
+  alvo.append(el('div', {class: 'kpis'}, ...cards),
+    el('p', {class: 'ficha-atalhos'}, 'Ir para: ', ...SECOES_FICHA.flatMap(([id, rot], i) => [i ? ' · ' : '', el('a', {href: '#mod-' + id, onclick: e => { e.preventDefault(); rolar(id); }}, rot)])));
+}
+
 // ---------- acoes: sorteio de estado e localizacao ----------
 const rolar = id => { const n = document.getElementById('mod-' + id); if (n) n.scrollIntoView({behavior: semMovimento() ? 'auto' : 'smooth', block: 'start'}); };
 function selecionarUF(u) { const sel = $('selUF'); if (!sel || ![...sel.options].some(o => o.value === u)) return; sel.value = u; sel.dispatchEvent(new Event('change')); }
-function selecionarMun(c) { const sel = $('selMun'); if (!sel || ![...sel.options].some(o => o.value === c)) return; sel.value = c; sel.dispatchEvent(new Event('change')); }
+function selecionarMun(c) { const sel = $('selMun'); if (!sel || ![...sel.options].some(o => o.value === c)) return; sel.value = c; sel.dispatchEvent(new Event('change')); setTimeout(() => rolar('ficha'), 450); }
 function surpreender() {
   const opcoes = Object.keys(UF_NOMES).filter(u => u !== S.uf);
   const u = opcoes[Math.floor(Math.random() * opcoes.length)];
@@ -569,10 +702,10 @@ async function usarLocalizacao() {
   } finally { btn.disabled = false; }
 }
 
-const C = {D, MUN, S, UF_NOMES, dengueUF, chikUF, redeUF, profUF, selecionarUF, selecionarMun, minhaPos: null, aoMapa: () => jornada?.atualizar()};
+const C = {D, MUN, S, UF_NOMES, dengueUF, chikUF, redeUF, profUF, recursosUF, selecionarUF, selecionarMun, minhaPos: null, aoMapa: () => jornada?.atualizar()};
 
 async function render() {
-  await Promise.all([mapa.atualizar(), rResumo(), rDengue(), rChik(), rRede(), rPessoal(), rLeitos(), rFin(), rEm(), rRecursos(), rPlanos()]);
+  await Promise.all([mapa.atualizar(), rFicha(), rResumo(), rDengue(), rChik(), rRede(), rPessoal(), rLeitos(), rFin(), rEm(), rRecursos(), rPlanos()]);
   rAps(); rNotas();
   preencherIcones(); revelar(); jornada.atualizar();
 }

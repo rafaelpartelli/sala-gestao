@@ -74,7 +74,7 @@ def iter_registros(fluxo, tamanho=4_000_000):
 
 def agregar(textos, mapa6, hosp=None):
     """textos: iteravel de JSON em texto. mapa6: codigo de 6 digitos -> (cod7, uf). Devolve (por_municipio, lidos, erros, sem_municipio).
-    hosp: lista opcional que recebe os hospitais ativos (pessoas juridicas) como [cnes, nome, cod7, uf, tipo, natureza, atende_sus]."""
+    hosp: lista opcional que recebe os hospitais ativos (pessoas juridicas) como [cnes, nome, cod7, uf, tipo, natureza, atende_sus, esfera]."""
     por, lidos, erros, sem = {}, 0, 0, 0
     for t in textos:
         try:
@@ -102,7 +102,7 @@ def agregar(textos, mapa6, hosp=None):
             gg = d["gn"].setdefault(g, {})
             gg[n] = gg.get(n, 0) + 1
             if hosp is not None and tp in HOSPITAIS and n != "Pessoa física":
-                hosp.append([str(r.get("CO_CNES") or "").strip(), nome_curto(r.get("NO_FANTASIA") or r.get("NO_RAZAO_SOCIAL")), alvo[0], alvo[1], tp, n, str(r.get("CO_AMBULATORIAL_SUS") or "").strip() == "1"])
+                hosp.append([str(r.get("CO_CNES") or "").strip(), nome_curto(r.get("NO_FANTASIA") or r.get("NO_RAZAO_SOCIAL")), alvo[0], alvo[1], tp, n, str(r.get("CO_AMBULATORIAL_SUS") or "").strip() == "1", e])
     return por, lidos, erros, sem
 
 def main():
@@ -146,9 +146,9 @@ def main():
     escrever_json("dados/rede_resumo.json", resumo)
     por_uf = {}
     for h in sorted(hosp, key=lambda x: (x[3], x[2], x[1])):
-        por_uf.setdefault(h[3], []).append([h[0], h[1], h[2], h[4], h[5], h[6]])
+        por_uf.setdefault(h[3], []).append([h[0], h[1], h[2], h[4], h[5], h[6], h[7]])
     for uf, lista in por_uf.items():
-        escrever_json(f"dados/hospitais/{uf}.json", {"uf": uf, "gerado_em": resumo["gerado_em"], "campos": ["cnes", "nome", "cod_municipio", "tipo", "natureza", "atende_sus"], "h": lista})
+        escrever_json(f"dados/hospitais/{uf}.json", {"uf": uf, "gerado_em": resumo["gerado_em"], "campos": ["cnes", "nome", "cod_municipio", "tipo", "natureza", "atende_sus", "esfera"], "h": lista})
     resumo_actions("Rede assistencial (CNES)", [f"Estabelecimentos lidos: {lidos}", f"Sem municipio identificado: {sem}", f"Erros de leitura: {erros}", f"UFs: {len(ufs)}"])
     print(f"lidos={lidos} sem_municipio={sem} erros={erros} ufs={len(ufs)}")
     return 0

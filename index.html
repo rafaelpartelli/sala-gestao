@@ -13,7 +13,7 @@
 <link rel="canonical" href="https://partelli.pro/gestor/sala/">
 <meta name="theme-color" content="#0c326f">
 <meta name="color-scheme" content="light">
-<link rel="stylesheet" href="css/sala.css?v=10">
+<link rel="stylesheet" href="css/sala.css?v=11">
 </head>
 <body>
 <noscript><p class="sem-js">Este painel precisa de JavaScript para carregar os dados.</p></noscript>
@@ -66,6 +66,12 @@
     <div id="kpis" class="kpis"></div>
   </section>
 
+  <section aria-labelledby="h-ficha" class="bloco rev" id="mod-ficha" hidden>
+    <h2 id="h-ficha"><span class="ico" data-ico="local"></span><span id="h-ficha-nome">Ficha do município</span></h2>
+    <p class="fonte" id="fonte-ficha"></p>
+    <div id="ficha"></div>
+  </section>
+
   <section aria-labelledby="h-mapa" class="bloco rev" id="mod-mapa">
     <h2 id="h-mapa"><span class="ico" data-ico="mapa"></span>Mapa da saúde</h2>
     <p class="fonte" id="fonte-mapa"></p>
@@ -115,7 +121,7 @@
   </section>
 
   <section aria-labelledby="h-rec" class="bloco rev" id="mod-rec">
-    <h2 id="h-rec"><span class="ico" data-ico="rec"></span>Transferências da União, despesa municipal e regularidade (CAUC)</h2>
+    <h2 id="h-rec"><span class="ico" data-ico="rec"></span>Transferências da União, despesa municipal, regularidade (CAUC) e 15% em saúde</h2>
     <p class="fonte" id="fonte-rec"></p>
     <div id="rec"></div>
   </section>
@@ -172,6 +178,6 @@
   </div>
 </footer>
 <aside id="jornada" class="jornada" aria-label="Sua jornada pela Sala"></aside>
-<script type="module" src="js/app.js?v=8"></script>
+<script type="module" src="js/app.js?v=9"></script>
 </body>
 </html>

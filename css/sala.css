@@ -253,3 +253,8 @@ select{border:2px solid #1351b4;border-radius:8px;font-weight:700}
 .rodape .copy{font-size:12px}
 @media (min-width:961px){.nav{flex:1;margin-left:16px}.nav .nav-hl{margin-right:auto}}
 .filtros label{min-width:200px}
+.rotulo-bloco{font-weight:700;color:var(--azul-escuro);margin:14px 0 6px;font-size:.95rem}
+.ficha-atalhos{margin:12px 0 0;font-size:.92rem}
+.ficha-atalhos a{color:var(--azul);font-weight:700}
+#mod-ficha[hidden]{display:none}
+h4{margin:14px 0 6px;font-size:.95rem;color:var(--azul-escuro)}

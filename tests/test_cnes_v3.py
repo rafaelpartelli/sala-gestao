@@ -23,3 +23,26 @@ class TestEquipamentosENatureza(unittest.TestCase):
         por, *_ = cr.agregar([json.dumps(reg)], {"320530": ("3205309", "ES")}, hosp)
         self.assertEqual(por["3205309"]["gn"]["Hospitais"], {"Privada sem fins lucrativos": 1})
         self.assertEqual(hosp[0][5], "Privada sem fins lucrativos")
+        self.assertEqual(hosp[0][7], "Privada")
+
+
+class TestRecursosEBase15(unittest.TestCase):
+    def test_base15(self):
+        import coletar_base15 as b
+        itens = [{"coluna": "Receitas Brutas Realizadas", "conta": "Imposto sobre a Propriedade Predial e Territorial Urbana", "valor": "1000"},
+                 {"coluna": "Receitas Brutas Realizadas", "conta": "IPTU - Pessoa Fisica", "valor": "400"},
+                 {"coluna": "Receitas Liquidas", "conta": "Imposto sobre a Propriedade Predial e Territorial Urbana", "valor": "9999"},
+                 {"coluna": "Receitas Brutas Realizadas", "conta": "Cota-Parte do Fundo de Participacao dos Municipios - Cota Mensal", "valor": "5000"},
+                 {"coluna": "Receitas Brutas Realizadas", "conta": "Cota-Parte do ICMS", "valor": "3000"}]
+        r, _ = b.extrair(itens)
+        self.assertEqual((r["iptu"], r["fpm"], r["icms"], r["ipi"]), (1000, 5000, 3000, 0))
+
+    def test_recursos(self):
+        import coletar_recursos as cr
+        mun = [{"cod": "3200102", "nome": "Afonso Cláudio", "uf": "ES"}, {"cod": "3200201", "nome": "Água Doce do Norte", "uf": "ES"}]
+        dados = {"meta": {"anoEm": 2026}, "m": [{"n": "AFONSO CLAUDIO", "nm": "Afonso Cláudio", "fb": 100, "fl": 90, "fe": 10, "fm": 90, "s": 5, "comp": [[0, 0, 100]], "ano": [[2026, 50, 40, 30]], "prop": [[1]]}],
+                 "EST": {"fb": 1000, "fl": 900, "fe": 100, "fm": 900, "s": 50, "comp": [], "ano": [[2026, 5, 4, 3]]}}
+        obj, nao = cr.montar("ES", dados, mun)
+        self.assertEqual(obj["m"]["3200102"]["em"], [50, 40, 30])
+        self.assertEqual(obj["est"]["fm"], 900)
+        self.assertEqual(nao, [])

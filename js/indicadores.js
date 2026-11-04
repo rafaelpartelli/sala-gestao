@@ -44,8 +44,19 @@ export function indicadores(c) {
       mun: async u => { const dg = await c.chikUF(u); if (!dg) return null; const o = {}; dg.m.forEach(l => { o[l[0]] = l[5]; }); return o; }});
   }
   if (D.fin) {
-    L.push({id: 'fin', ico: 'fin', curto: 'Repasses', rot: 'Repasses fundo a fundo por habitante no ano (R$)', fmt: v => 'R$ ' + decimal(v, 0), fonte: D.fin.fonte,
-      uf: u => { const x = D.fin.dados.uf[u]; return x?.pop ? x.fb / x.pop : null; }, mun: null});
+    // Recursos ordinarios (fundo a fundo) dos fundos municipais, sem o Fundo Estadual: mesma metodologia do Radar de Recursos.
+    L.push({id: 'fin', ico: 'fin', curto: 'Repasses', rot: 'Repasses fundo a fundo aos municípios por habitante no ano (R$)', fmt: v => 'R$ ' + decimal(v, 0), fonte: D.fin.fonte,
+      uf: u => { const x = D.fin.dados.uf[u]; return x?.pop ? (x.fb - (x.fbEst || 0)) / x.pop : null; },
+      mun: async u => { const r = c.recursosUF ? await c.recursosUF(u) : null; return r ? porMun(u, m => r.m?.[m.cod] ? div(r.m[m.cod].fb, m.pop) : null) : null; }});
+    L.push({id: 'emendas', ico: 'rec', curto: 'Emendas pagas', rot: 'Emendas parlamentares pagas por habitante, pelo ano da proposta (R$)', fmt: v => 'R$ ' + decimal(v, 0), fonte: D.fin.fonte,
+      uf: u => { const x = D.fin.dados.uf[u]; return x?.pop ? x.eg / x.pop : null; },
+      mun: async u => { const r = c.recursosUF ? await c.recursosUF(u) : null; return r ? porMun(u, m => r.m?.[m.cod] ? div(r.m[m.cod].em[2], m.pop) : null) : null; }});
+  }
+  if (D.equip) {
+    const tot = o => Object.values(o || {}).reduce((a, v) => a + (v[0] || 0), 0);
+    L.push({id: 'equip', ico: 'rede', curto: 'Equipamentos', rot: 'Equipamentos de saúde cadastrados por 1.000 habitantes', fmt: v => decimal(v, 1), fonte: D.equip.fonte,
+      uf: u => div(tot(D.equip.ufs[u]), pop(u), 1000),
+      mun: async u => porMun(u, m => div(tot(D.equip.mun[m.cod]), m.pop, 1000))});
   }
   if (D.transf) {
     L.push({id: 'transf', ico: 'rec', curto: 'Transferências', rot: `Transferências da União em saúde por habitante (${D.transf.meses.length} meses, R$)`, fmt: v => 'R$ ' + decimal(v, 0), fonte: D.transf.fonte,

@@ -25,6 +25,9 @@ jobs:
       - name: Coletar
         working-directory: .
         run: python3 robo/coletar_financiamento.py
+      - name: Coletar recursos por municipio
+        if: always()
+        run: python3 robo/coletar_recursos.py
       - name: Coletar CAUC
         if: always()
         run: python3 robo/coletar_cauc.py

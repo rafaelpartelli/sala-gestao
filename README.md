@@ -28,6 +28,11 @@ Os workflows ficam em `.github/workflows/`. Segredo necessário: `PORTAL_TRANSPA
 ## CNES: natureza, hospitais e equipamentos
 O coletor da rede (`coletar_rede.py`) classifica os estabelecimentos pela natureza jurídica (pública, privada com fins lucrativos, privada sem fins lucrativos, que inclui as filantrópicas) e grava a lista de hospitais ativos em `dados/hospitais/<UF>.json`. O coletor `coletar_equipamentos.py` lê os arquivos EQ do FTP do DATASUS e grava `dados/equipamentos.json`. O CNES não informa o CEBAS, então filantrópico aqui significa privado sem fins lucrativos.
 
+## Recursos, gestão estadual e 15% em saúde
+- `coletar_recursos.py` lê os arquivos do Radar de Recursos (partelli.pro/fundo) e grava `dados/recursos/<UF>.json`: por município e para o Fundo Estadual, repasses fundo a fundo (Manutenção e Estruturação da rede, valor bruto) e emendas (proposto, empenhado e pago pelo ano da proposta), com a mesma metodologia do Radar. Emendas não se somam aos repasses ordinários.
+- `coletar_base15.py` (SICONFI, DCA Anexo I-C) grava `dados/base15.json` com as receitas que compõem a base dos 15% (LC 141/2012, art. 6 e 7): IPTU, ITBI, ISS, IRRF, cotas-partes de ITR, IPVA, ICMS e IPI-exportação e FPM. É preliminar: as contas são reconhecidas pelo texto e o log do primeiro município lista as contas usadas. O percentual aplicado de fato (recursos próprios) está no SIOPS e ainda não foi integrado.
+- A tela mostra a ficha do município ao escolhê-lo (no filtro ou no mapa), com comparação com o estado, e separa gestão municipal e estadual.
+
 ## Agenda (fila diária às 02:35)
 O workflow "Coleta diaria (02:35)" (`sondar.yml`) roda todo dia às 02:35 de Brasília (05:35 UTC) e chama os demais em fila, um após o outro: base territorial (só dia 1), notas, emendas, financiamento (com CAUC e transferências), dengue (com chikungunya), CNES (só segunda) e Atenção Primária, ANS e despesa (só dia 1). Se uma etapa falhar, as seguintes continuam. Cada workflow continua disponível para execução manual (Run workflow). A coluna "Agenda" da tabela acima vale para a periodicidade da fonte, e o horário é sempre o da fila.
 

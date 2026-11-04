@@ -33,6 +33,11 @@ jobs:
         env:
           TRABALHADORES: "6"
         run: python3 robo/coletar_despesa.py
+      - name: Coletar base de calculo dos 15 por cento (DCA I-C)
+        if: always()
+        env:
+          TRABALHADORES: "6"
+        run: python3 robo/coletar_base15.py
       - name: Publicar resultado
         if: always()
         run: |
