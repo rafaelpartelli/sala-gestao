@@ -32,7 +32,19 @@ def agregar(registros, mapa6):
         d[tipo] = d.get(tipo, 0) + 1
     return por, lidos, sem, inativas
 
+def amostrar(registros, ac):
+    """Diagnostico: guarda os valores mais comuns de DT_DESAT e imprime 3 linhas de exemplo (sem nomes nem CPF)."""
+    for r in registros:
+        if ac["n"] < 3:
+            print("amostra", {k: r.get(k) for k in ("CODUFMUN", "TIPO_EQP", "DT_DESAT")}, flush=True)
+        ac["n"] += 1
+        d = r.get("DT_DESAT") or "(vazio)"
+        if d in ac["dt"] or len(ac["dt"]) < 60:
+            ac["dt"][d] = ac["dt"].get(d, 0) + 1
+        yield r
+
 def main():
+    diag = {"n": 0, "dt": {}}
     terr = ler_json("dados/territorio.json")
     mapa6 = {m["cod"][:6]: m["cod"] for m in terr["municipios"]}
     uf_de = {m["cod"]: m["uf"] for m in terr["municipios"]}
@@ -45,13 +57,15 @@ def main():
     mun, lidos, sem, inat, falhas = {}, 0, 0, 0, {}
     for uf in ufs:
         try:
-            p, l, s, i = agregar(dbc.registros(cnes_ftp.baixar_arquivo("EP", uf, comp), CAMPOS), mapa6)
+            p, l, s, i = agregar(amostrar(dbc.registros(cnes_ftp.baixar_arquivo("EP", uf, comp), CAMPOS), diag), mapa6)
             mun.update(p)
             lidos += l; sem += s; inat += i
             print(f"{uf}: {l} linhas", flush=True)
         except Exception as e:
             falhas[uf] = f"{type(e).__name__}: {str(e)[:120]}"
             print("FALHA", uf, falhas[uf], flush=True)
+    top = sorted(diag["dt"].items(), key=lambda x: -x[1])[:8]
+    print(f"diagnostico: lidas={lidos} desativadas={inat} sem_municipio={sem} municipios_com_equipe={len(mun)} DT_DESAT mais comuns={top}", flush=True)
     if len(falhas) > 2 or not mun:
         print("validacao falhou")
         return 1
