@@ -315,14 +315,19 @@ def bloco_emendas(chave):
 def bloco_sisab_colunas():
     F = []
     for q in ("2024Q1", "2024Q3"):
-        url = f"{S3}sisab/indicador_desempenho/csv/sisab_indicador_desempenho_{q}.csv"
-        o = pedir(url, headers={"Range": "bytes=0-300000"}, timeout=60, limite=310_000)
+        url = f"{S3}sisab/indicador_desempenho/csv/sisab_indicador_desempenho_{q}.csv.zip"
+        o = pedir(url, timeout=90, limite=6_000_000)
         r = {"id": f"sisab_{q}", "nome": f"SISAB indicadores de desempenho {q}: colunas", "url": url, "ms": o["ms"], "status": o.get("status")}
         if "erro" in o:
             r.update({"ok": False, "erro": o["erro"]})
         else:
-            r.update(cabecalho_csv(o["corpo"]))
-            r["ok"] = bool(r.get("colunas")) and len(r["colunas"]) > 3
+            z = primeiro_arquivo_zip(o["corpo"], max_saida=600_000)
+            if not z or not z["bytes"]:
+                r.update({"ok": False, "erro": "nao e um ZIP legivel"})
+            else:
+                r["arquivo"] = z["nome"]
+                r.update(cabecalho_csv(z["bytes"]))
+                r["ok"] = bool(r.get("colunas")) and len(r["colunas"]) > 3
         F.append(r)
     return F
 

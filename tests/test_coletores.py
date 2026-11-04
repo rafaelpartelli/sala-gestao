@@ -107,6 +107,20 @@ class Aps(unittest.TestCase):
     def test_estrutura_ponto_e_virgula(self):
         cols, n, sep = ap.estrutura("a;b;c\n1;2;3\n4;5;6\n")
         self.assertEqual((cols, n, sep), (["a", "b", "c"], 2, ";"))
+    def test_ler_zip_csv(self):
+        import zipfile
+        b = io.BytesIO()
+        with zipfile.ZipFile(b, "w", zipfile.ZIP_DEFLATED) as z:
+            z.writestr("leia.txt", "x")
+            z.writestr("sisab_2024Q1.csv", "\ufeffa;b\n1;2\n")
+        nome, txt = ap.ler_zip_csv(b.getvalue())
+        self.assertEqual(nome, "sisab_2024Q1.csv")
+        self.assertEqual(ap.estrutura(txt)[0], ["a", "b"])
+        self.assertEqual(ap.ler_zip_csv(b"a;b\n1;2\n")[0], "(csv sem zip)")
+
+    def test_url_do_sisab_e_zip(self):
+        self.assertTrue(ap.BASE.endswith(".csv.zip"))
+
     def test_estrutura_virgula(self):
         cols, n, sep = ap.estrutura("a,b\n1,2\n")
         self.assertEqual((cols, n, sep), (["a", "b"], 1, ","))
