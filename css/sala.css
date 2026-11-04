@@ -212,11 +212,10 @@ h1,h2,h3{font-family:inherit}
 }
 .topbar a:focus-visible,.topbar button:focus-visible,.topo a:focus-visible,.rodape a:focus-visible{outline-color:#fff}
 .topo{background:linear-gradient(135deg,#0c326f 0%,#0f3f8c 100%);color:#fff;padding:48px 0 40px}
-.crumb{font-size:14px;margin:0 0 14px;color:#cfe0fa}
+.crumb{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 20px;font-size:14px;margin:0 0 14px;color:#cfe0fa}
+.crumb p{margin:0}
+.atualiza{font-size:13px;color:#cfe0fa;white-space:nowrap}
 .crumb a{color:#fff}
-.upd{display:table;max-width:100%;margin:0 0 14px;font-size:14px;line-height:1.4;padding:8px 14px;border-radius:8px;background:#ffd54a;color:#3a2c00;font-weight:700}
-.upd .sub{font-weight:400;margin-left:8px}
-.upd .idade{display:inline-block;margin-left:8px;background:#3a2c00;color:#ffd54a;border-radius:4px;padding:1px 6px;font-size:12.5px}
 .topo h1{font-size:clamp(28px,4.2vw,44px);line-height:1.15;margin:0 0 12px}
 .topo .lead{margin:0;max-width:78ch;font-size:17px;opacity:1;color:#fff}
 .topo .convite{margin:16px 0 0;display:inline-flex;gap:8px;align-items:center;font-size:14px;color:#cfe0fa}

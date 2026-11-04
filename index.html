@@ -13,7 +13,7 @@
 <link rel="canonical" href="https://partelli.pro/gestor/sala/">
 <meta name="theme-color" content="#0c326f">
 <meta name="color-scheme" content="light">
-<link rel="stylesheet" href="css/sala.css?v=9">
+<link rel="stylesheet" href="css/sala.css?v=10">
 </head>
 <body>
 <noscript><p class="sem-js">Este painel precisa de JavaScript para carregar os dados.</p></noscript>
@@ -35,8 +35,8 @@
 </header>
 <div class="topo">
   <div class="miolo">
-    <p class="crumb"><a href="/">Início</a> &#8250; <a href="/gestor/">Área do Gestor</a> &#8250; Sala de Gestão Estratégica</p>
-    <p class="upd" id="upd" role="status">Carregando dados...</p>
+    <div class="crumb"><p><a href="/">Início</a> &#8250; <a href="/gestor/">Área do Gestor</a> &#8250; Sala de Gestão Estratégica</p>
+      <p class="atualiza" id="upd" role="status"></p></div>
     <h1>Sala de Gestão Estratégica em Saúde</h1>
     <p class="lead">Situação da saúde nos 27 estados e 5.570 municípios, a partir de bases públicas. Cada bloco mostra a fonte e a data da última coleta.</p>
     <p class="convite" data-ico="trilha" data-tam="18">Faça a jornada: visite cada parada, libere as descobertas e compare o seu território com o Brasil.</p>
@@ -55,7 +55,7 @@
       <button type="button" id="btnLocal" class="botao botao-icone" data-ico="local" data-tam="16" title="O navegador pede sua permissão. A posição não é enviada nem gravada.">Usar minha localização</button>
       <button type="button" id="btnSorte" class="botao botao-icone" data-ico="dado" data-tam="16">Surpreenda-me</button>
     </div>
-    <p id="selo" class="selo" role="status" aria-live="polite">Carregando dados...</p>
+    <p id="selo" class="selo" role="status" aria-live="polite" hidden></p>
     <p id="geo-status" class="selo geo-status" role="status" aria-live="polite"></p>
   </div>
 </nav>
@@ -172,6 +172,6 @@
   </div>
 </footer>
 <aside id="jornada" class="jornada" aria-label="Sua jornada pela Sala"></aside>
-<script type="module" src="js/app.js?v=6"></script>
+<script type="module" src="js/app.js?v=7"></script>
 </body>
 </html>
