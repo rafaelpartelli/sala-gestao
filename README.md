@@ -46,3 +46,9 @@ Os workflows ficam em `.github/workflows/`. Segredo necessário: `PORTAL_TRANSPA
 
 ## Publicação
 O repositório inteiro é o site (raiz = `index.html`). Teste rápido: GitHub Pages (Settings, Pages, branch main, pasta raiz). Produção prevista: partelli.pro/gestor/sala/ por Git deploy da Hostinger. O `.htaccess` esconde `robo/`, `tests/` e arquivos internos.
+
+## Mapa, gráficos e jornada
+- `js/mapa.js`: mapa por estados (arquivo `js/mapa-brasil.js`, @svg-maps/brazil, CC BY 4.0) e por municípios (malha do IBGE carregada no navegador). Camadas em `js/indicadores.js`, escala por quantis em cinco faixas.
+- `js/geo.js`: projeção das malhas e localização. A posição do visitante fica só no navegador.
+- `js/jornada.js`: paradas visitadas (guardadas no navegador), perguntas e descobertas calculadas com os dados do território.
+- `js/efeitos.js`: animações (respeitam a preferência de reduzir movimento).

@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231351B4'/%3E%3Cpath d='M14 7h4v7h7v4h-7v7h-4v-7H7v-4h7z' fill='%23fff'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0c326f">
-<link rel="stylesheet" href="css/sala.css?v=3">
+<link rel="stylesheet" href="css/sala.css?v=4">
 </head>
 <body>
 <noscript><p class="sem-js">Este painel precisa de JavaScript para carregar os dados.</p></noscript>
@@ -20,7 +20,9 @@
     <p class="marca">Rafael Partelli · Gestão em saúde pública</p>
     <h1>Sala de Gestão Estratégica em Saúde</h1>
     <p class="lead">Situação da saúde nos 27 estados e 5.570 municípios, a partir de bases públicas. Cada bloco mostra a fonte e a data da última coleta.</p>
+    <p class="convite" data-ico="trilha" data-tam="18">Faça a jornada: visite cada parada, libere as descobertas e compare o seu território com o Brasil.</p>
   </div>
+  <svg class="ecg" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><polyline points="0,30 80,30 100,30 112,8 126,52 140,18 152,30 260,30 290,30 302,8 316,52 330,18 342,30 450,30 480,30 492,8 506,52 520,18 532,30 600,30"/></svg>
 </header>
 
 <nav class="filtros" aria-label="Escolha do território">
@@ -31,81 +33,94 @@
     <label>Município
       <select id="selMun" disabled><option value="">Todos os municípios</option></select>
     </label>
+    <div class="filtros-acoes">
+      <button type="button" id="btnLocal" class="botao botao-icone" data-ico="local" data-tam="16" title="O navegador pede sua permissão. A posição não é enviada nem gravada.">Usar minha localização</button>
+      <button type="button" id="btnSorte" class="botao botao-icone" data-ico="dado" data-tam="16">Surpreenda-me</button>
+    </div>
     <p id="selo" class="selo" role="status" aria-live="polite">Carregando dados...</p>
+    <p id="geo-status" class="selo geo-status" role="status" aria-live="polite"></p>
   </div>
 </nav>
 
 <main id="conteudo" class="miolo">
   <section aria-labelledby="h-resumo">
-    <h2 id="h-resumo">Resumo do território</h2>
+    <h2 id="h-resumo"><span class="ico" data-ico="resumo"></span>Resumo do território</h2>
     <div id="kpis" class="kpis"></div>
   </section>
 
-  <section aria-labelledby="h-dengue" class="bloco" id="mod-dengue">
-    <h2 id="h-dengue">Dengue: nível de alerta dos municípios</h2>
+  <section aria-labelledby="h-mapa" class="bloco rev" id="mod-mapa">
+    <h2 id="h-mapa"><span class="ico" data-ico="mapa"></span>Mapa da saúde</h2>
+    <p class="fonte" id="fonte-mapa"></p>
+    <div id="mapa-corpo"><p class="indisponivel">Carregando o mapa...</p></div>
+  </section>
+
+  <section aria-labelledby="h-dengue" class="bloco rev" id="mod-dengue">
+    <h2 id="h-dengue"><span class="ico" data-ico="dengue"></span>Dengue: nível de alerta dos municípios</h2>
     <p class="fonte" id="fonte-dengue"></p>
     <div id="dengue"></div>
   </section>
 
-  <section aria-labelledby="h-chik" class="bloco" id="mod-chik">
-    <h2 id="h-chik">Chikungunya: nível de alerta dos municípios</h2>
+  <section aria-labelledby="h-chik" class="bloco rev" id="mod-chik">
+    <h2 id="h-chik"><span class="ico" data-ico="chik"></span>Chikungunya: nível de alerta dos municípios</h2>
     <p class="fonte" id="fonte-chik"></p>
     <div id="chik"></div>
   </section>
 
-  <section aria-labelledby="h-rede" class="bloco" id="mod-rede">
-    <h2 id="h-rede">Rede assistencial (CNES)</h2>
+  <section aria-labelledby="h-rede" class="bloco rev" id="mod-rede">
+    <h2 id="h-rede"><span class="ico" data-ico="rede"></span>Rede assistencial (CNES)</h2>
     <p class="fonte" id="fonte-rede"></p>
     <div id="rede"></div>
   </section>
 
-  <section aria-labelledby="h-pessoal" class="bloco" id="mod-pessoal">
-    <h2 id="h-pessoal">Profissionais e equipes de saúde (CNES)</h2>
+  <section aria-labelledby="h-pessoal" class="bloco rev" id="mod-pessoal">
+    <h2 id="h-pessoal"><span class="ico" data-ico="pessoal"></span>Profissionais e equipes de saúde (CNES)</h2>
     <p class="fonte" id="fonte-pessoal"></p>
     <div id="pessoal"></div>
   </section>
 
-  <section aria-labelledby="h-leitos" class="bloco" id="mod-leitos">
-    <h2 id="h-leitos">Leitos hospitalares (CNES)</h2>
+  <section aria-labelledby="h-leitos" class="bloco rev" id="mod-leitos">
+    <h2 id="h-leitos"><span class="ico" data-ico="leitos"></span>Leitos hospitalares (CNES)</h2>
     <p class="fonte" id="fonte-leitos"></p>
     <div id="leitos"></div>
   </section>
 
-  <section aria-labelledby="h-fin" class="bloco" id="mod-fin">
-    <h2 id="h-fin">Financiamento: repasses fundo a fundo, saldos e emendas</h2>
+  <section aria-labelledby="h-fin" class="bloco rev" id="mod-fin">
+    <h2 id="h-fin"><span class="ico" data-ico="fin"></span>Financiamento: repasses fundo a fundo, saldos e emendas</h2>
     <p class="fonte" id="fonte-fin"></p>
     <div id="fin"></div>
   </section>
 
-  <section aria-labelledby="h-em" class="bloco" id="mod-em">
-    <h2 id="h-em">Emendas da União na função Saúde</h2>
+  <section aria-labelledby="h-em" class="bloco rev" id="mod-em">
+    <h2 id="h-em"><span class="ico" data-ico="em"></span>Emendas da União na função Saúde</h2>
     <p class="fonte" id="fonte-em"></p>
     <div id="em"></div>
   </section>
 
-  <section aria-labelledby="h-rec" class="bloco" id="mod-rec">
-    <h2 id="h-rec">Transferências da União, despesa municipal e regularidade (CAUC)</h2>
+  <section aria-labelledby="h-rec" class="bloco rev" id="mod-rec">
+    <h2 id="h-rec"><span class="ico" data-ico="rec"></span>Transferências da União, despesa municipal e regularidade (CAUC)</h2>
     <p class="fonte" id="fonte-rec"></p>
     <div id="rec"></div>
   </section>
 
-  <section aria-labelledby="h-planos" class="bloco" id="mod-planos">
-    <h2 id="h-planos">Cobertura de planos privados de saúde (ANS)</h2>
+  <section aria-labelledby="h-planos" class="bloco rev" id="mod-planos">
+    <h2 id="h-planos"><span class="ico" data-ico="planos"></span>Cobertura de planos privados de saúde (ANS)</h2>
     <p class="fonte" id="fonte-planos"></p>
     <div id="planos"></div>
   </section>
 
-  <section aria-labelledby="h-aps" class="bloco" id="mod-aps">
-    <h2 id="h-aps">Atenção Primária à Saúde</h2>
+  <section aria-labelledby="h-aps" class="bloco rev" id="mod-aps">
+    <h2 id="h-aps"><span class="ico" data-ico="aps"></span>Atenção Primária à Saúde</h2>
     <p class="fonte" id="fonte-aps"></p>
     <div id="aps"></div>
   </section>
 
-  <section aria-labelledby="h-notas" class="bloco" id="mod-notas">
-    <h2 id="h-notas">Notas técnicas, informes e portarias</h2>
+  <section aria-labelledby="h-notas" class="bloco rev" id="mod-notas">
+    <h2 id="h-notas"><span class="ico" data-ico="notas"></span>Notas técnicas, informes e portarias</h2>
     <p class="fonte" id="fonte-notas"></p>
     <div id="notas"></div>
   </section>
+
+  <section id="mod-fim" class="bloco fim" aria-labelledby="h-fim" hidden></section>
 
   <section aria-labelledby="h-metodo" class="bloco">
     <h2 id="h-metodo">Como ler este painel</h2>
@@ -116,6 +131,7 @@
       <li>A despesa municipal vem da Declaração de Contas Anuais (SICONFI) e as transferências, do Portal da Transparência. Parte das transferências não informa município.</li>
       <li>Valores de financiamento vêm dos Painéis InvestSUS do Fundo Nacional de Saúde, extraídos pelo Radar de Recursos. Os valores oficiais estão nesses painéis.</li>
       <li>Cada bloco tem a opção de ver os números em tabela. Quando uma fonte está indisponível, o bloco informa em vez de mostrar dado antigo sem aviso.</li>
+      <li>O mapa dos estados usa a malha incluída no site e o dos municípios usa a malha do IBGE, carregada no seu navegador. O botão de localização usa a posição do aparelho só para achar o município: ela não é enviada nem gravada.</li>
       <li>Este painel apoia a análise técnica e não substitui os sistemas oficiais.</li>
     </ul>
   </section>
@@ -126,7 +142,9 @@
     <p>Rafael Partelli, administrador (CRA/ES 15721). <a href="https://partelli.pro/">partelli.pro</a></p>
     <p>Dados públicos: IBGE e SICONFI (território e despesa), InfoDengue, CNES e Dados Abertos do SUS, InvestSUS (FNS), Portal da Transparência, CAUC (Tesouro Nacional), ANS, CONASS, Ministério da Saúde e DOU.</p>
   </div>
+  <div class="miolo"><p>Mapa dos estados: <a href="https://github.com/VictorCazanave/svg-maps" rel="noopener">@svg-maps/brazil</a>, de Victor Cazanave, licença <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>. Malhas municipais: IBGE.</p></div>
 </footer>
-<script type="module" src="js/app.js?v=2"></script>
+<aside id="jornada" class="jornada" aria-label="Sua jornada pela Sala"></aside>
+<script type="module" src="js/app.js?v=3"></script>
 </body>
 </html>

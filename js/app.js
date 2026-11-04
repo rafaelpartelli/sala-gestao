@@ -1,5 +1,10 @@
 import {UF_NOMES, inteiro, decimal, pct, moeda, dataBR, el, limpar, seguro, carregar, verTabela} from './util.js';
-import {ranking, pilhaNiveis, miniserie, NIVEIS} from './graficos.js';
+import {ranking, pilhaNiveis, miniserie, rosca, comparativo, NIVEIS} from './graficos.js';
+import {icone, preencherIcones} from './icones.js';
+import {revelar, semMovimento} from './efeitos.js';
+import {montarMapa} from './mapa.js';
+import {montarJornada} from './jornada.js';
+import {localizar, descobrirTerritorio} from './geo.js';
 
 const D = {};       // dados carregados
 const MUN = new Map();   // codigo IBGE de 7 digitos -> municipio
@@ -12,7 +17,11 @@ function indisponivel(no, texto) {
   limpar(no).append(el('p', {class: 'indisponivel'}, texto || 'Dados ainda não coletados para este bloco.'));
 }
 const aviso = txt => el('p', {class: 'aviso', role: 'note'}, txt);
-const kpi = (rot, val, nota) => el('div', {class: 'kpi'}, el('div', {class: 'rot'}, rot), el('div', {class: 'val'}, val), nota ? el('div', {class: 'nota'}, nota) : null);
+const ICO_ROT = [[/estabelec/i, 'rede'], [/leito|UTI/i, 'leitos'], [/dengue/i, 'dengue'], [/chikun/i, 'chik'], [/equipe/i, 'aps'], [/profission|médico|vínculo|popula|horas/i, 'pessoal'],
+  [/repasse|saldo|emenda|transfer|despesa|paga|empenh|liquid|proposta|estadual|pago/i, 'fin'], [/plano|benefici|cobertura|sem plano/i, 'planos'], [/CAUC|pend/i, 'em'], [/município/i, 'mapa']];
+const kpi = (rot, val, nota, ico) => el('div', {class: 'kpi rev'},
+  el('div', {class: 'kpi-topo'}, el('span', {class: 'ic'}, icone(ico || ICO_ROT.find(([r]) => r.test(rot))?.[1] || 'resumo', 18)), el('div', {class: 'rot'}, rot)),
+  el('div', {class: 'val'}, val), nota ? el('div', {class: 'nota'}, nota) : null);
 const somaUF = (obj, campo, ufs) => ufs.reduce((s, u) => s + (obj?.[u]?.[campo] || 0), 0);
 const ufsAlvo = () => S.uf === 'BR' ? Object.keys(UF_NOMES) : [S.uf];
 const nomeTerritorio = () => S.mun ? (D.munAtual?.nome || 'Município') : (S.uf === 'BR' ? 'Brasil' : UF_NOMES[S.uf]);
@@ -164,7 +173,7 @@ async function rRede() {
   alvo.append(el('p', null, `${nomeTerritorio()}: ${inteiro(ativos)} estabelecimentos ativos (${inteiro(total)} cadastrados, incluindo desabilitados).`),
     el('div', {class: 'grade2'},
       el('div', null, el('h3', null, 'Por tipo de unidade'), ranking(ord(grupos))),
-      el('div', null, el('h3', null, 'Por esfera administrativa'), ranking(ord(esfera)))),
+      el('div', null, el('h3', null, 'Por esfera administrativa'), rosca(ord(esfera).slice(0, 4), {titulo: 'Estabelecimentos por esfera'}))),
     verTabela('Ver em tabela', ['Tipo de unidade', 'Estabelecimentos ativos'], ord(grupos).map(g => [g.nome, g.rotulo]), [1]));
 }
 
@@ -222,6 +231,7 @@ async function rEm() {
 // ---------- profissionais e equipes ----------
 const profUF = uf => uf === 'BR' ? null : carregar(`dados/profissionais/${uf}.json`);
 const GRUPOS_SEM_RANK = new Set(['Total', 'Outros']);
+const medicosBR = () => { const us = Object.keys(UF_NOMES); return porMil(us.reduce((a, u) => a + (D.profRes.ufs[u]?.['Médicos']?.[1] || 0), 0), us.reduce((a, u) => a + (D.terr?.por_uf[u]?.pop_soma || 0), 0)); };
 
 async function rPessoal() {
   const alvo = limpar($('pessoal')), fonte = $('fonte-pessoal');
@@ -242,6 +252,8 @@ async function rPessoal() {
     else {
       alvo.append(el('div', {class: 'kpis'}, kpi('Vínculos profissionais', inteiro(tot[0]), 'Todos os grupos'), kpi('Vínculos que atendem o SUS', inteiro(tot[1]), tot[0] ? pct(tot[1] / tot[0], 0) + ' do total' : null),
         kpi('Médicos (SUS) por 1.000 habitantes', decimal(porMil(g['Médicos']?.[1], pop), 2), 'Vínculos, não pessoas'), kpi('Horas semanais contratadas', inteiro(tot[2]))));
+      alvo.append(el('div', {class: 'grade2'}, el('div', null, el('h3', null, 'Vínculos: atendem o SUS e demais'), rosca([{nome: 'Atendem o SUS', valor: tot[1], rotulo: inteiro(tot[1])}, {nome: 'Demais', valor: Math.max(0, tot[0] - tot[1]), rotulo: inteiro(Math.max(0, tot[0] - tot[1]))}], {titulo: 'Vínculos profissionais'})),
+        S.uf !== 'BR' && !S.mun ? el('div', null, el('h3', null, 'Médicos (SUS) por 1.000 habitantes: território e Brasil'), comparativo({valor: porMil(g['Médicos']?.[1], pop), ref: medicosBR(), rotValor: `${nomeTerritorio()}: ${decimal(porMil(g['Médicos']?.[1], pop), 2)}`, rotRef: decimal(medicosBR(), 2)})) : null));
       const lin = D.profRes.grupos.filter(n => !GRUPOS_SEM_RANK.has(n) && g[n]).map(n => ({n, v: g[n]})).sort((x, y) => y.v[1] - x.v[1]);
       alvo.append(el('h3', null, 'Vínculos que atendem o SUS por 1.000 habitantes, por grupo'),
         ranking(lin.map(x => ({nome: x.n, valor: porMil(x.v[1], pop) || 0, rotulo: `${decimal(porMil(x.v[1], pop), 2)} (${inteiro(x.v[1])})`}))),
@@ -282,6 +294,13 @@ async function rLeitos() {
   if (S.mun && !L.mun[S.mun]) alvo.append(aviso('Este município não tem estabelecimento com leitos na competência coletada.'));
   alvo.append(el('div', {class: 'kpis'}, kpi('Leitos existentes', inteiro(v[ix.EXIST]), `${inteiro(v[ix.EST])} estabelecimentos`), kpi('Leitos SUS', inteiro(v[ix.SUS]), v[ix.EXIST] ? pct(v[ix.SUS] / v[ix.EXIST], 0) + ' dos existentes' : null),
     kpi('Leitos SUS por 1.000 habitantes', decimal(porMil(v[ix.SUS], pop), 2)), kpi('Leitos de UTI no SUS', inteiro(v[ix.UTI_SUS]), `Adulto ${inteiro(v[ix.UTI_AD_SUS])}, pediátrico ${inteiro(v[ix.UTI_PED_SUS])}, neonatal ${inteiro(v[ix.UTI_NEO_SUS])}`)));
+  alvo.append(el('div', {class: 'grade2'},
+    el('div', null, el('h3', null, 'Leitos existentes: SUS e fora do SUS'), rosca([{nome: 'SUS', valor: v[ix.SUS], rotulo: inteiro(v[ix.SUS])}, {nome: 'Fora do SUS', valor: Math.max(0, v[ix.EXIST] - v[ix.SUS]), rotulo: inteiro(Math.max(0, v[ix.EXIST] - v[ix.SUS]))}], {titulo: 'Leitos existentes'})),
+    el('div', null, el('h3', null, 'Leitos de UTI: SUS e fora do SUS'), !v[ix.UTI_EXIST] ? el('p', {class: 'indisponivel'}, 'Sem leitos de UTI registrados neste território.') : rosca([{nome: 'UTI SUS', valor: v[ix.UTI_SUS], rotulo: inteiro(v[ix.UTI_SUS])}, {nome: 'UTI fora do SUS', valor: Math.max(0, v[ix.UTI_EXIST] - v[ix.UTI_SUS]), rotulo: inteiro(Math.max(0, v[ix.UTI_EXIST] - v[ix.UTI_SUS]))}], {titulo: 'Leitos de UTI'}))));
+  if (S.uf !== 'BR' && !S.mun) {
+    const lb = somaVet(L.ufs, Object.keys(UF_NOMES), L.campos.length), popB = Object.keys(UF_NOMES).reduce((a, u) => a + (D.terr?.por_uf[u]?.pop_soma || 0), 0);
+    alvo.append(el('h3', null, 'Leitos SUS por 1.000 habitantes: território e Brasil'), comparativo({valor: porMil(v[ix.SUS], pop), ref: porMil(lb[ix.SUS], popB), rotValor: `${nomeTerritorio()}: ${decimal(porMil(v[ix.SUS], pop), 2)}`, rotRef: decimal(porMil(lb[ix.SUS], popB), 2)}));
+  }
   if (S.uf === 'BR') {
     const rk = Object.keys(UF_NOMES).filter(u => L.ufs[u]).map(u => ({u, v: porMil(L.ufs[u][ix.SUS], D.terr?.por_uf[u]?.pop_soma), n: L.ufs[u][ix.SUS]})).filter(x => x.v != null).sort((a, b) => b.v - a.v);
     alvo.append(el('h3', null, 'Estados com mais leitos SUS por 1.000 habitantes'), ranking(rk.slice(0, 10).map(x => ({nome: UF_NOMES[x.u], valor: x.v, rotulo: `${decimal(x.v, 2)} (${inteiro(x.n)})`}))),
@@ -361,6 +380,7 @@ async function rPlanos() {
   if (!v || !v[1]) return alvo.append(aviso('Sem dado de cobertura para este território.'));
   alvo.append(el('div', {class: 'kpis'}, kpi('Beneficiários de plano de assistência médica', inteiro(v[0])), kpi('Cobertura da população', pct(v[0] / v[1], 1), 'Beneficiários ÷ população (ANS)'),
     kpi('Sem plano privado (estimativa)', pct(Math.max(0, 1 - v[0] / v[1]), 1), 'Complemento da cobertura')));
+  alvo.append(rosca([{nome: 'Com plano de assistência médica', valor: v[0], rotulo: inteiro(v[0])}, {nome: 'Sem plano privado (estimativa)', valor: Math.max(0, v[1] - v[0]), rotulo: inteiro(Math.max(0, v[1] - v[0]))}], {titulo: 'Cobertura de planos'}));
   if (S.uf === 'BR') {
     const rk = Object.keys(UF_NOMES).filter(u => A.ufs[u] && A.ufs[u][1]).map(u => ({u, v: A.ufs[u][0] / A.ufs[u][1]})).sort((a, b) => b.v - a.v);
     alvo.append(el('h3', null, 'Estados com maior cobertura de planos de assistência médica'), ranking(rk.slice(0, 10).map(x => ({nome: UF_NOMES[x.u], valor: x.v, rotulo: pct(x.v, 1)})), {max: 1}),
@@ -424,14 +444,93 @@ function rNotas() {
   }
 }
 
+// ---------- jornada: paradas, perguntas e descobertas ----------
+const sumGrupos = (ufs, chave) => ufs.reduce((o, u) => { for (const [k, v] of Object.entries(D.redeRes?.ufs[u]?.[chave] || {})) o[k] = (o[k] || 0) + v; return o; }, {});
+const terr = () => S.uf === 'BR' ? 'o Brasil' : UF_NOMES[S.uf];
+function fatoArbo(res, rot) {
+  if (!res) return null;
+  const ufs = ufsAlvo(), alta = u => (+res.ufs[u]?.niveis?.['3'] || 0) + (+res.ufs[u]?.niveis?.['4'] || 0);
+  const alto = ufs.reduce((a, u) => a + alta(u), 0), tot = ufs.reduce((a, u) => a + (res.ufs[u]?.municipios || 0), 0);
+  if (!tot) return null;
+  if (S.uf !== 'BR') return `${inteiro(alto)} de ${inteiro(tot)} municípios (${pct(alto / tot, 1)}) de ${UF_NOMES[S.uf]} estão em nível 3 ou 4 de ${rot}.`;
+  const r = ufs.filter(u => res.ufs[u]?.municipios).map(u => ({u, p: alta(u) / res.ufs[u].municipios})).sort((a, b) => b.p - a.p)[0];
+  return `${inteiro(alto)} de ${inteiro(tot)} municípios (${pct(alto / tot, 1)}) estão em nível 3 ou 4 de ${rot}. A maior proporção é em ${UF_NOMES[r.u]} (${pct(r.p, 0)}).`;
+}
+let mapa, jornada;
+const PARADAS = [
+  {id: 'mapa', rot: 'Mapa da saúde', ico: 'mapa', pergunta: 'Onde cada indicador é mais alto? Troque a camada e veja o mapa mudar.', disp: () => !!D.terr, fato: () => mapa?.fato || null},
+  {id: 'dengue', rot: 'Dengue', ico: 'dengue', pergunta: 'Qual estado tem a maior parte dos municípios em alerta alto?', disp: () => !!D.dengueRes, fato: () => fatoArbo(D.dengueRes, 'dengue')},
+  {id: 'chik', rot: 'Chikungunya', ico: 'chik', pergunta: 'A chikungunya segue o mesmo desenho da dengue?', disp: () => !!D.chikRes, fato: () => fatoArbo(D.chikRes, 'chikungunya')},
+  {id: 'rede', rot: 'Rede assistencial', ico: 'rede', pergunta: 'Que tipo de unidade domina a rede do seu território?', disp: () => !!D.redeRes, fato: () => {
+    const g = sumGrupos(ufsAlvo(), 'grupos'), tot = Object.values(g).reduce((a, b) => a + b, 0), top = Object.entries(g).sort((a, b) => b[1] - a[1])[0];
+    return top && tot ? `${pct(top[1] / tot, 0)} dos estabelecimentos ativos de ${terr()} são do tipo "${top[0]}" (${inteiro(top[1])}).` : null; }},
+  {id: 'pessoal', rot: 'Profissionais e equipes', ico: 'pessoal', pergunta: 'Quantos médicos atendem o SUS para cada 1.000 habitantes?', disp: () => !!(D.profRes || D.equipes), fato: () => {
+    if (!D.profRes) return null; const ufs = ufsAlvo(), v = porMil(ufs.reduce((a, u) => a + (D.profRes.ufs[u]?.['Médicos']?.[1] || 0), 0), ufs.reduce((a, u) => a + (D.terr?.por_uf[u]?.pop_soma || 0), 0));
+    return v != null ? `${decimal(v, 2)} vínculos de médicos que atendem o SUS por 1.000 habitantes em ${terr()} (Brasil: ${decimal(medicosBR(), 2)}).` : null; }},
+  {id: 'leitos', rot: 'Leitos', ico: 'leitos', pergunta: 'Quantos leitos de UTI o SUS tem no seu território?', disp: () => !!D.leitos, fato: () => {
+    const L = D.leitos, ix = Object.fromEntries(L.campos.map((c, i) => [c, i])), ufs = ufsAlvo(), v = somaVet(L.ufs, ufs, L.campos.length);
+    return `${inteiro(v[ix.UTI_SUS])} leitos de UTI no SUS e ${decimal(porMil(v[ix.SUS], popAlvoUF()), 2)} leitos SUS por 1.000 habitantes em ${terr()}.`; }},
+  {id: 'fin', rot: 'Financiamento', ico: 'fin', pergunta: 'Quanto chega por habitante em cada estado?', disp: () => !!D.fin, fato: () => {
+    const f = D.fin.dados.uf, ufs = ufsAlvo(), fb = somaUF(f, 'fb', ufs), pp = ufs.reduce((a, u) => a + (f[u]?.pop || 0), 0);
+    return pp ? `R$ ${decimal(fb / pp, 0)} por habitante em repasses fundo a fundo no ano, em ${terr()}.` : null; }},
+  {id: 'em', rot: 'Emendas da União', ico: 'em', pergunta: 'Quanto das emendas já foi de fato pago?', disp: () => !!D.em, fato: () => {
+    const anos = Object.keys(D.em.anos).sort().reverse(), u = D.em.anos[anos[0]]?.total;
+    return u?.empenhado ? `${pct(u.pago / u.empenhado, 0)} do valor empenhado em ${anos[0]} já foi pago (dado nacional).` : null; }},
+  {id: 'rec', rot: 'Transferências e regularidade', ico: 'rec', pergunta: 'Seu município está regular no CAUC?', disp: () => !!(D.transf || D.desp || D.cauc), fato: () => {
+    const ufs = ufsAlvo();
+    if (D.cauc) { const com = ufs.reduce((a, u) => a + (D.cauc.ufs[u]?.com_pendencia || 0), 0), tot = ufs.reduce((a, u) => a + (D.cauc.ufs[u]?.municipios || 0), 0); if (tot) return `${pct(com / tot, 1)} dos municípios de ${terr()} têm alguma pendência no CAUC (${inteiro(com)} de ${inteiro(tot)}).`; }
+    return null; }},
+  {id: 'planos', rot: 'Planos de saúde', ico: 'planos', pergunta: 'Que parte da população não tem plano privado?', disp: () => !!D.ans, fato: () => {
+    const v = somaVet(D.ans.ufs, ufsAlvo(), 2); return v[1] ? `${pct(v[0] / v[1], 1)} da população de ${terr()} tem plano de assistência médica; o restante depende do SUS na prática (estimativa).` : null; }},
+  {id: 'aps', rot: 'Atenção Primária', ico: 'aps', pergunta: 'O que muda no cofinanciamento da Atenção Primária?', disp: () => true, fato: () => '15 indicadores de qualidade em três blocos de equipes, com desempenho de 0 a 100 (Portaria GM/MS nº 10.994/2026).'},
+  {id: 'notas', rot: 'Notas e portarias', ico: 'notas', pergunta: 'Saiu alguma norma nova que afeta o seu município?', disp: () => !!(D.notas || D.port), fato: () => `${inteiro(D.notas?.itens?.length || 0)} notas e informes e ${inteiro(D.port?.portarias?.length || 0)} portarias na última coleta.`}
+];
+const popAlvoUF = () => ufsAlvo().reduce((a, u) => a + (D.terr?.por_uf[u]?.pop_soma || 0), 0);
+
+// ---------- acoes: sorteio de estado e localizacao ----------
+const rolar = id => { const n = document.getElementById('mod-' + id); if (n) n.scrollIntoView({behavior: semMovimento() ? 'auto' : 'smooth', block: 'start'}); };
+function selecionarUF(u) { const sel = $('selUF'); if (!sel || ![...sel.options].some(o => o.value === u)) return; sel.value = u; sel.dispatchEvent(new Event('change')); }
+function selecionarMun(c) { const sel = $('selMun'); if (!sel || ![...sel.options].some(o => o.value === c)) return; sel.value = c; sel.dispatchEvent(new Event('change')); }
+function surpreender() {
+  const opcoes = Object.keys(UF_NOMES).filter(u => u !== S.uf);
+  const u = opcoes[Math.floor(Math.random() * opcoes.length)];
+  selecionarUF(u); rolar('mapa'); jornada?.avisar(`Sorteado: ${UF_NOMES[u]}. Explore os blocos e compare com o Brasil.`);
+}
+async function usarLocalizacao() {
+  const st = $('geo-status'), btn = $('btnLocal');
+  const dizer = t => { st.textContent = t; };
+  btn.disabled = true; dizer('Pedindo permissão de localização ao navegador...');
+  try {
+    const p = await localizar();
+    dizer('Identificando o município...');
+    const t = await descobrirTerritorio(p.lat, p.lon, D.terr?.municipios || []);
+    if (!t) { dizer('Sua posição está fora do território brasileiro coberto pelo painel.'); return; }
+    C.minhaPos = p;
+    selecionarUF(t.uf);
+    if (t.cod) selecionarMun(t.cod);
+    dizer(t.cod ? `Localizamos você em ${nomeMun(t.cod)}, ${t.uf}. A posição fica só no seu navegador.` : `Localizamos você em ${UF_NOMES[t.uf]}. Não foi possível identificar o município.`);
+    rolar('mapa');
+  } catch (e) {
+    dizer(e && e.code === 1 ? 'Permissão negada. Escolha o estado e o município nas listas acima.' : 'Não foi possível obter a localização agora. Escolha o estado e o município nas listas acima.');
+  } finally { btn.disabled = false; }
+}
+
+const C = {D, MUN, S, UF_NOMES, dengueUF, chikUF, redeUF, profUF, selecionarUF, selecionarMun, minhaPos: null, aoMapa: () => jornada?.atualizar()};
+
 async function render() {
-  await Promise.all([rResumo(), rDengue(), rChik(), rRede(), rPessoal(), rLeitos(), rFin(), rEm(), rRecursos(), rPlanos()]);
+  await Promise.all([mapa.atualizar(), rResumo(), rDengue(), rChik(), rRede(), rPessoal(), rLeitos(), rFin(), rEm(), rRecursos(), rPlanos()]);
   rAps(); rNotas();
+  preencherIcones(); revelar(); jornada.atualizar();
 }
 
 (async () => {
   montarFiltros();
+  preencherIcones();
+  $('btnLocal').addEventListener('click', usarLocalizacao);
+  $('btnSorte').addEventListener('click', surpreender);
   await carregarBase();
   preencherMun();
+  mapa = montarMapa(C);
+  jornada = montarJornada({paradas: PARADAS, irPara: rolar, surpreender, nomeTerritorio: () => S.uf === 'BR' ? 'o Brasil' : UF_NOMES[S.uf]});
   await render();
 })();
