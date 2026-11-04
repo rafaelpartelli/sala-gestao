@@ -21,17 +21,17 @@ jobs:
           python-version: "3.12"
       - name: Testes
         run: python3 -I -m unittest discover -s tests
-      - name: Sondar (rodada 8, SIOPS)
+      - name: Sondar (rodada 9, SIOPS)
         env:
           PORTAL_TRANSPARENCIA_KEY: ${{ secrets.PORTAL_TRANSPARENCIA_KEY }}
-        run: python3 robo/sondar_r8.py
+        run: python3 robo/sondar_r9.py
       - name: Publicar resultado
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add dados
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "dados: sondagem rodada 8 $(date -u +%d/%m/%Y\ %H:%M)"
+          git commit -m "dados: sondagem rodada 9 $(date -u +%d/%m/%Y\ %H:%M)"
           for i in 1 2 3; do
             if git pull --rebase -X theirs origin main && git push; then exit 0; fi
             sleep 5
