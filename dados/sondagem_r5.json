@@ -1,0 +1,1555 @@
+{
+ "rodada": 5,
+ "gerado_em": "2026-11-04T13:16:28-03:00",
+ "ambiente": "GitHub Actions",
+ "resumo": {
+  "ok": 25,
+  "falha": 7,
+  "nao_testado": 4
+ },
+ "fontes": [
+  {
+   "id": "cnes_formato",
+   "nome": "CNES JSON: formato real e tipos de unidade (amostra do inicio do arquivo)",
+   "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/CNES/cnes_estabelecimentos_json.zip",
+   "ms": 1679,
+   "status": 206,
+   "arquivo_dentro_do_zip": "cnes_estabelecimentos.json",
+   "metodo_compressao": 8,
+   "bytes_descompactados": 45153192,
+   "comeca_com": "[{\"\":\"\",\"\":\"\",\"\":\"\",\"\":\"\",\"\":\"\",\"\":\"\",\"\"",
+   "lidos": 44458,
+   "erros_leitura": 1,
+   "campos": [
+    "CO_CNES",
+    "CO_UNIDADE",
+    "CO_UF",
+    "CO_IBGE",
+    "NU_CNPJ_MANTENEDORA",
+    "NO_RAZAO_SOCIAL",
+    "NO_FANTASIA",
+    "CO_NATUREZA_ORGANIZACAO",
+    "DS_NATUREZA_ORGANIZACAO",
+    "TP_GESTAO",
+    "CO_NIVEL_HIERARQUIA",
+    "DS_NIVEL_HIERARQUIA",
+    "CO_ESFERA_ADMINISTRATIVA",
+    "DS_ESFERA_ADMINISTRATIVA",
+    "CO_ATIVIDADE",
+    "TP_UNIDADE",
+    "CO_CEP",
+    "NO_LOGRADOURO",
+    "NU_ENDERECO",
+    "NO_BAIRRO",
+    "NU_TELEFONE",
+    "NU_LATITUDE",
+    "NU_LONGITUDE",
+    "CO_TURNO_ATENDIMENTO",
+    "DS_TURNO_ATENDIMENTO",
+    "NU_CNPJ",
+    "NO_EMAIL",
+    "CO_NATUREZA_JUR",
+    "ST_CENTRO_CIRURGICO",
+    "ST_CENTRO_OBSTETRICO",
+    "ST_CENTRO_NEONATAL",
+    "ST_ATEND_HOSPITALAR",
+    "ST_SERVICO_APOIO",
+    "ST_ATEND_AMBULATORIAL",
+    "CO_MOTIVO_DESAB",
+    "CO_AMBULATORIAL_SUS"
+   ],
+   "tipos_unidade": {
+    "22": 18304,
+    "36": 8582,
+    "43": 5577,
+    "39": 2777,
+    "02": 2588,
+    "04": 1245,
+    "84": 1087,
+    "05": 576,
+    "42": 543,
+    "01": 457,
+    "74": 376,
+    "85": 309,
+    "77": 275,
+    "60": 208,
+    "73": 173,
+    "50": 163,
+    "70": 160,
+    "83": 134,
+    "07": 131,
+    "80": 125,
+    "40": 120,
+    "62": 91,
+    "81": 67,
+    "68": 59,
+    "69": 55,
+    "71": 54,
+    "72": 49,
+    "15": 34,
+    "32": 29,
+    "20": 25,
+    "75": 25,
+    "21": 19,
+    "79": 9,
+    "76": 9,
+    "61": 7,
+    "16": 7,
+    "82": 4,
+    "78": 3,
+    "67": 1,
+    "64": 1
+   },
+   "descricao_do_tipo": {},
+   "esferas": {
+    "MUNICIPAL": 42646,
+    "ESTADUAL": 1699,
+    "DUPLA": 113
+   },
+   "motivos_desativacao": {
+    "(vazio)": 36407,
+    "10": 2708,
+    "08": 2076,
+    "04": 1742,
+    "06": 836,
+    "11": 379,
+    "07": 194,
+    "01": 42,
+    "13": 32,
+    "03": 29,
+    "02": 10,
+    "12": 1
+   },
+   "tamanho_co_ibge": {
+    "6": 44458
+   },
+   "ufs_na_amostra": {
+    "35": 8447,
+    "31": 6008,
+    "43": 4116,
+    "41": 4061,
+    "33": 3816,
+    "42": 3502,
+    "29": 2225,
+    "26": 1433,
+    "52": 1150,
+    "32": 1066,
+    "23": 1063,
+    "51": 1030,
+    "53": 920,
+    "50": 784,
+    "15": 772,
+    "25": 659,
+    "11": 628,
+    "21": 579,
+    "24": 433,
+    "28": 392,
+    "22": 301,
+    "13": 254,
+    "27": 244,
+    "17": 216,
+    "12": 182,
+    "14": 98,
+    "16": 79
+   },
+   "tipos_fora_dos_grupos": [
+    "43",
+    "84",
+    "42",
+    "74",
+    "85",
+    "77",
+    "60",
+    "50",
+    "70",
+    "83",
+    "80",
+    "40",
+    "81",
+    "68",
+    "69",
+    "71",
+    "72",
+    "32",
+    "75",
+    "79",
+    "76",
+    "61",
+    "16",
+    "82",
+    "78",
+    "67",
+    "64"
+   ],
+   "ok": true
+  },
+  {
+   "id": "infodengue_paralelo",
+   "nome": "InfoDengue: limite de uso com 3 e 6 pedidos em paralelo",
+   "fases": {
+    "3_em_paralelo": {
+     "pedidos": 90,
+     "status": {
+      "200": 90
+     },
+     "ok": 90,
+     "taxa_erro": 0.0,
+     "mediana_ms": 607,
+     "p95_ms": 878,
+     "retry_after": [],
+     "pedidos_por_segundo": 4.28,
+     "minutos_para_5570": 21.7
+    },
+    "6_em_paralelo": {
+     "pedidos": 90,
+     "status": {
+      "200": 90
+     },
+     "ok": 90,
+     "taxa_erro": 0.0,
+     "mediana_ms": 600,
+     "p95_ms": 619,
+     "retry_after": [],
+     "pedidos_por_segundo": 9.94,
+     "minutos_para_5570": 9.3
+    }
+   },
+   "ok": true
+  },
+  {
+   "id": "info_chikungunya",
+   "nome": "InfoDengue: chikungunya (Vitoria)",
+   "url": "https://info.dengue.mat.br/api/alertcity?geocode=3205309&disease=chikungunya&format=json&ew_start=1&ew_end=53&ey_start=2026&ey_end=2026",
+   "metodo": "GET",
+   "nota": "mesma rota, outro agravo",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 600,
+   "tipo": "application/json",
+   "tamanho_http": "26122",
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 26122,
+   "campos": [
+    "data_iniSE",
+    "SE",
+    "casos_est",
+    "casos_est_min",
+    "casos_est_max",
+    "casos",
+    "p_rt1",
+    "p_inc100k",
+    "Localidade_id",
+    "nivel",
+    "id",
+    "versao_modelo",
+    "municipio_nome",
+    "Rt",
+    "pop",
+    "tempmin"
+   ],
+   "registros": 43,
+   "semanas": 43,
+   "campos_item": [
+    "data_iniSE",
+    "SE",
+    "casos_est",
+    "casos_est_min",
+    "casos_est_max",
+    "casos",
+    "p_rt1",
+    "p_inc100k",
+    "Localidade_id",
+    "nivel",
+    "id",
+    "versao_modelo"
+   ]
+  },
+  {
+   "id": "info_zika",
+   "nome": "InfoDengue: zika (Vitoria)",
+   "url": "https://info.dengue.mat.br/api/alertcity?geocode=3205309&disease=zika&format=json&ew_start=1&ew_end=53&ey_start=2026&ey_end=2026",
+   "metodo": "GET",
+   "nota": "mesma rota, outro agravo",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 461,
+   "tipo": "application/json",
+   "tamanho_http": "2",
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 2,
+   "campos": [],
+   "registros": 0,
+   "semanas": 0,
+   "campos_item": []
+  },
+  {
+   "id": "emendas_amostra",
+   "nome": "Emendas (API): campos, paginacao e reconhecimento da UF",
+   "metodo": "GET",
+   "itens_pagina1_2026": 15,
+   "campos_2026": [
+    "codigoEmenda",
+    "ano",
+    "tipoEmenda",
+    "autor",
+    "nomeAutor",
+    "numeroEmenda",
+    "localidadeDoGasto",
+    "funcao",
+    "subfuncao",
+    "valorEmpenhado",
+    "valorLiquidado",
+    "valorPago",
+    "valorRestoInscrito",
+    "valorRestoCancelado",
+    "valorRestoPago"
+   ],
+   "uf_reconhecida_2026": "15 de 15",
+   "exemplos_local_nao_reconhecido_2026": [],
+   "itens_pagina1_2025": 15,
+   "campos_2025": [
+    "codigoEmenda",
+    "ano",
+    "tipoEmenda",
+    "autor",
+    "nomeAutor",
+    "numeroEmenda",
+    "localidadeDoGasto",
+    "funcao",
+    "subfuncao",
+    "valorEmpenhado",
+    "valorLiquidado",
+    "valorPago",
+    "valorRestoInscrito",
+    "valorRestoCancelado",
+    "valorRestoPago"
+   ],
+   "uf_reconhecida_2025": "13 de 15",
+   "exemplos_local_nao_reconhecido_2025": [
+    "Nacional"
+   ],
+   "ok": true
+  },
+  {
+   "id": "sisab_2024Q1",
+   "nome": "SISAB indicadores de desempenho 2024Q1: colunas",
+   "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicador_desempenho/csv/sisab_indicador_desempenho_2024Q1.csv.zip",
+   "ms": 1502,
+   "status": 200,
+   "arquivo": "sisab_indicador_desempenho_2024Q1.csv",
+   "codificacao": "utf-8-sig",
+   "separador": ";",
+   "colunas": [
+    "uf",
+    "ibge",
+    "municipio",
+    "nu_competencia",
+    "ds_quadrimestre",
+    "co_tipo_indicador",
+    "numerador",
+    "denominador_utilizador",
+    "vl_perc_quad",
+    "visao_equipe",
+    "denominador_identificado",
+    "denominador_estimado",
+    "cadastro",
+    "base_externa",
+    "percentual",
+    "populacao",
+    "dt_criacao_registro"
+   ],
+   "amostra": [
+    "\"SC\";\"421550\";\"SANTA CECÍLIA\";\"202404\";\"2024Q1\";\"10\";\"0\";\"1\";\"0.0\";\"validas\";\"0\";\"1\";\"167\";\"82\";\"0\";\"15546\";\"2025/10/01 15:27:57.000\"",
+    "\"SC\";\"421550\";\"SANTA CECÍLIA\";\"202404\";\"2024Q1\";\"20\";\"0\";\"1\";\"0.0\";\"validas\";\"0\";\"1\";\"167\";\"82\";\"0\";\"15546\";\"2025/10/01 15:27:57.000\"",
+    "\"SC\";\"421550\";\"SANTA CECÍLIA\";\"202404\";\"2024Q1\";\"30\";\"0\";\"1\";\"0.0\";\"validas\";\"0\";\"1\";\"167\";\"82\";\"0\";\"15546\";\"2025/10/01 15:27:57.000\""
+   ],
+   "ok": true
+  },
+  {
+   "id": "sisab_2024Q3",
+   "nome": "SISAB indicadores de desempenho 2024Q3: colunas",
+   "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicador_desempenho/csv/sisab_indicador_desempenho_2024Q3.csv.zip",
+   "ms": 1660,
+   "status": 200,
+   "arquivo": "sisab_indicador_desempenho_2024Q3.csv",
+   "codificacao": "utf-8-sig",
+   "separador": ";",
+   "colunas": [
+    "uf",
+    "ibge",
+    "municipio",
+    "nu_competencia",
+    "ds_quadrimestre",
+    "co_tipo_indicador",
+    "numerador",
+    "denominador_utilizador",
+    "vl_perc_quad",
+    "visao_equipe",
+    "denominador_identificado",
+    "denominador_estimado",
+    "cadastro",
+    "base_externa",
+    "percentual",
+    "populacao",
+    "dt_criacao_registro"
+   ],
+   "amostra": [
+    "\"GO\";\"520120\";\"ANHANGUERA\";\"202412\";\"2024Q3\";\"50\";\"0\";\"0\";\"0.0\";\"geral\";\"0\";\"0\";\"1331\";\"0\";\"0\";\"924\";\"2025/10/01 15:27:57.000\"",
+    "\"GO\";\"520120\";\"ANHANGUERA\";\"202412\";\"2024Q3\";\"50\";\"0\";\"0\";\"0.0\";\"homologadas\";\"0\";\"0\";\"1331\";\"0\";\"0\";\"924\";\"2025/10/01 15:27:57.000\"",
+    "\"RS\";\"431725\";\"SANTA TEREZA\";\"202412\";\"2024Q3\";\"10\";\"0\";\"0\";\"0.0\";\"validas\";\"0\";\"0\";\"1834\";\"0\";\"0\";\"1505\";\"2025/10/01 15:27:57.000\""
+   ],
+   "ok": true
+  },
+  {
+   "id": "radar_brasil",
+   "nome": "Radar de Recursos: brasil.json (teste de hipoteses dos campos)",
+   "url": "https://partelli.pro/fundo/brasil.json",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 281,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": "Sat, 31 Oct 2026 16:50:15 GMT",
+   "ok": true,
+   "bytes_lidos": 6642,
+   "campos": [
+    "meta",
+    "uf"
+   ],
+   "registros": null,
+   "hipoteses": {
+    "ufs": 27,
+    "fbEst <= fb": 27,
+    "sEst <= s": 27,
+    "fbEst == 0": 0,
+    "nIdx == mun": 0,
+    "nIdx <= mun": 27,
+    "eq e inteiro": 27,
+    "eq <= ep": 27,
+    "ep >= ee >= eg": 27,
+    "amostra": {
+     "ES": {
+      "mun": 78,
+      "pop": 4126854,
+      "fb": 2828539996,
+      "fbEst": 1151973571,
+      "s": 1621984800,
+      "sEst": 328775196,
+      "ep": 570084444,
+      "ee": 556747420,
+      "eg": 416188804,
+      "eq": 987,
+      "nIdx": 22
+     },
+     "SP": {
+      "mun": 645,
+      "pop": 46081801,
+      "fb": 20946898671,
+      "fbEst": 6415622475,
+      "s": 9529540801,
+      "sEst": 4355511656,
+      "ep": 2642145902,
+      "ee": 2450536412,
+      "eg": 1587175640,
+      "eq": 5960,
+      "nIdx": 108
+     },
+     "AC": {
+      "mun": 22,
+      "pop": 884372,
+      "fb": 819614766,
+      "fbEst": 328232563,
+      "s": 426086623,
+      "sEst": 38475762,
+      "ep": 328143686,
+      "ee": 289907176,
+      "eg": 165547231,
+      "eq": 220,
+      "nIdx": 8
+     }
+    }
+   }
+  },
+  {
+   "id": "s3_indice",
+   "nome": "Dados Abertos SUS (S3): pastas e arquivos mais recentes",
+   "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/",
+   "ms": 491,
+   "status": 403,
+   "ok": false,
+   "erro": "HTTP 403"
+  },
+  {
+   "id": "ckan_busca_siops",
+   "nome": "Dados Abertos SUS: busca 'siops'",
+   "url": "https://dadosabertos.saude.gov.br/api/3/action/package_search?q=siops&rows=8",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 905,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "ckan_busca_orcamento",
+   "nome": "Dados Abertos SUS: busca 'orcamento'",
+   "url": "https://dadosabertos.saude.gov.br/api/3/action/package_search?q=orcamento&rows=8",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 891,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "ckan_busca_financiamento",
+   "nome": "Dados Abertos SUS: busca 'financiamento'",
+   "url": "https://dadosabertos.saude.gov.br/api/3/action/package_search?q=financiamento&rows=8",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 892,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "ckan_busca_repasse",
+   "nome": "Dados Abertos SUS: busca 'repasse'",
+   "url": "https://dadosabertos.saude.gov.br/api/3/action/package_search?q=repasse&rows=8",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 489,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "siops_gov",
+   "nome": "SIOPS: pagina no gov.br",
+   "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops",
+   "metodo": "GET",
+   "nota": "",
+   "ms": 1644,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=utf-8",
+   "bytes_lidos": 167382,
+   "titulo": "Sistema de Informações sobre Orçamentos Públicos em Saúde — Ministério da Saúde",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o Conteúdo 1",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops#wrapper"
+    },
+    {
+     "texto": "Ir para o menu de Navegação 3",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops#main-navigation"
+    },
+    {
+     "texto": "Ir para a Busca 4",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops#govbr-busca-input"
+    },
+    {
+     "texto": "Ir para o Mapa do site 5",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops#portal-footer"
+    },
+    {
+     "texto": "Abrir menu principal de navegação",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops"
+    },
+    {
+     "texto": "Dados Abertos",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/dados-abertos"
+    },
+    {
+     "texto": "Lei Geral de Proteção de Dados Pessoais (LGPD)",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/lgpd"
+    },
+    {
+     "texto": "Consultas Públicas",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/participacao-social/consultas-publicas"
+    },
+    {
+     "texto": "Relatórios",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/relatorios"
+    },
+    {
+     "texto": "GOV.BR",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/siops"
+    },
+    {
+     "texto": "Proteção de Dados Pessoais",
+     "url": "https://www.gov.br/pt-br/temas/protecao-de-dados-pessoais"
+    },
+    {
+     "texto": "Cuidados na Primeira Infância",
+     "url": "https://www.gov.br/pt-br/temas/desenvolvimento-cuidados-e-educacao-pre-escolar"
+    },
+    {
+     "texto": "Consultar minhas solicitações",
+     "url": "https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/atendimento-gov.br/duvidas-na-plataforma-de-automacao/cidadao/consultar-as-minhas-solicitacoes"
+    },
+    {
+     "texto": "Dados da Administração Pública Federal",
+     "url": "https://www.gov.br/pt-br/dados-da-administracao-publica-federal"
+    },
+    {
+     "texto": "Dados Abertos",
+     "url": "https://www.gov.br/governodigital/pt-br/dados-abertos"
+    },
+    {
+     "texto": "Saiba mais sobre o histórico de institucionalização do SIOPS",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/historico-de-institucionalizacao-do-siops"
+    },
+    {
+     "texto": "Certificado Digital",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/certificado-digital"
+    },
+    {
+     "texto": "Indicadores",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/indicadores"
+    },
+    {
+     "texto": "Publicações",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes"
+    },
+    {
+     "texto": "Perguntas Frequentes (FAQ)",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/faq"
+    }
+   ],
+   "total_links_filtrados": 20
+  },
+  {
+   "id": "siops_datasus",
+   "nome": "SIOPS: portal do DATASUS",
+   "url": "https://siops.datasus.gov.br/",
+   "metodo": "GET",
+   "nota": "",
+   "ms": 1609,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html",
+   "bytes_lidos": 2509,
+   "titulo": null,
+   "links_encontrados": [],
+   "total_links_filtrados": 0
+  },
+  {
+   "id": "siops_info",
+   "nome": "SIOPS: pagina de informacoes",
+   "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/dados",
+   "metodo": "GET",
+   "nota": "",
+   "ms": 1351,
+   "status": 404,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "siconfi_dca",
+   "nome": "SICONFI DCA (Vitoria): anexos com despesa por funcao",
+   "metodo": "GET",
+   "tentativas_por_anexo": {
+    "DCA-Anexo I-E 2025": 374
+   },
+   "anexo_com_saude": {
+    "anexo": "DCA-Anexo I-E",
+    "ano": 2025,
+    "campos": [
+     "exercicio",
+     "instituicao",
+     "cod_ibge",
+     "uf",
+     "anexo",
+     "rotulo",
+     "coluna",
+     "cod_conta",
+     "conta",
+     "valor",
+     "populacao"
+    ],
+    "linhas": 374,
+    "linhas_saude": 5,
+    "amostra_saude": [
+     {
+      "conta": "10 - Saúde",
+      "coluna": "Despesas Empenhadas",
+      "valor": 514137035.96
+     },
+     {
+      "conta": "10 - Saúde",
+      "coluna": "Despesas Liquidadas",
+      "valor": 471857624.14
+     },
+     {
+      "conta": "10 - Saúde",
+      "coluna": "Despesas Pagas",
+      "valor": 465546738.15
+     },
+     {
+      "conta": "10 - Saúde",
+      "coluna": "Inscrição de Restos a Pagar Não Processados",
+      "valor": 42279411.82
+     },
+     {
+      "conta": "10 - Saúde",
+      "coluna": "Inscrição de Restos a Pagar Processados",
+      "valor": 6310885.99
+     }
+    ]
+   },
+   "ok": true
+  },
+  {
+   "id": "rreo_paginacao",
+   "nome": "SICONFI RREO (Vitoria): paginacao e nomes de anexos",
+   "metodo": "GET",
+   "nota": "varre paginas ate achar o anexo de saude",
+   "ok": true,
+   "ms": 32,
+   "registros_lidos": 3194,
+   "campos_item": [
+    "exercicio",
+    "demonstrativo",
+    "periodo",
+    "periodicidade",
+    "instituicao",
+    "cod_ibge",
+    "uf",
+    "populacao",
+    "anexo",
+    "esfera",
+    "rotulo",
+    "coluna",
+    "cod_conta",
+    "conta",
+    "valor"
+   ],
+   "anexos": {
+    "RREO-Anexo 01": 495,
+    "RREO-Anexo 02": 1152,
+    "RREO-Anexo 03": 416,
+    "RREO-Anexo 04": 149,
+    "RREO-Anexo 06": 188,
+    "RREO-Anexo 07": 53,
+    "RREO-Anexo 09": 18,
+    "RREO-Anexo 10 - RPPS": 600,
+    "RREO-Anexo 11": 26,
+    "RREO-Anexo 13": 2,
+    "RREO-Anexo 14": 95
+   },
+   "anexos_de_saude": []
+  },
+  {
+   "id": "pt_spec",
+   "nome": "Portal da Transparencia: especificacao da API",
+   "url": "https://api.portaldatransparencia.gov.br/v3/api-docs",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 952,
+   "tipo": "application/json",
+   "tamanho_http": "171293",
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 171293,
+   "campos": [
+    "openapi",
+    "info",
+    "externalDocs",
+    "servers",
+    "security",
+    "paths",
+    "components"
+   ],
+   "registros": null,
+   "rotas_de_interesse": [
+    {
+     "path": "/api-de-dados/emendas",
+     "obrigatorios": [
+      "pagina"
+     ],
+     "opcionais": [
+      "codigoEmenda",
+      "numeroEmenda",
+      "nomeAutor",
+      "tipoEmenda",
+      "ano",
+      "codigoFuncao",
+      "codigoSubfuncao"
+     ]
+    },
+    {
+     "path": "/api-de-dados/emendas/documentos/{codigo}",
+     "obrigatorios": [
+      "codigo",
+      "pagina"
+     ],
+     "opcionais": []
+    },
+    {
+     "path": "/api-de-dados/despesas/tipo-transferencia",
+     "obrigatorios": [],
+     "opcionais": []
+    },
+    {
+     "path": "/api-de-dados/despesas/favorecidos-finais-por-documento",
+     "obrigatorios": [
+      "codigoDocumento",
+      "pagina"
+     ],
+     "opcionais": []
+    },
+    {
+     "path": "/api-de-dados/despesas/documentos-por-favorecido",
+     "obrigatorios": [
+      "codigoPessoa",
+      "fase",
+      "ano",
+      "pagina"
+     ],
+     "opcionais": [
+      "ug",
+      "gestao",
+      "ordenacaoResultado"
+     ]
+    },
+    {
+     "path": "/api-de-dados/coronavirus/transferencias",
+     "obrigatorios": [
+      "mesAno",
+      "pagina"
+     ],
+     "opcionais": [
+      "codigoOrgao",
+      "tipoTransferencia",
+      "uf",
+      "codigoIbge"
+     ]
+    },
+    {
+     "path": "/api-de-dados/convenios",
+     "obrigatorios": [
+      "pagina"
+     ],
+     "opcionais": [
+      "dataInicial",
+      "dataFinal",
+      "dataUltimaLiberacaoInicial",
+      "dataUltimaLiberacaoFinal",
+      "dataVigenciaInicial",
+      "dataVigenciaFinal",
+      "convenente",
+      "tipoConvenente",
+      "numero",
+      "numeroOriginal"
+     ]
+    },
+    {
+     "path": "/api-de-dados/convenios/tipo-instrumento",
+     "obrigatorios": [],
+     "opcionais": []
+    },
+    {
+     "path": "/api-de-dados/convenios/numero",
+     "obrigatorios": [
+      "numero",
+      "pagina"
+     ],
+     "opcionais": []
+    },
+    {
+     "path": "/api-de-dados/convenios/numero-processo",
+     "obrigatorios": [
+      "numeroProcesso",
+      "pagina"
+     ],
+     "opcionais": []
+    },
+    {
+     "path": "/api-de-dados/convenios/numero-original",
+     "obrigatorios": [
+      "numeroOriginal",
+      "pagina"
+     ],
+     "opcionais": []
+    },
+    {
+     "path": "/api-de-dados/convenios/id",
+     "obrigatorios": [
+      "id"
+     ],
+     "opcionais": []
+    }
+   ]
+  },
+  {
+   "id": "pt_teste",
+   "nome": "/api-de-dados/despesas/tipo-transferencia: 1 pagina",
+   "url": "https://api.portaldatransparencia.gov.br/api-de-dados/despesas/tipo-transferencia?",
+   "metodo": "GET",
+   "nota": "consulta minima dos ultimos 30 dias, orgao 36000 (Ministerio da Saude)",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 501,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 111,
+   "campos": [
+    "id",
+    "descricao"
+   ],
+   "registros": 2,
+   "total_itens": 2,
+   "campos_item": [
+    "id",
+    "descricao"
+   ]
+  },
+  {
+   "id": "pt_teste",
+   "nome": "/api-de-dados/coronavirus/transferencias: 1 pagina",
+   "url": "https://api.portaldatransparencia.gov.br/api-de-dados/coronavirus/transferencias?mesAno=202609&pagina=1",
+   "metodo": "GET",
+   "nota": "consulta minima dos ultimos 30 dias, orgao 36000 (Ministerio da Saude)",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 339,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 2,
+   "campos": [],
+   "registros": 0,
+   "total_itens": 0,
+   "campos_item": []
+  },
+  {
+   "id": "pt_teste",
+   "nome": "/api-de-dados/convenios: 1 pagina",
+   "url": "https://api.portaldatransparencia.gov.br/api-de-dados/convenios?pagina=1",
+   "metodo": "GET",
+   "nota": "consulta minima dos ultimos 30 dias, orgao 36000 (Ministerio da Saude)",
+   "tentativas": 1,
+   "status": 400,
+   "ms": 521,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 400"
+  },
+  {
+   "id": "pt_teste",
+   "nome": "/api-de-dados/convenios/tipo-instrumento: 1 pagina",
+   "url": "https://api.portaldatransparencia.gov.br/api-de-dados/convenios/tipo-instrumento?",
+   "metodo": "GET",
+   "nota": "consulta minima dos ultimos 30 dias, orgao 36000 (Ministerio da Saude)",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 206,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 1422,
+   "campos": [
+    "id",
+    "codigo",
+    "descricao"
+   ],
+   "registros": 20,
+   "total_itens": 20,
+   "campos_item": [
+    "id",
+    "codigo",
+    "descricao"
+   ]
+  },
+  {
+   "id": "pt_teste",
+   "nome": "/api-de-dados/convenios/numero: nao testado",
+   "ok": null,
+   "nota": "obrigatorios sem valor: numero"
+  },
+  {
+   "id": "pt_teste",
+   "nome": "/api-de-dados/convenios/numero-processo: nao testado",
+   "ok": null,
+   "nota": "obrigatorios sem valor: numeroProcesso"
+  },
+  {
+   "id": "pt_teste",
+   "nome": "/api-de-dados/convenios/numero-original: nao testado",
+   "ok": null,
+   "nota": "obrigatorios sem valor: numeroOriginal"
+  },
+  {
+   "id": "pt_teste",
+   "nome": "/api-de-dados/convenios/id: nao testado",
+   "ok": null,
+   "nota": "obrigatorios sem valor: id"
+  },
+  {
+   "id": "pt_csv_transferencias",
+   "nome": "CSV de transferencias (202610): colunas",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/transferencias/202610",
+   "ms": 687,
+   "status": 206,
+   "arquivo": "202610_Transferencias.csv",
+   "codificacao": "latin-1",
+   "separador": ";",
+   "colunas": [
+    "ANO / MÊS",
+    "TIPO TRANSFERÊNCIA",
+    "TIPO FAVORECIDO",
+    "UF",
+    "CÓDIGO MUNICÍPIO SIAFI",
+    "NOME MUNICÍPIO",
+    "CÓDIGO ÓRGÃO SIAFI",
+    "NOME ÓRGÃO",
+    "CÓDIGO UNIDADE GESTORA",
+    "NOME UNIDADE GESTORA",
+    "CÓDIGO FUNÇÃO",
+    "NOME FUNÇÃO",
+    "CÓDIGO SUBFUNÇÃO",
+    "NOME SUBFUNÇÃO",
+    "CÓDIGO PROGRAMA",
+    "NOME PROGRAMA",
+    "AÇÃO",
+    "NOME AÇÃO",
+    "LINGUAGEM CIDADÃ",
+    "CÓDIGO GRUPO DESPESA",
+    "NOME GRUPO DESPESA",
+    "CÓDIGO MODALIDADE APLICAÇÃO DESPESA",
+    "NOME MODALIDADE APLICAÇÃO DESPESA",
+    "CÓDIGO ELEMENTO DESPESA",
+    "NOME ELEMENTO DESPESA",
+    "CÓDIGO PLANO ORÇAMENTÁRIO",
+    "NOME PLANO ORÇAMENTÁRIO",
+    "CÓDIGO SUBTÍTULO",
+    "NOME SUBTÍTULO",
+    "CÓDIGO LOCALIZADOR",
+    "NOME LOCALIZADOR",
+    "SIGLA LOCALIZADOR",
+    "DESCRIÇÃO COMPLEMENTAR LOCALIZADOR",
+    "CÓDIGO FAVORECIDO",
+    "NOME FAVORECIDO",
+    "VALOR TRANSFERIDO"
+   ],
+   "amostra": [],
+   "ok": true
+  },
+  {
+   "id": "pt_csv_emendas",
+   "nome": "CSV de emendas (202610): colunas",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares/202610",
+   "ms": 297,
+   "status": 206,
+   "arquivo": "EmendasParlamentares.csv",
+   "codificacao": "latin-1",
+   "separador": ";",
+   "colunas": [
+    "Código da Emenda",
+    "Ano da Emenda",
+    "Tipo de Emenda",
+    "Código do Autor da Emenda",
+    "Nome do Autor da Emenda",
+    "Número da emenda",
+    "Localidade de aplicação do recurso",
+    "Código Município IBGE",
+    "Município",
+    "Código UF IBGE",
+    "UF",
+    "Região",
+    "Código Função",
+    "Nome Função",
+    "Código Subfunção",
+    "Nome Subfunção",
+    "Código Programa",
+    "Nome Programa",
+    "Código Ação",
+    "Nome Ação",
+    "Código Plano Orçamentário",
+    "Nome Plano Orçamentário",
+    "Valor Empenhado",
+    "Valor Liquidado",
+    "Valor Pago",
+    "Valor Restos A Pagar Inscritos",
+    "Valor Restos A Pagar Cancelados",
+    "Valor Restos A Pagar Pagos"
+   ],
+   "amostra": [],
+   "ok": true
+  },
+  {
+   "id": "ans_api",
+   "nome": "ANS API de operadoras: raiz",
+   "url": "https://www.ans.gov.br/operadoras-entity/v1/",
+   "metodo": "GET",
+   "nota": "o documento cita este endereco, sem autenticacao",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 903,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 115,
+   "campos": [
+    "_links"
+   ],
+   "registros": null,
+   "tipo_resposta": "dict"
+  },
+  {
+   "id": "ans_api",
+   "nome": "ANS API de operadoras: operadoras?page=0&size=1",
+   "url": "https://www.ans.gov.br/operadoras-entity/v1/operadoras?page=0&size=1",
+   "metodo": "GET",
+   "nota": "o documento cita este endereco, sem autenticacao",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 921,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 826,
+   "campos": [
+    "size",
+    "total_elements",
+    "total_pages",
+    "page",
+    "page_elements",
+    "content",
+    "_links"
+   ],
+   "registros": null,
+   "tipo_resposta": "dict"
+  },
+  {
+   "id": "ans_pda",
+   "nome": "ANS Dados Abertos (PDA): indice",
+   "url": "https://dadosabertos.ans.gov.br/FTP/PDA/",
+   "metodo": "GET",
+   "nota": "",
+   "ms": 847,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=ISO-8859-1",
+   "bytes_lidos": 13385,
+   "titulo": "Index of /FTP/PDA",
+   "links_encontrados": [
+    {
+     "texto": "beneficiarios_identi..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/beneficiarios_identificados_sus_abi/"
+    },
+    {
+     "texto": "beneficiarios_vincul..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/beneficiarios_vinculos_tipo_contratacao_vda/"
+    },
+    {
+     "texto": "dados_de_beneficiari..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/dados_de_beneficiarios_por_operadora/"
+    },
+    {
+     "texto": "dados_de_beneficiari..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/dados_de_beneficiarios_por_regiao_geografica/"
+    },
+    {
+     "texto": "dados_ressarcimento_..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/dados_ressarcimento_SUS_operadora_planos_saude/"
+    },
+    {
+     "texto": "demandas_dos_consumi..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/demandas_dos_consumidores_reclamacao_beneficiarios/"
+    },
+    {
+     "texto": "informacoes_consolid..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/informacoes_consolidadas_de_beneficiarios-024/"
+    },
+    {
+     "texto": "operadoras_acreditadas/",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/operadoras_acreditadas/"
+    },
+    {
+     "texto": "operadoras_de_plano_..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/operadoras_de_plano_de_saude_ativas/"
+    },
+    {
+     "texto": "operadoras_de_plano_..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/operadoras_de_plano_de_saude_canceladas/"
+    },
+    {
+     "texto": "operadoras_e_prestad..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/operadoras_e_prestadores_nao_hospitalares/"
+    },
+    {
+     "texto": "penalidades_aplicada..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/penalidades_aplicadas_a_operadoras/"
+    },
+    {
+     "texto": "taxa_de_cobertura_de..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/taxa_de_cobertura_de_planos_de_saude-047/"
+    },
+    {
+     "texto": "taxa_de_resolutividade/",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/taxa_de_resolutividade/"
+    }
+   ],
+   "total_links_filtrados": 14
+  },
+  {
+   "id": "ans_benef",
+   "nome": "ANS: pasta de beneficiarios",
+   "url": "https://dadosabertos.ans.gov.br/FTP/PDA/beneficiarios_identificados_sus_abi/",
+   "metodo": "GET",
+   "nota": "",
+   "ms": 559,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=ISO-8859-1",
+   "bytes_lidos": 1254,
+   "titulo": "Index of /FTP/PDA/beneficiarios_identificados_sus_abi",
+   "links_encontrados": [
+    {
+     "texto": "Name",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/beneficiarios_identificados_sus_abi/?C=N;O=D"
+    },
+    {
+     "texto": "Last modified",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/beneficiarios_identificados_sus_abi/?C=M;O=A"
+    },
+    {
+     "texto": "Size",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/beneficiarios_identificados_sus_abi/?C=S;O=A"
+    },
+    {
+     "texto": "Description",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/beneficiarios_identificados_sus_abi/?C=D;O=A"
+    },
+    {
+     "texto": "Parent Directory",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/"
+    },
+    {
+     "texto": "dicionário_benefici..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/beneficiarios_identificados_sus_abi/dicion%c3%a1rio_beneficiarios-identificados-sus-abi.ods"
+    },
+    {
+     "texto": "ressarc_benef_SUS_AB..>",
+     "url": "https://dadosabertos.ans.gov.br/FTP/PDA/beneficiarios_identificados_sus_abi/ressarc_benef_SUS_ABI.zip"
+    }
+   ],
+   "total_links_filtrados": 7
+  },
+  {
+   "id": "conasems_tecnica",
+   "nome": "CONASEMS: tecnica de leitura (site em Next.js)",
+   "url": "https://www.conasems.org.br/",
+   "ms": 997,
+   "status": 200,
+   "next_build_id": true,
+   "pageProps_chaves": [
+    "data"
+   ],
+   "tem_next_data": true,
+   "testes": {
+    "sitemap.xml": {
+     "status": 200,
+     "erro": null,
+     "tipo": "text/html; charset=utf-8",
+     "urls": 0,
+     "amostra_nota": []
+    },
+    "feed": {
+     "status": 200,
+     "erro": null,
+     "tipo": "text/html; charset=utf-8"
+    },
+    "rss.xml": {
+     "status": 200,
+     "erro": null,
+     "tipo": "text/html; charset=utf-8"
+    }
+   },
+   "ok": true
+  },
+  {
+   "id": "relatorioaps_js",
+   "nome": "e-Gestor APS (relatorioaps): enderecos e arquivos citados nos scripts",
+   "url": "https://relatorioaps.saude.gov.br/",
+   "ms": 1175,
+   "status": 200,
+   "scripts": 3,
+   "trechos_sobre_download": [
+    "DownloadProgress",
+    ";exportFilename=",
+    "+this.getExportHeader(p)+",
+    ",u<a.length-1&&(r+=this.csvSeparator))}n.forEach((u,p)=>{r+=",
+    ",h<a.length-1&&(r+=this.csvSeparator)}}});let o=new Blob([r],{type:",
+    ",this.renderer.appendChild(this.document.body,s),void 0!==s.download?(s.setAttribute(",
+    ",this.exportFilename+",
+    "csvSeparator",
+    "exportFilename",
+    "exportFunction",
+    "exportHeader",
+    "==typeof(chrome.downloads||{}).download)return URL.revokeObjectURL&&typeof setTimeout<"
+   ],
+   "enderecos": [
+    "https://bvsms.saude.gov.br/bvs/saudelegis/gm/2020/prt0397_16_03_2020.html",
+    "https://egestorab.saude.gov.br/",
+    "https://egestorab.saude.gov.br/gestaoaps/relFinanciamento.xhtml",
+    "https://egestorab.saude.gov.br/gestaoaps/relFinanciamentoParcela.xhtml",
+    "https://egestorab.saude.gov.br/paginas/acessoPublico/relatorios/nota_tecnica/nota_metodologica_AB.pdf",
+    "https://egestorab.saude.gov.br/paginas/acessoPublico/relatorios/nota_tecnica/nota_metodologica_AB_adaptada.pdf",
+    "https://egestorab.saude.gov.br/paginas/acessoPublico/relatorios/nota_tecnica/nota_metodologica_SB.pdf",
+    "https://egestorab.saude.gov.br/paginas/acessoPublico/relatorios/nota_tecnica/nota_metodologica_SB_adaptada_2.pdf",
+    "https://egestorab.saude.gov.br/paginas/acessoPublico/relatorios/nota_tecnica/nota_tecnica_relatorio_de_cobertura_AB.pdf",
+    "https://egestorab.saude.gov.br/paginas/acessoPublico/relatorios/nota_tecnica/nota_tecnica_relatorio_de_cobertura_SB.pdf",
+    "https://egestorab.saude.gov.br/paginas/acessoPublico/relatorios/relPagamentoAB.xhtml",
+    "https://relatorioaps-prd.saude.gov.br",
+    "https://sisaps.saude.gov.br/sistemas/siaps/",
+    "https://sisapsdoc.saude.gov.br/pt-br/Validacao-Saudecomagente",
+    "https://sisapsdoc.saude.gov.br/pt-br/egestor"
+   ],
+   "ok": true
+  },
+  {
+   "id": "ckan_leitos5",
+   "nome": "Dados Abertos SUS: hospitais e leitos (recursos mais recentes)",
+   "url": "https://dadosabertos.saude.gov.br/dataset/hospitais-e-leitos",
+   "metodo": "GET",
+   "recursos": [
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/008344c7-89e8-40a9-93ee-ae1d8beb364a",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/xml/Leitos_2018.xml.zip"
+     ],
+     "tamanho_bytes": "2249471",
+     "ultima_modificacao": "Thu, 23 Jan 2025 17:57:58 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/012bbfb3-fee5-4b19-8803-439bb1e99aae",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/xml/Leitos_2021.xml.zip"
+     ],
+     "tamanho_bytes": "2367645",
+     "ultima_modificacao": "Thu, 23 Jan 2025 17:58:00 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/0972294a-bbaf-42dd-a64c-e7ef8155970d",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2012.json.zip"
+     ],
+     "tamanho_bytes": "1579987",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:06 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/0c8ee5d3-e419-4332-b8bb-e95ae2b0819b",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2013.json.zip"
+     ],
+     "tamanho_bytes": "1559939",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:07 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/0d125413-1b24-4765-9606-52d8c098c2ab",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2011.json.zip"
+     ],
+     "tamanho_bytes": "1555485",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:06 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/0f5bfff1-f292-4fd8-8314-d827275dfa88",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/Leitos_2018.csv"
+     ],
+     "tamanho_bytes": "24623933",
+     "ultima_modificacao": "Tue, 20 Jun 2023 17:32:14 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/1444219b-fa83-45fa-9a68-e8bb4a6e2397",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2010.json.zip"
+     ],
+     "tamanho_bytes": "1552563",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:06 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/1b71c280-733e-4786-bf37-df25c4c2cf95",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2020.json.zip"
+     ],
+     "tamanho_bytes": "1576120",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:09 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/22bf4653-3a7c-4ca0-bccd-0652b9c4f691",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/xml/Leitos_2020.xml.zip"
+     ],
+     "tamanho_bytes": "2306768",
+     "ultima_modificacao": "Thu, 23 Jan 2025 17:57:59 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/2485b97f-5207-4127-8983-b9fdc4bc42c3",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/Leitos_2024.csv"
+     ],
+     "tamanho_bytes": "25197031",
+     "ultima_modificacao": "Mon, 12 May 2025 16:18:41 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/2a0c85c0-2f14-4ef8-8088-628e0029f496",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/xml/Leitos_2012.xml.zip"
+     ],
+     "tamanho_bytes": "2347005",
+     "ultima_modificacao": "Thu, 23 Jan 2025 17:57:55 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/2fd3d6a9-47bf-459c-8530-6e6f60f1b3b3",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2015.json.zip"
+     ],
+     "tamanho_bytes": "1524075",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:07 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/39073b77-cd43-4604-a53d-8274a0336d65",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/Leitos_2014.csv"
+     ],
+     "tamanho_bytes": "25533107",
+     "ultima_modificacao": "Tue, 03 Jan 2023 12:35:40 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/3a7e5620-6b81-469a-9ece-acab7f18869a",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/Leitos_2011.csv"
+     ],
+     "tamanho_bytes": "25869582",
+     "ultima_modificacao": "Tue, 03 Jan 2023 12:35:40 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/42a09251-791c-4940-a29d-e13e3254e4ed",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/Leitos_2007.csv"
+     ],
+     "tamanho_bytes": "12767758",
+     "ultima_modificacao": "Tue, 03 Jan 2023 12:35:42 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/432528e3-ead5-4042-b531-97de6eb8f6ce",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2024.json.zip"
+     ],
+     "tamanho_bytes": "7789934",
+     "ultima_modificacao": "Mon, 12 May 2025 15:36:41 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/493970b5-3166-4c6f-968b-3a1b3ea19b9d",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/xml/Leitos_2016.xml.zip"
+     ],
+     "tamanho_bytes": "2244791",
+     "ultima_modificacao": "Thu, 23 Jan 2025 17:57:57 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/5701f27f-a202-4605-a944-7dbe888c0445",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/Leitos_2023.csv"
+     ],
+     "tamanho_bytes": "24942282",
+     "ultima_modificacao": "Tue, 20 Feb 2024 15:04:15 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/5ac78b13-649f-4b09-8a92-0ae829a56d50",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/Leitos_csv_2026.zip"
+     ],
+     "tamanho_bytes": "4914199",
+     "ultima_modificacao": "Wed, 21 Oct 2026 02:23:24 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/5b0a1d09-d3ec-4206-a4f3-4c1adf97f416",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2008.json.zip"
+     ],
+     "tamanho_bytes": "1549000",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:05 GMT",
+     "status_download": 200
+    }
+   ],
+   "ms": 1373,
+   "total_recursos_na_pagina": 20,
+   "ok": true
+  }
+ ]
+}
