@@ -2,8 +2,7 @@ name: Coletar Atencao Primaria, planos (ANS) e despesa (DCA)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 6 1 * *"
+  workflow_call:
 
 permissions:
   contents: write

@@ -25,6 +25,9 @@ Coletores em Python (somente biblioteca padrão) rodam no GitHub Actions, gravam
 
 Os workflows ficam em `.github/workflows/`. Segredo necessário: `PORTAL_TRANSPARENCIA_KEY` (só para emendas). A chave nunca vai no código.
 
+## Agenda (fila diária às 02:35)
+O workflow "Coleta diaria (02:35)" (`sondar.yml`) roda todo dia às 02:35 de Brasília (05:35 UTC) e chama os demais em fila, um após o outro: base territorial (só dia 1), notas, emendas, financiamento (com CAUC e transferências), dengue (com chikungunya), CNES (só segunda) e Atenção Primária, ANS e despesa (só dia 1). Se uma etapa falhar, as seguintes continuam. Cada workflow continua disponível para execução manual (Run workflow). A coluna "Agenda" da tabela acima vale para a periodicidade da fonte, e o horário é sempre o da fila.
+
 ## Regras de dados
 - Somente dados públicos e agregados. Nenhum dado de pessoa é coletado ou publicado.
 - Casos de dengue são estimativas do modelo do InfoDengue, não notificações.

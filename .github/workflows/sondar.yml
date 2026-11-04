@@ -1,37 +1,73 @@
-name: Sondar fontes da Sala de Gestao
+name: Coleta diaria (02:35)
+
+# Fila diaria as 02:35 de Brasilia (05:35 UTC; o Brasil nao tem horario de verao). Cada etapa so comeca quando a anterior termina.
+# Se uma etapa falhar, as seguintes continuam. CNES roda as segundas; base territorial, Atencao Primaria, ANS e despesa rodam no dia 1.
+# Os workflows chamados tambem podem ser executados sozinhos (Run workflow).
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "35 5 * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: sondar-fontes
+  group: coleta-diaria
   cancel-in-progress: false
 
 jobs:
-  sondar:
+  calendario:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 5
+    outputs:
+      dia1: ${{ steps.d.outputs.dia1 }}
+      segunda: ${{ steps.d.outputs.segunda }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Sondar
-        env:
-          PORTAL_TRANSPARENCIA_KEY: ${{ secrets.PORTAL_TRANSPARENCIA_KEY }}
-        run: python3 robo/sondar_fontes.py
-      - name: Publicar resultado
+      - id: d
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dados
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m "dados: sondagem das fontes $(date -u +%d/%m/%Y\ %H:%M)"
-          for i in 1 2 3; do
-            if git pull --rebase -X theirs origin main && git push; then exit 0; fi
-            sleep 5
-          done
-          exit 1
+          export TZ=America/Sao_Paulo
+          echo "dia1=$([ "$(date +%d)" = "01" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "segunda=$([ "$(date +%u)" = "1" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+  territorio:
+    needs: calendario
+    if: needs.calendario.outputs.dia1 == 'true'
+    uses: ./.github/workflows/territorio.yml
+    secrets: inherit
+
+  notas:
+    needs: [calendario, territorio]
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/notas.yml
+    secrets: inherit
+
+  emendas:
+    needs: notas
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/emendas.yml
+    secrets: inherit
+
+  financiamento:
+    needs: emendas
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/financiamento.yml
+    secrets: inherit
+
+  dengue:
+    needs: financiamento
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/dengue.yml
+    secrets: inherit
+
+  rede:
+    needs: [calendario, dengue]
+    if: ${{ !cancelled() && needs.calendario.outputs.segunda == 'true' }}
+    uses: ./.github/workflows/rede.yml
+    secrets: inherit
+
+  aps:
+    needs: [calendario, rede]
+    if: ${{ !cancelled() && needs.calendario.outputs.dia1 == 'true' }}
+    uses: ./.github/workflows/aps.yml
+    secrets: inherit

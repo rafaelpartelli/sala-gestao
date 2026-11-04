@@ -2,8 +2,7 @@ name: Coletar dengue (InfoDengue)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "37 8 * * *"
+  workflow_call:
 
 permissions:
   contents: write

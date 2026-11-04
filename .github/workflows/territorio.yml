@@ -2,8 +2,7 @@ name: Coletar base territorial
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 5 1 * *"
+  workflow_call:
 
 permissions:
   contents: write

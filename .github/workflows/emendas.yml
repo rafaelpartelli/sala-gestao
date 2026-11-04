@@ -2,8 +2,7 @@ name: Coletar emendas da Uniao (Portal da Transparencia)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "29 9 * * *"
+  workflow_call:
 
 permissions:
   contents: write

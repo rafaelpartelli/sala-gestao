@@ -2,8 +2,7 @@ name: Coletar rede, leitos, profissionais e equipes (CNES)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "23 7 * * 1"
+  workflow_call:
 
 permissions:
   contents: write

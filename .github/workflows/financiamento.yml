@@ -2,9 +2,7 @@ name: Coletar financiamento e portarias (Radar de Recursos)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "41 11 * * *"
-    - cron: "41 19 * * 5"
+  workflow_call:
 
 permissions:
   contents: write
