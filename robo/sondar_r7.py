@@ -89,7 +89,7 @@ def bloco_elasticnes():
         p = pedir(ELASTI + caminho, timeout=30)
         c = (p.pop("corpo", b"") or b"")[:200].decode("utf-8", "replace")
         r["testes"][nome] = {"status": p.get("status"), "erro": p.get("erro"), "tipo": p.get("tipo"), "ms": p.get("ms"),
-                             "inicio": re.sub(r"\s+", " ", c)[:160]}
+                             "inicio": ("(omitido)" if nome in ("kibana_status", "kibana_reporting") else re.sub(r"\s+", " ", c)[:160])}
         time.sleep(1)
     r["testes"]["bsearch_lote_vazio"] = post_vazio(ELASTI + "/kibana/internal/bsearch")
     r["ok"] = bool(r["testes"]["pagina_profissionais"].get("status") == 200)
