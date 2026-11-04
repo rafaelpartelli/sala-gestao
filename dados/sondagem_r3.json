@@ -1,0 +1,1701 @@
+{
+ "rodada": 3,
+ "gerado_em": "2026-11-04T10:44:02-03:00",
+ "ambiente": "GitHub Actions",
+ "resumo": {
+  "ok": 34,
+  "falha": 19,
+  "nao_testado": 0
+ },
+ "fontes": [
+  {
+   "id": "tg_fundoafundo_openapi",
+   "nome": "Transferegov fundoafundo: raiz pedindo OpenAPI",
+   "url": "https://api-publica.transferegov.gestao.gov.br/fundoafundo/",
+   "metodo": "GET",
+   "nota": "PostgREST devolve o esquema com esse Accept",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 1187,
+   "tipo": "text/html; charset=utf-8",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 2082,
+   "inicio": " <!DOCTYPE html> <html> <head> <link type=\"text/css\" rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css\"> <link rel=\"shortcut icon\" href=\"/fundoaf"
+  },
+  {
+   "id": "tg_fundoafundo_programa",
+   "nome": "Transferegov fundoafundo: tabela programa (1 linha)",
+   "url": "https://api-publica.transferegov.gestao.gov.br/fundoafundo/programa?limit=1",
+   "metodo": "GET",
+   "nota": "candidato, so nomes de campos",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 625,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "tg_fundoafundo_plano_acao",
+   "nome": "Transferegov fundoafundo: tabela plano_acao (1 linha)",
+   "url": "https://api-publica.transferegov.gestao.gov.br/fundoafundo/plano_acao?limit=1",
+   "metodo": "GET",
+   "nota": "candidato, so nomes de campos",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 729,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "tg_fundoafundo_empenho",
+   "nome": "Transferegov fundoafundo: tabela empenho (1 linha)",
+   "url": "https://api-publica.transferegov.gestao.gov.br/fundoafundo/empenho?limit=1",
+   "metodo": "GET",
+   "nota": "candidato, so nomes de campos",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 359,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "tg_fundoafundo_relatorio_gestao",
+   "nome": "Transferegov fundoafundo: tabela relatorio_gestao (1 linha)",
+   "url": "https://api-publica.transferegov.gestao.gov.br/fundoafundo/relatorio_gestao?limit=1",
+   "metodo": "GET",
+   "nota": "candidato, so nomes de campos",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 349,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "tg_especiais_openapi",
+   "nome": "Transferegov especiais: raiz pedindo OpenAPI",
+   "url": "https://api-publica.transferegov.gestao.gov.br/especiais/",
+   "metodo": "GET",
+   "nota": "PostgREST devolve o esquema com esse Accept",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 536,
+   "tipo": "text/html; charset=utf-8",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 2074,
+   "inicio": " <!DOCTYPE html> <html> <head> <link type=\"text/css\" rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css\"> <link rel=\"shortcut icon\" href=\"/especia"
+  },
+  {
+   "id": "tg_especiais_programa",
+   "nome": "Transferegov especiais: tabela programa (1 linha)",
+   "url": "https://api-publica.transferegov.gestao.gov.br/especiais/programa?limit=1",
+   "metodo": "GET",
+   "nota": "candidato, so nomes de campos",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 544,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "tg_especiais_plano_acao",
+   "nome": "Transferegov especiais: tabela plano_acao (1 linha)",
+   "url": "https://api-publica.transferegov.gestao.gov.br/especiais/plano_acao?limit=1",
+   "metodo": "GET",
+   "nota": "candidato, so nomes de campos",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 662,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "tg_especiais_empenho",
+   "nome": "Transferegov especiais: tabela empenho (1 linha)",
+   "url": "https://api-publica.transferegov.gestao.gov.br/especiais/empenho?limit=1",
+   "metodo": "GET",
+   "nota": "candidato, so nomes de campos",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 743,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "tg_especiais_relatorio_gestao",
+   "nome": "Transferegov especiais: tabela relatorio_gestao (1 linha)",
+   "url": "https://api-publica.transferegov.gestao.gov.br/especiais/relatorio_gestao?limit=1",
+   "metodo": "GET",
+   "nota": "candidato, so nomes de campos",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 355,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "ms_doc_0",
+   "nome": "API do MS: /v3/api-docs",
+   "url": "https://apidadosabertos.saude.gov.br/v3/api-docs",
+   "metodo": "GET",
+   "nota": "busca da especificacao",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 940,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "ms_doc_1",
+   "nome": "API do MS: /openapi.json",
+   "url": "https://apidadosabertos.saude.gov.br/openapi.json",
+   "metodo": "GET",
+   "nota": "busca da especificacao",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 915,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "ms_doc_2",
+   "nome": "API do MS: /docs",
+   "url": "https://apidadosabertos.saude.gov.br/docs",
+   "metodo": "GET",
+   "nota": "busca da especificacao",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 4000,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "ms_doc_3",
+   "nome": "API do MS: /swagger-ui/index.html",
+   "url": "https://apidadosabertos.saude.gov.br/swagger-ui/index.html",
+   "metodo": "GET",
+   "nota": "busca da especificacao",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 583,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "ms_doc_4",
+   "nome": "API do MS: /v1/docs",
+   "url": "https://apidadosabertos.saude.gov.br/v1/docs",
+   "metodo": "GET",
+   "nota": "busca da especificacao",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 4937,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "ms_doc_5",
+   "nome": "API do MS: /v1/openapi.json",
+   "url": "https://apidadosabertos.saude.gov.br/v1/openapi.json",
+   "metodo": "GET",
+   "nota": "busca da especificacao",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 2080,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "rreo_paginacao",
+   "nome": "SICONFI RREO (Vitoria): paginacao e nomes de anexos",
+   "metodo": "GET",
+   "nota": "varre paginas ate achar o anexo de saude",
+   "ok": true,
+   "ms": 2299,
+   "registros_lidos": 3194,
+   "campos_item": [
+    "exercicio",
+    "demonstrativo",
+    "periodo",
+    "periodicidade",
+    "instituicao",
+    "cod_ibge",
+    "uf",
+    "populacao",
+    "anexo",
+    "esfera",
+    "rotulo",
+    "coluna",
+    "cod_conta",
+    "conta",
+    "valor"
+   ],
+   "anexos": {
+    "RREO-Anexo 01": 495,
+    "RREO-Anexo 02": 1152,
+    "RREO-Anexo 03": 416,
+    "RREO-Anexo 04": 149,
+    "RREO-Anexo 06": 188,
+    "RREO-Anexo 07": 53,
+    "RREO-Anexo 09": 18,
+    "RREO-Anexo 10 - RPPS": 600,
+    "RREO-Anexo 11": 26,
+    "RREO-Anexo 13": 2,
+    "RREO-Anexo 14": 95
+   },
+   "anexos_de_saude": []
+  },
+  {
+   "id": "siconfi_entes",
+   "nome": "SICONFI entes",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/entes",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 47,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 866510,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 5598
+  },
+  {
+   "id": "infodengue_volume",
+   "nome": "InfoDengue: 500 municipios em sequencia",
+   "metodo": "GET",
+   "nota": "para o dimensionamento da coleta nacional",
+   "ok": true,
+   "testados": 500,
+   "respostas_por_codigo": {
+    "200": 500
+   },
+   "ms_mediana": 608,
+   "ms_p95": 846,
+   "segundos_total": 361,
+   "estimativa_min_5570": 67
+  },
+  {
+   "id": "datasus_sinasc",
+   "nome": "DATASUS FTP: SINASC (variantes de pasta)",
+   "url": "ftp://ftp.datasus.gov.br",
+   "metodo": "FTP",
+   "nota": "",
+   "pastas": {
+    "/dissemin/publicos/SINASC": {
+     "total": 5,
+     "ultimos": [
+      "1994_1995",
+      "1996_",
+      "ANT",
+      "NOV",
+      "PRELIM"
+     ]
+    },
+    "/dissemin/publicos/SINASC/1996_/Dados/DNRES": {
+     "total": 823,
+     "ultimos": [
+      "DNTO2019.dbc",
+      "DNTO2020.dbc",
+      "DNTO2021.dbc",
+      "DNTO2022.dbc",
+      "DNTO2023.dbc",
+      "DNTO2024.dbc"
+     ],
+     "tamanho_ultimo_bytes": 1097547
+    },
+    "/dissemin/publicos/SINASC/NOV/DNRES": {
+     "total": 734,
+     "ultimos": [
+      "DNTO2017.dbc",
+      "DNTO2018.dbc",
+      "DNTO2019.dbc",
+      "DNTO2020.dbc",
+      "DNTO2021.dbc",
+      "DNTO2022.dbc"
+     ],
+     "tamanho_ultimo_bytes": 1127918
+    },
+    "/dissemin/publicos/SINAN/DADOS/FINAIS": {
+     "total": 745,
+     "ultimos": [
+      "ZIKABR20.dbc",
+      "ZIKABR21.dbc",
+      "ZIKABR22.dbc",
+      "ZIKABR23.dbc",
+      "ZIKABR24.dbc",
+      "ZIKABR25.dbc"
+     ],
+     "tamanho_ultimo_bytes": 688125
+    },
+    "/dissemin/publicos/PNI/DADOS": {
+     "total": 1504,
+     "ultimos": [
+      "DPNIUF94.DBF",
+      "DPNIUF95.DBF",
+      "DPNIUF96.DBF",
+      "DPNIUF97.DBF",
+      "DPNIUF98.DBF",
+      "DPNIUF99.DBF"
+     ],
+     "tamanho_ultimo_bytes": 162466
+    }
+   },
+   "ok": true,
+   "ms": 6199
+  },
+  {
+   "id": "querido_diario2",
+   "nome": "Querido Diario (busca 'saude', Vitoria), nova tentativa",
+   "url": "https://api.queridodiario.org.br/gazettes?querystring=saude&territory_ids=3205309&size=1",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 2,
+   "status": null,
+   "ms": 90110,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "TimeoutError: The read operation timed out"
+  },
+  {
+   "id": "aps_dataset",
+   "nome": "Dados Abertos SUS: indicadores de desempenho SISAB (pagina)",
+   "url": "https://dadosabertos.saude.gov.br/dataset/indicadores_desempenho_sisab",
+   "metodo": "GET",
+   "nota": "lista os arquivos do conjunto e seus formatos",
+   "ms": 1420,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html; charset=utf-8",
+   "bytes_lidos": 55874,
+   "titulo": "Portal de Dados Abertos do SUS",
+   "links_encontrados": [
+    {
+     "texto": "Plano de Dados Abertos - Ministério da Saúde - 2026-2028 (PDF)",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/dados-abertos/pda/plano-de-dados-abertos-2026-2028.pdf/@@download/file"
+    },
+    {
+     "texto": "Plano de Dados Abertos - Ministério da Saúde - 2024-2026 (PDF)",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/dados-abertos/pda/plano-de-dados-abertos_ms_2024-2026.pdf/@@download/file"
+    },
+    {
+     "texto": "Plano de Dados Abertos - Ministério da Saúde - 2022-2023 (PDF)",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/dados-abertos/pda/plano-de-dados-abertos_ms_2022-2023.pdf/@@download/file"
+    },
+    {
+     "texto": "Plano de Dados Abertos - Ministério da Saúde - 2020-2022 (PDF)",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/dados-abertos/pda/plano-de-dados-abertos-ministerio-da-saude-2020-2022/@@download/file"
+    },
+    {
+     "texto": "Plano de Dados Abertos - Ministério da Saúde - 2016-2018 (PDF)",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/dados-abertos/pda/plano_de_dados_abertos_do_ms.pdf/@@download/file"
+    }
+   ],
+   "total_links_filtrados": 5
+  },
+  {
+   "id": "aps_ckan_pkg",
+   "nome": "Dados Abertos SUS: package_show do conjunto (candidato)",
+   "url": "https://dadosabertos.saude.gov.br/api/3/action/package_show?id=indicadores_desempenho_sisab",
+   "metodo": "GET",
+   "nota": "CKAN, ja falhou em variantes; retestar",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 1829,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "aps_ms_api",
+   "nome": "API do MS: candidatos de APS",
+   "url": "https://apidadosabertos.saude.gov.br/cnes/equipes?limit=2&offset=0",
+   "metodo": "GET",
+   "nota": "caminho candidato (equipes da APS no CNES)",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 862,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  },
+  {
+   "id": "aps_egestor",
+   "nome": "e-Gestor APS: pagina e enderecos de API nos scripts",
+   "url": "https://egestoraps.saude.gov.br/",
+   "metodo": "GET",
+   "nota": "pagina dinamica",
+   "ms": 3350,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html; charset=UTF-8",
+   "bytes_lidos": 46570,
+   "titulo": "e-Gestor Atenção Primária",
+   "links_encontrados": [],
+   "total_links_filtrados": 0,
+   "scripts": [
+    {
+     "url": "https://www.googletagmanager.com/gtag/js?id=G-PQPQJHMHNQ",
+     "status": 200,
+     "bytes": 542016
+    },
+    {
+     "url": "https://egestoraps.saude.gov.br/runtime.ca35109b657b32c0.js",
+     "status": 200,
+     "bytes": 2755
+    },
+    {
+     "url": "https://egestoraps.saude.gov.br/polyfills.d4cfe391d1d447ad.js",
+     "status": 200,
+     "bytes": 34175
+    },
+    {
+     "url": "https://egestoraps.saude.gov.br/main.44704e4196800581.js",
+     "status": 200,
+     "bytes": 861308
+    }
+   ],
+   "enderecos_api": [
+    "https://acesso-egestoraps.saude.gov.br/login",
+    "https://apiegestoraps.saude.gov.br/",
+    "https://egestoraps.saude.gov.br/",
+    "https://relatorioaps.saude.gov.br",
+    "https://sisaps.saude.gov.br/sistemas/apsnosterritorios",
+    "https://sisaps.saude.gov.br/sistemas/dignidademenstrual",
+    "https://sisaps.saude.gov.br/sistemas/esusaps",
+    "https://sisaps.saude.gov.br/sistemas/gerenciaaps",
+    "https://sisaps.saude.gov.br/sistemas/painelesusaps",
+    "https://sisaps.saude.gov.br/sistemas/siaps",
+    "https://sisaps.saude.gov.br/sistemas/sisab/",
+    "https://sisapsdoc.saude.gov.br",
+    "https://www.youtube.com/iframe_api"
+   ]
+  },
+  {
+   "id": "aps_sisab_0",
+   "nome": "SISAB (raiz)",
+   "url": "https://sisab.saude.gov.br/",
+   "metodo": "GET",
+   "nota": "candidato",
+   "ms": 917,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=UTF-8",
+   "bytes_lidos": 26156,
+   "titulo": "SISAB",
+   "links_encontrados": [
+    {
+     "texto": "Relatório de Validação",
+     "url": "https://sisab.saude.gov.br/paginas/acessoRestrito/relatorio/federal/envio/RelValidacao.xhtml"
+    },
+    {
+     "texto": "Produção",
+     "url": "https://sisab.saude.gov.br/paginas/acessoRestrito/relatorio/federal/saude/RelSauProducao.xhtml"
+    },
+    {
+     "texto": "Atividade Coletiva",
+     "url": "https://sisab.saude.gov.br/paginas/acessoRestrito/relatorio/federal/saude/RelSauAtivColetiva.xhtml"
+    },
+    {
+     "texto": "Indicadores de Desempenho",
+     "url": "https://sisab.saude.gov.br/paginas/acessoRestrito/relatorio/federal/indicadores/indicadorPainel.xhtml"
+    },
+    {
+     "texto": "Painel de Cadastro",
+     "url": "https://sisab.saude.gov.br/paginas/acessoRestrito/relatorio/federal/indicadores/indicadorCadastro.xhtml"
+    },
+    {
+     "texto": "Indicadores Pré-natal",
+     "url": "https://sisab.saude.gov.br/paginas/acessoPublico/relatorio/indicadores/IndicadorPrenatal.xhtml"
+    },
+    {
+     "texto": "Envio",
+     "url": "https://sisab.saude.gov.br/paginas/acessoPublico/relatorio/envio/RelPubEnvStatusEnvio.xhtml"
+    },
+    {
+     "texto": "Relatórios Restritos Acesso aos relatórios restritos do SISAB.",
+     "url": "http://acesso-egestoraps.saude.gov.br/login"
+    }
+   ],
+   "total_links_filtrados": 8
+  },
+  {
+   "id": "aps_sisab_1",
+   "nome": "SISAB relatorios publicos",
+   "url": "https://sisab.saude.gov.br/paginas/acessoRestrito/relatorio/federal/saude/RelSauPreNatal.xhtml",
+   "metodo": "GET",
+   "nota": "candidato",
+   "ms": 594,
+   "status": 500,
+   "ok": false,
+   "erro": "HTTP 500"
+  },
+  {
+   "id": "aps_sisab_2",
+   "nome": "e-Gestor APS: informacao e gestao (cobertura)",
+   "url": "https://relatorioaps.saude.gov.br/",
+   "metodo": "GET",
+   "nota": "candidato",
+   "ms": 2529,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html; charset=UTF-8",
+   "bytes_lidos": 46321,
+   "titulo": "Relatórios Públicos da APS",
+   "links_encontrados": [],
+   "total_links_filtrados": 0
+  },
+  {
+   "id": "nt_ms",
+   "nome": "Ministerio da Saude: notas tecnicas",
+   "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas",
+   "metodo": "GET",
+   "nota": "radar de notas tecnicas: so titulo, data e link",
+   "ms": 1733,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=utf-8",
+   "bytes_lidos": 153763,
+   "titulo": "Notas Técnicas — Ministério da Saúde",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o Conteúdo 1",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas#wrapper"
+    },
+    {
+     "texto": "Ir para o menu de Navegação 3",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas#main-navigation"
+    },
+    {
+     "texto": "Ir para a Busca 4",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas#govbr-busca-input"
+    },
+    {
+     "texto": "Ir para o Mapa do site 5",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas#portal-footer"
+    },
+    {
+     "texto": "Abrir menu principal de navegação",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas"
+    },
+    {
+     "texto": "GOV.BR",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/notas-tecnicas"
+    },
+    {
+     "texto": "📄 Últimas Notas Técnicas",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/ultimas"
+    },
+    {
+     "texto": "2026",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2026"
+    },
+    {
+     "texto": "2025",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2025"
+    },
+    {
+     "texto": "2024",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2024"
+    },
+    {
+     "texto": "2023",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2023"
+    },
+    {
+     "texto": "2022",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2022"
+    },
+    {
+     "texto": "2021",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2021"
+    },
+    {
+     "texto": "2020",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2020"
+    },
+    {
+     "texto": "2019",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2019"
+    },
+    {
+     "texto": "2018",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2018"
+    },
+    {
+     "texto": "2017",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2017"
+    },
+    {
+     "texto": "2016",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2016"
+    },
+    {
+     "texto": "2015",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2015"
+    },
+    {
+     "texto": "2014",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2014"
+    }
+   ],
+   "total_links_filtrados": 20
+  },
+  {
+   "id": "nt_ms_saps",
+   "nome": "Ministerio da Saude: SAPS (atencao primaria)",
+   "url": "https://www.gov.br/saude/pt-br/composicao/saps",
+   "metodo": "GET",
+   "nota": "radar de notas tecnicas: so titulo, data e link",
+   "ms": 1478,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=utf-8",
+   "bytes_lidos": 172250,
+   "titulo": "Atenção Primária — Ministério da Saúde",
+   "links_encontrados": [
+    {
+     "texto": "Notas Técnicas",
+     "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas"
+    },
+    {
+     "texto": "Notas Técnicas e Informativas",
+     "url": "https://www.gov.br/saude/pt-br/composicao/saps/notas-tecnicas-e-informativas"
+    }
+   ],
+   "total_links_filtrados": 2
+  },
+  {
+   "id": "nt_conass",
+   "nome": "CONASS: notas tecnicas",
+   "url": "https://www.conass.org.br/biblioteca/notas-tecnicas/",
+   "metodo": "GET",
+   "nota": "radar de notas tecnicas: so titulo, data e link",
+   "ms": 1969,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html; charset=UTF-8",
+   "bytes_lidos": 138661,
+   "titulo": "Notas Técnicas - Biblioteca Conass",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o conteúdo",
+     "url": "https://www.conass.org.br/biblioteca/notas-tecnicas/#content"
+    },
+    {
+     "texto": "Search",
+     "url": "https://www.conass.org.br/biblioteca/notas-tecnicas/#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6Ijg4MTEiLCJ0b2dnbGUiOmZhbHNlfQ%3D%3D"
+    },
+    {
+     "texto": "Outras publicações",
+     "url": "https://www.conass.org.br/biblioteca/notas-tecnicas/"
+    },
+    {
+     "texto": "NT 01-2026 – Estruturas das Assessorias de Comunicação das Secretarias Estaduais de Saúde",
+     "url": "https://www.conass.org.br/biblioteca/nota-tecnica-01-2026/"
+    },
+    {
+     "texto": "NT 05-2025 – Recomendações para a Comunicação Digital, Sites, Redes Sociais e Boletins nas Secretarias Est",
+     "url": "https://www.conass.org.br/biblioteca/nota-tecnica-05-2025-comunicacao-digital/"
+    },
+    {
+     "texto": "NT n. 02/17 – BASE NACIONAL DE DADOS DE AÇÕES E SERVIÇOS DA ASSISTÊNCIA FARMACÊUTICA – PROPOSTAS DE ALTERAÇÃO ",
+     "url": "https://www.conass.org.br/biblioteca/nt-n-02-17-base-nacional-de-dados-de-acoes-e-servicos-da-assistencia-farmaceutica-propostas-de-alteracao-na-portaria-gm-ms-957-de-10-de-maio-de-2016/"
+    },
+    {
+     "texto": "NT n. 08/18 – PROPOSTA DE PORTARIA PARA DISPOR SOBRE NORMAS E AÇÕES PARA GARANTIA DO ACESSO A MEDICAMENTOS E I",
+     "url": "https://www.conass.org.br/biblioteca/nt-n-08-18-proposta-de-portaria-para-dispor-sobre-normas-e-acoes-para-garantia-do-acesso-a-medicamentos-e-insumos-do-componente-estrategico-da-assistencia-farmaceu"
+    },
+    {
+     "texto": "NT n. 01/18 – PORTARIA GM/MS Nº 3.992, DE 28 DE DEZEMBRO DE 2017",
+     "url": "https://www.conass.org.br/biblioteca/nt-n-01-18-portaria-gm-ms-no-3-992-de-28-de-dezembro-de-2017/"
+    },
+    {
+     "texto": "NT n. 01/19 – PORTARIA Nº 395, DE 14 DE MARÇO DE 2019",
+     "url": "https://www.conass.org.br/biblioteca/nt-n-01-19-portaria-no-395-de-14-de-marco-de-2019/"
+    },
+    {
+     "texto": "NT n. 02/22 – CONSIDERAÇÕES TÉCNICAS ACERCA DA PORTARIA DA REDE MATERNO INFANTIL",
+     "url": "https://www.conass.org.br/biblioteca/nt-n-02-22-consideracoes-tecnicas-acerca-da-portaria-da-rede-materno-infantil/"
+    },
+    {
+     "texto": "NT n. 01/23 – ORIENTAÇÕES REFERENTES A PORTARIA GM/MS nº 96 de 07/02/2023",
+     "url": "https://www.conass.org.br/biblioteca/nt-n-01-23-orientacoes-referentes-a-portaria-gm-ms-no-96-de-07-02-2023/"
+    },
+    {
+     "texto": "NT n. 04/11 – Substituição dos materiais perfurocortantes por outros com dispositivos de segurança conforme a ",
+     "url": "https://www.conass.org.br/biblioteca/nt-n-0411-substituicao-dos-materiais-perfurocortantes-por-outros-com-dispositivos-de-seguranca-conforme-a-portaria-n-9392008/"
+    },
+    {
+     "texto": "Próximo →",
+     "url": "https://www.conass.org.br/biblioteca/notas-tecnicas/page/2/"
+    },
+    {
+     "texto": "Hm-arrow-up",
+     "url": "https://www.conass.org.br/biblioteca/notas-tecnicas/#topo"
+    }
+   ],
+   "total_links_filtrados": 14
+  },
+  {
+   "id": "nt_conass_rss",
+   "nome": "CONASS: feed de noticias (candidato)",
+   "url": "https://www.conass.org.br/feed/",
+   "metodo": "GET",
+   "nota": "radar de notas tecnicas: so titulo, data e link",
+   "ms": 1663,
+   "status": 200,
+   "ok": true,
+   "tipo": "application/rss+xml; charset=UTF-8",
+   "bytes_lidos": 854728,
+   "titulo": "Conselho Nacional de Secretários de Saúde | Conass",
+   "links_encontrados": [
+    {
+     "texto": "Conass Informa n. 218/2026 – Publicada Portaria SAES/MS n. 5.182 que inclui e altera procedimentos na Tabela d",
+     "url": "https://www.conass.org.br/conass-informa-n-218-2026-publicada-portaria-saes-ms-n-5-182-que-inclui-e-altera-procedimentos-na-tabela-de-procedimentos-medicamentos-orteses-proteses-e-materiais-especiais-"
+    },
+    {
+     "texto": "Conass Informa n. 217/2026 – Publicadas Portarias GM/MS que incluem e alteram procedimentos na Tabela de Proce",
+     "url": "https://www.conass.org.br/conass-informa-n-217-2026-publicadas-portarias-gm-ms-que-incluem-e-alteram-procedimentos-na-tabela-de-procedimentos-medicamentos-orteses-proteses-e-materiais-especiais-do-sus"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.303, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.303-de-28-de-outubro-de-2026-741166748"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.304, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.304-de-28-de-outubro-de-2026-741169904"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.305, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.305-de-28-de-outubro-de-2026-741160691"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.306, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.306-de-28-de-outubro-de-2026-741116295"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.307, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.307-de-28-de-outubro-de-2026-741175027"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.308, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.308-de-28-de-outubro-de-2026-741175821"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.309, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.309-de-28-de-outubro-de-2026-741103563"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.310, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.310-de-28-de-outubro-de-2026-741175663"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.311, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.311-de-28-de-outubro-de-2026-741113517"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.312, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.312-de-28-de-outubro-de-2026-741098845"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.313, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.313-de-28-de-outubro-de-2026-741170700"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.314, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.314-de-28-de-outubro-de-2026-741176374"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.315, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.315-de-28-de-outubro-de-2026-741176397"
+    },
+    {
+     "texto": "Portaria GM/MS nº 12.318, de 28 de outubro de 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-gm/ms-n-12.318-de-28-de-outubro-de-2026-741166669"
+    },
+    {
+     "texto": "Conass Informa n. 216/2026 – Publicada Portaria GM n. 12.301 que altera a Portaria de Consolidação GM/MS n° 2/",
+     "url": "https://www.conass.org.br/conass-informa-n-216-2026-publicada-portaria-gm-n-12-301-que-altera-a-portaria-de-consolidacao-gm-ms-n-2-17-para-instituir-a-politica-nacional-de-informacao-e-saude-digital-n"
+    },
+    {
+     "texto": "Conass Informa n. 214/2026 – Publicada Portaria SCTIE n. 66 que torna pública a decisão de não incorporar, no ",
+     "url": "https://www.conass.org.br/conass-informa-n-214-2026-publicada-portaria-sctie-n-66-que-torna-publica-a-decisao-de-nao-incorporar-no-ambito-do-sus-o-cateter-de-tomografia-de-coerencia-optica-para-interv"
+    },
+    {
+     "texto": "Conass Informa n. 212/2026 – Publicadas Portarias Conjuntas da SAES/SCTIE que aprovam Protocolos Clínicos e Di",
+     "url": "https://www.conass.org.br/publicadas-portarias-conjuntas-da-saes-sctie-que-aprovam-protocolos-clinicos-e-diretrizes-terapeuticas/"
+    },
+    {
+     "texto": "Portaria Conjunta SAES/SCTIE Nº 89, DE 20 DE outubro DE 2026",
+     "url": "https://www.in.gov.br/web/dou/-/portaria-conjunta-saes/sctie-n-89-de-20-de-outubro-de-2026-740654863"
+    }
+   ],
+   "total_links_filtrados": 20
+  },
+  {
+   "id": "nt_conasems",
+   "nome": "CONASEMS: notas tecnicas",
+   "url": "https://www.conasems.org.br/notas-tecnicas/",
+   "metodo": "GET",
+   "nota": "radar de notas tecnicas: so titulo, data e link",
+   "ms": 1121,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html; charset=utf-8",
+   "bytes_lidos": 237273,
+   "titulo": "Institucional Conasems",
+   "links_encontrados": [],
+   "total_links_filtrados": 0
+  },
+  {
+   "id": "nt_ms_rss",
+   "nome": "gov.br/saude: feed (candidato)",
+   "url": "https://www.gov.br/saude/pt-br/assuntos/noticias/RSS",
+   "metodo": "GET",
+   "nota": "radar de notas tecnicas: so titulo, data e link",
+   "ms": 498,
+   "status": 200,
+   "ok": true,
+   "tipo": "application/atom+xml; charset=utf-8",
+   "bytes_lidos": 8265,
+   "titulo": "Notícias",
+   "links_encontrados": [],
+   "total_links_filtrados": 0
+  },
+  {
+   "id": "nt_dou",
+   "nome": "Imprensa Nacional: consulta DOU (pagina)",
+   "url": "https://www.in.gov.br/consulta",
+   "metodo": "GET",
+   "nota": "radar de notas tecnicas: so titulo, data e link",
+   "ms": 1701,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=UTF-8",
+   "bytes_lidos": 135173,
+   "titulo": "Diário Oficial da União - Imprensa Nacional",
+   "links_encontrados": [],
+   "total_links_filtrados": 0
+  },
+  {
+   "id": "pt_transferencias",
+   "nome": "Portal da Transparencia: recursos transferidos",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/transferencias",
+   "metodo": "GET",
+   "nota": "pagina de download (CSV)",
+   "ms": 739,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=UTF-8",
+   "bytes_lidos": 97425,
+   "titulo": "Transferencias | Portal da Transparência",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o conteúdo (1/4) 1",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/transferencias#main-content"
+    },
+    {
+     "texto": "Ir para o menu (2/4) 2",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/transferencias#header-navigation"
+    },
+    {
+     "texto": "Ir para a busca (3/4) 3",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/transferencias#main-searchbox"
+    },
+    {
+     "texto": "Ir para o rodapé (4/4) 4",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/transferencias#footer"
+    },
+    {
+     "texto": "A+",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/transferencias"
+    },
+    {
+     "texto": "Dados abertos",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados"
+    },
+    {
+     "texto": "Controle Social",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603399-controle-social"
+    },
+    {
+     "texto": "Cartões de Pagamento",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603242-cartao-de-pagamento-do-governo-federal"
+    },
+    {
+     "texto": "Emendas Parlamentares",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/605525-emendas-parlamentares"
+    },
+    {
+     "texto": "Esferas e Poderes",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/605524-esferas-e-poderes"
+    },
+    {
+     "texto": "Imóveis Funcionais",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603234-imoveis-funcionais"
+    },
+    {
+     "texto": "Notas Fiscais",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603603-notas-fiscais"
+    },
+    {
+     "texto": "Transferências de Recursos",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603238-gastos-diretos-x-transferencias-de-recursos"
+    },
+    {
+     "texto": "dicionário de dados",
+     "url": "https://www.portaldatransparencia.gov.br/pagina-interna/603420-dicionario-de-dados-recursos-transferidos"
+    },
+    {
+     "texto": "Microsoft Edge",
+     "url": "https://support.microsoft.com/pt-br/help/4027947/microsoft-edge-delete-cookies"
+    }
+   ],
+   "total_links_filtrados": 15
+  },
+  {
+   "id": "pt_convenios",
+   "nome": "Portal da Transparencia: convenios",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios",
+   "metodo": "GET",
+   "nota": "pagina de download (CSV)",
+   "ms": 380,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=UTF-8",
+   "bytes_lidos": 84025,
+   "titulo": "Convenios | Portal da Transparência",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o conteúdo (1/4) 1",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios#main-content"
+    },
+    {
+     "texto": "Ir para o menu (2/4) 2",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios#header-navigation"
+    },
+    {
+     "texto": "Ir para a busca (3/4) 3",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios#main-searchbox"
+    },
+    {
+     "texto": "Ir para o rodapé (4/4) 4",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios#footer"
+    },
+    {
+     "texto": "A+",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios"
+    },
+    {
+     "texto": "Dados abertos",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados"
+    },
+    {
+     "texto": "Controle Social",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603399-controle-social"
+    },
+    {
+     "texto": "Cartões de Pagamento",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603242-cartao-de-pagamento-do-governo-federal"
+    },
+    {
+     "texto": "Emendas Parlamentares",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/605525-emendas-parlamentares"
+    },
+    {
+     "texto": "Esferas e Poderes",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/605524-esferas-e-poderes"
+    },
+    {
+     "texto": "Imóveis Funcionais",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603234-imoveis-funcionais"
+    },
+    {
+     "texto": "Notas Fiscais",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603603-notas-fiscais"
+    },
+    {
+     "texto": "Transferências de Recursos",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603238-gastos-diretos-x-transferencias-de-recursos"
+    },
+    {
+     "texto": "dicionário de dados",
+     "url": "http://www.portaldatransparencia.gov.br/pagina-interna/603415-dicionario-de-dados-convenios"
+    },
+    {
+     "texto": "Microsoft Edge",
+     "url": "https://support.microsoft.com/pt-br/help/4027947/microsoft-edge-delete-cookies"
+    }
+   ],
+   "total_links_filtrados": 15
+  },
+  {
+   "id": "pt_emendas",
+   "nome": "Portal da Transparencia: emendas parlamentares",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares",
+   "metodo": "GET",
+   "nota": "pagina de download (CSV)",
+   "ms": 402,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=UTF-8",
+   "bytes_lidos": 82525,
+   "titulo": "Emendas Parlamentares | Portal da Transparência",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o conteúdo (1/4) 1",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares#main-content"
+    },
+    {
+     "texto": "Ir para o menu (2/4) 2",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares#header-navigation"
+    },
+    {
+     "texto": "Ir para a busca (3/4) 3",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares#main-searchbox"
+    },
+    {
+     "texto": "Ir para o rodapé (4/4) 4",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares#footer"
+    },
+    {
+     "texto": "A+",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares"
+    },
+    {
+     "texto": "Dados abertos",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados"
+    },
+    {
+     "texto": "Controle Social",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603399-controle-social"
+    },
+    {
+     "texto": "Cartões de Pagamento",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603242-cartao-de-pagamento-do-governo-federal"
+    },
+    {
+     "texto": "Emendas Parlamentares",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/605525-emendas-parlamentares"
+    },
+    {
+     "texto": "Esferas e Poderes",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/605524-esferas-e-poderes"
+    },
+    {
+     "texto": "Imóveis Funcionais",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603234-imoveis-funcionais"
+    },
+    {
+     "texto": "Notas Fiscais",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603603-notas-fiscais"
+    },
+    {
+     "texto": "Transferências de Recursos",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603238-gastos-diretos-x-transferencias-de-recursos"
+    },
+    {
+     "texto": "dicionário de dados",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603482-dicionario-de-dados-emendas-parlamentares"
+    },
+    {
+     "texto": "Microsoft Edge",
+     "url": "https://support.microsoft.com/pt-br/help/4027947/microsoft-edge-delete-cookies"
+    }
+   ],
+   "total_links_filtrados": 15
+  },
+  {
+   "id": "pt_despesas_exec",
+   "nome": "Portal da Transparencia: execucao da despesa",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/despesas-execucao",
+   "metodo": "GET",
+   "nota": "pagina de download (CSV)",
+   "ms": 416,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=UTF-8",
+   "bytes_lidos": 96448,
+   "titulo": "Despesas Execucao | Portal da Transparência",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o conteúdo (1/4) 1",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/despesas-execucao#main-content"
+    },
+    {
+     "texto": "Ir para o menu (2/4) 2",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/despesas-execucao#header-navigation"
+    },
+    {
+     "texto": "Ir para a busca (3/4) 3",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/despesas-execucao#main-searchbox"
+    },
+    {
+     "texto": "Ir para o rodapé (4/4) 4",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/despesas-execucao#footer"
+    },
+    {
+     "texto": "A+",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/despesas-execucao"
+    },
+    {
+     "texto": "Dados abertos",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados"
+    },
+    {
+     "texto": "Controle Social",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603399-controle-social"
+    },
+    {
+     "texto": "Cartões de Pagamento",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603242-cartao-de-pagamento-do-governo-federal"
+    },
+    {
+     "texto": "Emendas Parlamentares",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/605525-emendas-parlamentares"
+    },
+    {
+     "texto": "Esferas e Poderes",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/605524-esferas-e-poderes"
+    },
+    {
+     "texto": "Imóveis Funcionais",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603234-imoveis-funcionais"
+    },
+    {
+     "texto": "Notas Fiscais",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603603-notas-fiscais"
+    },
+    {
+     "texto": "Transferências de Recursos",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603238-gastos-diretos-x-transferencias-de-recursos"
+    },
+    {
+     "texto": "dicionário de dados",
+     "url": "https://portaldatransparencia.gov.br/pagina-interna/603453-dicionario-de-dados-execucao-da-despesa"
+    },
+    {
+     "texto": "Microsoft Edge",
+     "url": "https://support.microsoft.com/pt-br/help/4027947/microsoft-edge-delete-cookies"
+    }
+   ],
+   "total_links_filtrados": 15
+  },
+  {
+   "id": "pt_head_emendas",
+   "nome": "Arquivo de emendas (HEAD)",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares/UNICO",
+   "metodo": "HEAD",
+   "nota": "padrao de URL candidato, so cabecalhos (tamanho e data)",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 524,
+   "tipo": "application/x-zip-compressed",
+   "tamanho_http": "32535934",
+   "ultima_modificacao": "Fri, 30 Oct 2026 04:48:48 GMT",
+   "ok": true,
+   "bytes_lidos": 0
+  },
+  {
+   "id": "pt_head_transf",
+   "nome": "Arquivo de transferencias 202610 (HEAD)",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/transferencias/202610",
+   "metodo": "HEAD",
+   "nota": "padrao de URL candidato, so cabecalhos (tamanho e data)",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 696,
+   "tipo": "application/x-zip-compressed",
+   "tamanho_http": "4764521",
+   "ultima_modificacao": "Fri, 30 Oct 2026 04:48:45 GMT",
+   "ok": true,
+   "bytes_lidos": 0
+  },
+  {
+   "id": "pt_head_conv",
+   "nome": "Arquivo de convenios (HEAD)",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios/UNICO",
+   "metodo": "HEAD",
+   "nota": "padrao de URL candidato, so cabecalhos (tamanho e data)",
+   "tentativas": 1,
+   "status": 403,
+   "ms": 797,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 403"
+  },
+  {
+   "id": "pt_api_docs",
+   "nome": "API do Portal da Transparencia: especificacao",
+   "url": "https://api.portaldatransparencia.gov.br/v3/api-docs",
+   "metodo": "GET",
+   "nota": "lista de endpoints; a chave so e pedida nas consultas",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 3541,
+   "tipo": "application/json",
+   "tamanho_http": "171293",
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 171293,
+   "campos": [
+    "openapi",
+    "info",
+    "externalDocs",
+    "servers",
+    "security",
+    "paths",
+    "components"
+   ],
+   "registros": null,
+   "endpoints_interesse": [
+    "/api-de-dados/convenios",
+    "/api-de-dados/convenios/id",
+    "/api-de-dados/convenios/numero",
+    "/api-de-dados/convenios/numero-original",
+    "/api-de-dados/convenios/numero-processo",
+    "/api-de-dados/convenios/tipo-instrumento",
+    "/api-de-dados/coronavirus/movimento-liquido-despesa",
+    "/api-de-dados/coronavirus/transferencias",
+    "/api-de-dados/despesas/documentos",
+    "/api-de-dados/despesas/documentos-por-favorecido",
+    "/api-de-dados/despesas/documentos-relacionados",
+    "/api-de-dados/despesas/documentos/{codigo}",
+    "/api-de-dados/despesas/empenhos-impactados",
+    "/api-de-dados/despesas/favorecidos-finais-por-documento",
+    "/api-de-dados/despesas/funcional-programatica/acoes",
+    "/api-de-dados/despesas/funcional-programatica/funcoes",
+    "/api-de-dados/despesas/funcional-programatica/listar",
+    "/api-de-dados/despesas/funcional-programatica/programas",
+    "/api-de-dados/despesas/funcional-programatica/subfuncoes",
+    "/api-de-dados/despesas/itens-de-empenho",
+    "/api-de-dados/despesas/itens-de-empenho/historico",
+    "/api-de-dados/despesas/plano-orcamentario",
+    "/api-de-dados/despesas/por-funcional-programatica",
+    "/api-de-dados/despesas/por-funcional-programatica/movimentacao-liquida",
+    "/api-de-dados/despesas/por-orgao",
+    "/api-de-dados/despesas/recursos-recebidos",
+    "/api-de-dados/despesas/tipo-transferencia",
+    "/api-de-dados/emendas",
+    "/api-de-dados/emendas/documentos/{codigo}"
+   ],
+   "total_endpoints": 109
+  },
+  {
+   "id": "uf_es_dados",
+   "nome": "ES: base de dados abertos",
+   "url": "https://transparencia.es.gov.br/DadosAbertos/BaseDeDados",
+   "metodo": "GET",
+   "nota": "candidato: o que cada estado publica de forma aberta",
+   "ms": 1392,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html; charset=utf-8",
+   "bytes_lidos": 140997,
+   "titulo": "Baixar Dados Abertos",
+   "links_encontrados": [
+    {
+     "texto": "Saúde",
+     "url": "https://transparencia.es.gov.br/Comum/Principal/AreaTematica?tema=saude"
+    }
+   ],
+   "total_links_filtrados": 1
+  },
+  {
+   "id": "uf_sp",
+   "nome": "SP: portal da transparencia",
+   "url": "https://www.transparencia.sp.gov.br/",
+   "metodo": "GET",
+   "nota": "candidato: o que cada estado publica de forma aberta",
+   "ms": 2148,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html; charset=utf-8",
+   "bytes_lidos": 31985,
+   "titulo": "Portal da Transparência do Estado de São Paulo",
+   "links_encontrados": [
+    {
+     "texto": "",
+     "url": "https://dadosabertos.sp.gov.br/"
+    }
+   ],
+   "total_links_filtrados": 1
+  },
+  {
+   "id": "uf_pr",
+   "nome": "PR: portal da transparencia",
+   "url": "https://www.transparencia.pr.gov.br/pte/",
+   "metodo": "GET",
+   "nota": "candidato: o que cada estado publica de forma aberta",
+   "ms": 3010,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=UTF-8",
+   "bytes_lidos": 151155,
+   "titulo": "Portal da Transparência",
+   "links_encontrados": [
+    {
+     "texto": "Lei Geral de Proteção de Dados Pessoais - LGPD",
+     "url": "https://www.transparencia.pr.gov.br/pte/assunto/8/307;jsessionid=koep5P4x1F2SoQ0YNDnASubDC5gZub72-4_IUubD.ssecs75004?origem=3"
+    },
+    {
+     "texto": "Dados Abertos",
+     "url": "https://www.transparencia.pr.gov.br/pte/"
+    },
+    {
+     "texto": "Lei Geral de Proteção de Dados Pessoais - LGPD",
+     "url": "https://www.transparencia.pr.gov.br/pte/assunto/8/307;jsessionid=koep5P4x1F2SoQ0YNDnASubDC5gZub72-4_IUubD.ssecs75004?origem=2"
+    }
+   ],
+   "total_links_filtrados": 3
+  },
+  {
+   "id": "uf_mg_ckan",
+   "nome": "MG: catalogo de dados abertos (busca saude)",
+   "url": "https://dados.mg.gov.br/api/3/action/package_search?q=saude&rows=5",
+   "metodo": "GET",
+   "nota": "CKAN candidato",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 1021,
+   "tipo": "application/json;charset=utf-8",
+   "tamanho_http": "33993",
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 33993,
+   "campos": [
+    "help",
+    "success",
+    "result"
+   ],
+   "registros": null
+  },
+  {
+   "id": "uf_pe_ckan",
+   "nome": "PE: catalogo de dados abertos (busca saude)",
+   "url": "https://dados.pe.gov.br/api/3/action/package_search?q=saude&rows=5",
+   "metodo": "GET",
+   "nota": "CKAN candidato",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 3144,
+   "tipo": "application/json;charset=utf-8",
+   "tamanho_http": "7057269",
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 3000000,
+   "json_valido": false
+  },
+  {
+   "id": "fns_portal",
+   "nome": "FNS: portal",
+   "url": "https://portalfns.saude.gov.br/",
+   "metodo": "GET",
+   "nota": "o que o FNS publica fora dos paineis",
+   "ms": 1203,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html; charset=UTF-8",
+   "bytes_lidos": 149538,
+   "titulo": "Início - FNS",
+   "links_encontrados": [
+    {
+     "texto": "Consultas e Repasses",
+     "url": "https://portalfns.saude.gov.br/consultas/"
+    },
+    {
+     "texto": "Superintendências Estaduais",
+     "url": "https://portalfns.saude.gov.br/gestao-de-convenios-nas-superintendencias-estaduais-do-ministerio-da-saude/"
+    },
+    {
+     "texto": "",
+     "url": "https://portalfns.saude.gov.br/emendas-individuais-prazo-inicia-nesta-quarta-feira-7/"
+    },
+    {
+     "texto": "",
+     "url": "https://portalfns.saude.gov.br/ministerio-da-saude-publica-portaria-sobre-regras-relativas-a-emendas-individuais-de-bancada-estadual-e-de-comissao-para-2027/"
+    },
+    {
+     "texto": "Fundo Nacional de Saúde divulga tetos de MAC e PAP para emendas coletivas de Bancada e Comissão",
+     "url": "https://portalfns.saude.gov.br/fundo-nacional-de-saude-divulga-tetos-de-mac-e-pap-para-emendas-coletivas-de-bancada-e-comissao/"
+    }
+   ],
+   "total_links_filtrados": 5
+  },
+  {
+   "id": "fns_gov",
+   "nome": "Ministerio da Saude: convenios e transferencias",
+   "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias",
+   "metodo": "GET",
+   "nota": "o que o FNS publica fora dos paineis",
+   "ms": 1160,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=utf-8",
+   "bytes_lidos": 159173,
+   "titulo": "Convênios e Transferências — Ministério da Saúde",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o Conteúdo 1",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias#wrapper"
+    },
+    {
+     "texto": "Ir para o menu de Navegação 3",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias#main-navigation"
+    },
+    {
+     "texto": "Ir para a Busca 4",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias#govbr-busca-input"
+    },
+    {
+     "texto": "Ir para o Mapa do site 5",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias#portal-footer"
+    },
+    {
+     "texto": "Abrir menu principal de navegação",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias"
+    },
+    {
+     "texto": "GOV.BR",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias/convenios-e-transferencias"
+    },
+    {
+     "texto": "Painel Estatístico de Pessoal",
+     "url": "https://www.gov.br/gestao/pt-br/acesso-a-informacao/servidores/servidores-publicos/painel-estatistico-de-pessoal"
+    },
+    {
+     "texto": "Painel de Compras da Administração Pública Federal",
+     "url": "http://paineldecompras.economia.gov.br"
+    },
+    {
+     "texto": "Financiamento ACE Assistência Financeira Complementar da União aos Agentes de Combate às Endemias (AFC)",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias/financiamento-ace"
+    },
+    {
+     "texto": "Painel FNS Acesse painéis de informações do Fundo Nacional de Saúde",
+     "url": "https://investsuspaineis.saude.gov.br/extensions/CGIN_InvestsusPaineis/CGIN_InvestsusPaineis.html"
+    },
+    {
+     "texto": "Parcerias Acesse as parcerias firmadas com o Ministério da Saúde",
+     "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias/parcerias"
+    },
+    {
+     "texto": "Transferegov.br O Transferegov.br constitui ferramenta integrada e centralizada, com dados abertos, destinada ",
+     "url": "https://www.gov.br/transferegov/pt-br"
+    },
+    {
+     "texto": "Portal da Transparência",
+     "url": "https://portaldatransparencia.gov.br/convenios/consulta?paginacaoSimples=true&tamanhoPagina=&offset=&direcaoOrdenacao=asc&orgaos=OS36000&colunasSelecionadas=linkDetalhamento%2CnumeroConvenio%2Cuf%2Cmu"
+    }
+   ],
+   "total_links_filtrados": 13
+  },
+  {
+   "id": "fns_dadosabertos",
+   "nome": "Dados Abertos SUS: busca 'fundo nacional'",
+   "url": "https://dadosabertos.saude.gov.br/dataset?q=fundo+nacional",
+   "metodo": "GET",
+   "nota": "o que o FNS publica fora dos paineis",
+   "ms": 1123,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html; charset=utf-8",
+   "bytes_lidos": 36239,
+   "titulo": "Portal de Dados Abertos do SUS",
+   "links_encontrados": [
+    {
+     "texto": "Saúde Indígena - Indicadores de enfrentamento e monitoramento à covid-19 dos Povos Indígenas Brasileiros e açõ",
+     "url": "https://dadosabertos.saude.gov.br/dataset/indicadores-de-enfrentamento-e-monitoramento-a-covid-19-dos-povos-indigenas-do-brasil"
+    }
+   ],
+   "total_links_filtrados": 1
+  },
+  {
+   "id": "elo_fundo",
+   "nome": "partelli.pro: Radar de Recursos (arquivos de dados)",
+   "url": "https://partelli.pro/gestor/recursos/",
+   "metodo": "GET",
+   "nota": "mostra onde os dados ja coletados ficam publicados",
+   "ms": 412,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html",
+   "bytes_lidos": 279381,
+   "titulo": "Radar de Recursos SUS: mapa do Brasil com repasses, emendas e saldos por estado e município | Rafael Partelli",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o conteúdo",
+     "url": "https://partelli.pro/gestor/recursos/#conteudo"
+    },
+    {
+     "texto": "Rafael Partelli",
+     "url": "https://partelli.pro/"
+    },
+    {
+     "texto": "Área do Gestor Guias e Radar",
+     "url": "https://partelli.pro/gestor/"
+    },
+    {
+     "texto": "Para profissionais",
+     "url": "https://partelli.pro/profissionais/"
+    },
+    {
+     "texto": "Para o cidadão",
+     "url": "https://partelli.pro/cidadao/"
+    },
+    {
+     "texto": "Radar Saúde",
+     "url": "https://partelli.pro/gestor/radar/"
+    },
+    {
+     "texto": "Reunião online",
+     "url": "https://partelli.pro/reuniao/"
+    },
+    {
+     "texto": "Falar comigo",
+     "url": "https://partelli.pro/#contato"
+    },
+    {
+     "texto": "Mapa do Brasil",
+     "url": "https://partelli.pro/gestor/recursos/"
+    },
+    {
+     "texto": "Resumo",
+     "url": "https://partelli.pro/gestor/recursos/#resumo"
+    }
+   ],
+   "total_links_filtrados": 10,
+   "arquivos_json": [
+    ".json",
+    "/fundo/brasil.json",
+    "/fundo/dados.json",
+    "/gestor/recursos/mapa-brasil.json",
+    "novidades.json"
+   ]
+  },
+  {
+   "id": "elo_gestor",
+   "nome": "partelli.pro: area do gestor (paginas e dados)",
+   "url": "https://partelli.pro/gestor/",
+   "metodo": "GET",
+   "nota": "mostra onde os dados ja coletados ficam publicados",
+   "ms": 257,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html",
+   "bytes_lidos": 25589,
+   "titulo": "Área do Gestor: guias, Radar Saúde e cursos para a gestão do SUS | Rafael Partelli",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o conteúdo",
+     "url": "https://partelli.pro/gestor/#conteudo"
+    },
+    {
+     "texto": "Rafael Partelli",
+     "url": "https://partelli.pro/"
+    },
+    {
+     "texto": "Área do Gestor Guias e Radar",
+     "url": "https://partelli.pro/gestor/"
+    },
+    {
+     "texto": "Para profissionais",
+     "url": "https://partelli.pro/profissionais/"
+    },
+    {
+     "texto": "Para o cidadão",
+     "url": "https://partelli.pro/cidadao/"
+    },
+    {
+     "texto": "Radar Saúde",
+     "url": "https://partelli.pro/gestor/radar/"
+    },
+    {
+     "texto": "Reunião online",
+     "url": "https://partelli.pro/reuniao/"
+    },
+    {
+     "texto": "Falar comigo",
+     "url": "https://partelli.pro/#contato"
+    },
+    {
+     "texto": "Folhear os guias",
+     "url": "https://partelli.pro/gestor/#guias"
+    },
+    {
+     "texto": "Ver as portarias de hoje",
+     "url": "https://partelli.pro/gestor/#radar"
+    }
+   ],
+   "total_links_filtrados": 10,
+   "arquivos_json": [
+    "/fundo/dados.json",
+    "/radar/radar.json",
+    "novidades.json"
+   ]
+  }
+ ]
+}
