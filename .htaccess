@@ -1,0 +1,18 @@
+# Hostinger (Apache): esconde pastas internas e comprime os dados
+RewriteEngine On
+RewriteRule ^(robo|tests|scripts|_workflows_novos|\.github|\.git)(/|$) - [F,L]
+RewriteRule ^(README|GUIA_GITHUB)\.md$ - [F,L]
+RewriteRule ^dados/(sondagem.*|aps)(\.json|/) - [F,L]
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE application/json text/csv image/svg+xml text/css application/javascript text/html
+</IfModule>
+
+<IfModule mod_headers.c>
+<FilesMatch "\.json$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+<FilesMatch "\.(css|js)$">
+Header set Cache-Control "public, max-age=3600"
+</FilesMatch>
+</IfModule>

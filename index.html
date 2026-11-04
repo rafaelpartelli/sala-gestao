@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sala de Gestão Estratégica em Saúde | Rafael Partelli</title>
+<meta name="description" content="Painel nacional para gestores de saúde: dengue, rede assistencial, financiamento, emendas, atenção primária e notas técnicas, com dados públicos e data de atualização de cada fonte.">
+<meta property="og:title" content="Sala de Gestão Estratégica em Saúde">
+<meta property="og:description" content="Dados públicos de saúde dos 5.570 municípios brasileiros em um só painel, com a fonte e a data de cada informação.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231351B4'/%3E%3Cpath d='M14 7h4v7h7v4h-7v7h-4v-7H7v-4h7z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/sala.css?v=1">
+</head>
+<body>
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+<header class="topo">
+  <div class="miolo">
+    <p class="marca">Rafael Partelli · Gestão em saúde pública</p>
+    <h1>Sala de Gestão Estratégica em Saúde</h1>
+    <p class="lead">Situação da saúde nos 27 estados e 5.570 municípios, a partir de bases públicas. Cada bloco mostra a fonte e a data da última coleta.</p>
+  </div>
+</header>
+
+<nav class="filtros" aria-label="Escolha do território">
+  <div class="miolo filtros-linha">
+    <label>Estado
+      <select id="selUF"><option value="BR">Brasil</option></select>
+    </label>
+    <label>Município
+      <select id="selMun" disabled><option value="">Todos os municípios</option></select>
+    </label>
+    <p id="selo" class="selo" role="status" aria-live="polite">Carregando dados...</p>
+  </div>
+</nav>
+
+<main id="conteudo" class="miolo">
+  <section aria-labelledby="h-resumo">
+    <h2 id="h-resumo">Resumo do território</h2>
+    <div id="kpis" class="kpis"></div>
+  </section>
+
+  <section aria-labelledby="h-dengue" class="bloco" id="mod-dengue">
+    <h2 id="h-dengue">Dengue: nível de alerta dos municípios</h2>
+    <p class="fonte" id="fonte-dengue"></p>
+    <div id="dengue"></div>
+  </section>
+
+  <section aria-labelledby="h-rede" class="bloco" id="mod-rede">
+    <h2 id="h-rede">Rede assistencial (CNES)</h2>
+    <p class="fonte" id="fonte-rede"></p>
+    <div id="rede"></div>
+  </section>
+
+  <section aria-labelledby="h-fin" class="bloco" id="mod-fin">
+    <h2 id="h-fin">Financiamento: repasses fundo a fundo, saldos e emendas</h2>
+    <p class="fonte" id="fonte-fin"></p>
+    <div id="fin"></div>
+  </section>
+
+  <section aria-labelledby="h-em" class="bloco" id="mod-em">
+    <h2 id="h-em">Emendas da União na função Saúde</h2>
+    <p class="fonte" id="fonte-em"></p>
+    <div id="em"></div>
+  </section>
+
+  <section aria-labelledby="h-aps" class="bloco" id="mod-aps">
+    <h2 id="h-aps">Atenção Primária à Saúde</h2>
+    <p class="fonte" id="fonte-aps"></p>
+    <div id="aps"></div>
+  </section>
+
+  <section aria-labelledby="h-notas" class="bloco" id="mod-notas">
+    <h2 id="h-notas">Notas técnicas, informes e portarias</h2>
+    <p class="fonte" id="fonte-notas"></p>
+    <div id="notas"></div>
+  </section>
+
+  <section aria-labelledby="h-metodo" class="bloco">
+    <h2 id="h-metodo">Como ler este painel</h2>
+    <ul class="metodo">
+      <li>Somente dados públicos e agregados. Nenhum dado de pessoa é coletado ou exibido.</li>
+      <li>Os casos de dengue são <strong>estimados</strong> pelo modelo do InfoDengue (Fiocruz e FGV), não são notificações confirmadas.</li>
+      <li>Valores de financiamento vêm dos Painéis InvestSUS do Fundo Nacional de Saúde, extraídos pelo Radar de Recursos. Os valores oficiais estão nesses painéis.</li>
+      <li>Cada bloco tem a opção de ver os números em tabela. Quando uma fonte está indisponível, o bloco informa em vez de mostrar dado antigo sem aviso.</li>
+      <li>Este painel apoia a análise técnica e não substitui os sistemas oficiais.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="miolo">
+    <p>Rafael Partelli, administrador (CRA/ES 15721). <a href="https://partelli.pro/">partelli.pro</a></p>
+    <p>Dados públicos: IBGE e SICONFI (território), InfoDengue, CNES e Dados Abertos do SUS, InvestSUS (FNS), Portal da Transparência, CONASS, Ministério da Saúde e DOU.</p>
+  </div>
+</footer>
+<script type="module" src="js/app.js?v=1"></script>
+</body>
+</html>

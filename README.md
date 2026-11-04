@@ -1,21 +1,34 @@
 # Sala de Gestão Estratégica em Saúde
 
-Painel para gestores de saúde, alimentado por APIs e bases públicas. Cobertura nacional: 27 UFs e 5.570 municípios, com o Espírito Santo como amostra de teste das fontes.
+Painel para gestores de saúde, alimentado por bases públicas. Cobertura nacional: 27 UFs e 5.570 municípios. Público: gestor de saúde (compras e editais ficam no Painel de Editais, voltado ao prestador).
 
-## Estado atual
-- `robo/sondar_fontes.py`: testa cada fonte a partir do GitHub. A rodada 1 gravou `dados/sondagem.json`; a rodada 2 grava `dados/sondagem_r2.json` (inclui teste de volume do InfoDengue e a estrutura do arquivo do CNES).
-- `robo/sondar_r3.py` (rodada 3): especificações de API (MS e Transferegov), paginação do RREO, teste de 500 municípios no InfoDengue, SINASC, Atenção Primária (indicadores, e-Gestor APS, SISAB) e radar de notas técnicas. Grava `dados/sondagem_r3.json`.
-- Escopo: a sala é para o **gestor de saúde**. Compras e editais (PNCP) ficam no Painel de Editais, voltado ao prestador.
-- A rodada 3 também sonda: Portal da Transparência da União (CSV e API), portais estaduais (ES, SP, PR, MG, PE), FNS e a ligação com os dados já coletados no Radar de Recursos (partelli.pro/gestor/recursos).
-- `robo/sondar_r4.py` (rodada 4): especificações de API (Transferegov, MS, e-Gestor APS), padrão dos arquivos do Portal da Transparência, anexo de saúde do RREO, arquivos dos conjuntos do Dados Abertos SUS, notas técnicas via WordPress e estrutura dos arquivos do Radar de Recursos. Grava `dados/sondagem_r4.json`.
-- `robo/coletar_territorio.py`: base territorial (27 UFs e 5.570 municípios) a partir do SICONFI. Grava `dados/territorio.json`. Roda todo dia 1 às 02:17 (Brasília) e sob demanda.
-- Testes offline em `tests/` (rodam antes de cada coleta).
-- Os módulos só serão construídos sobre as fontes que a sondagem confirmar.
+## Como funciona
+Coletores em Python (somente biblioteca padrão) rodam no GitHub Actions, gravam arquivos JSON em `dados/` e o site estático (`index.html`, `css/`, `js/`) lê esses arquivos. Cada bloco da tela mostra a fonte e a data da coleta e avisa quando o dado está velho.
 
-## Rodar a sondagem
-GitHub, aba Actions, "Sondar fontes da Sala de Gestao (rodada 3)", Run workflow. A rodada 3 leva de 15 a 25 minutos (teste de volume do InfoDengue).
-Depois, "Coletar base territorial", Run workflow.
-Opcional: cadastrar o segredo `PORTAL_TRANSPARENCIA_KEY` (Settings, Secrets and variables, Actions) para testar o Portal da Transparência. A chave nunca vai no código.
+| Módulo | Coletor | Fonte | Agenda (Brasília) |
+|---|---|---|---|
+| Território | `robo/coletar_territorio.py` | SICONFI (entes) | dia 1, 02:17 |
+| Dengue | `robo/coletar_dengue.py` | InfoDengue (Fiocruz e FGV), casos estimados | diária, 05:37 |
+| Rede assistencial | `robo/coletar_rede.py` | CNES, Dados Abertos do SUS | segunda, 04:23 |
+| Financiamento e portarias | `robo/coletar_financiamento.py` | Radar de Recursos (partelli.pro), InvestSUS/FNS | diária 08:41 e sexta 16:41 |
+| Emendas da União | `robo/coletar_emendas.py` | Portal da Transparência (chave) | diária, 06:29 |
+| Atenção Primária | `robo/coletar_aps.py` | Dados Abertos do SUS (SISAB 2024) | dia 1, 03:17 |
+| Notas técnicas | `robo/coletar_notas.py` | CONASS e Ministério da Saúde | 07:11 e 13:11 |
 
-## Dados
-Somente dados públicos e agregados. Nenhum dado pessoal é coletado ou guardado.
+Os workflows ficam em `.github/workflows/`. Segredo necessário: `PORTAL_TRANSPARENCIA_KEY` (só para emendas). A chave nunca vai no código.
+
+## Regras de dados
+- Somente dados públicos e agregados. Nenhum dado de pessoa é coletado ou publicado.
+- Casos de dengue são estimativas do modelo do InfoDengue, não notificações.
+- Emendas: sem nomes de autores. Valores agregados por localidade do gasto.
+- Financiamento: valores oficiais nos Painéis InvestSUS do FNS; o painel apenas replica o resumo do Radar de Recursos.
+- Agrupamento de tipos de unidade do CNES (campo `TP_UNIDADE`) é do painel e deve ser conferido com a tabela oficial.
+
+## Testes
+`python3 -I -m unittest discover -s tests` (rodam antes de cada coleta, sem acesso à internet).
+
+## Sondagens
+`robo/sondar_fontes.py`, `sondar_r3.py` e `sondar_r4.py` testam as fontes a partir do GitHub e gravam `dados/sondagem*.json` (histórico das rodadas 1 a 4).
+
+## Publicação
+O repositório inteiro é o site (raiz = `index.html`). Teste rápido: GitHub Pages (Settings, Pages, branch main, pasta raiz). Produção prevista: partelli.pro/gestor/sala/ por Git deploy da Hostinger. O `.htaccess` esconde `robo/`, `tests/` e arquivos internos.
