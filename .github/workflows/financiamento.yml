@@ -16,7 +16,7 @@ concurrency:
 jobs:
   coletar:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -27,7 +27,14 @@ jobs:
       - name: Coletar
         working-directory: .
         run: python3 robo/coletar_financiamento.py
+      - name: Coletar CAUC
+        if: always()
+        run: python3 robo/coletar_cauc.py
+      - name: Coletar transferencias da Uniao
+        if: always()
+        run: python3 robo/coletar_transferencias.py
       - name: Publicar resultado
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

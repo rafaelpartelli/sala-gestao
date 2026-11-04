@@ -1,4 +1,4 @@
-name: Coletar Atencao Primaria (indicadores 2024)
+name: Coletar Atencao Primaria, planos (ANS) e despesa (DCA)
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ concurrency:
 jobs:
   coletar:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -26,7 +26,16 @@ jobs:
       - name: Coletar
         working-directory: .
         run: python3 robo/coletar_aps.py
+      - name: Coletar planos de saude (ANS)
+        if: always()
+        run: python3 robo/coletar_ans.py
+      - name: Coletar despesa em saude (DCA)
+        if: always()
+        env:
+          TRABALHADORES: "6"
+        run: python3 robo/coletar_despesa.py
       - name: Publicar resultado
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

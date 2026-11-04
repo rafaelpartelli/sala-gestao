@@ -53,7 +53,7 @@ class Rede(unittest.TestCase):
         d = por["3205309"]
         self.assertEqual((lidos, erros, sem), (4, 0, 1))
         self.assertEqual((d["total"], d["ativos"]), (3, 2))
-        self.assertEqual(d["grupos"], {"Hospitais": 1, "Atencao basica": 1})
+        self.assertEqual(d["grupos"], {"Hospitais": 1, "Atenção básica": 1})
         self.assertEqual(d["esfera"], {"Municipal": 1, "Privada": 1})
     def test_json_invalido_conta_erro(self):
         por, lidos, erros, sem = rd.agregar(["{nao e json}", json.dumps(_cnes(1))], self.MAPA)
@@ -81,7 +81,8 @@ class Emendas(unittest.TestCase):
         regs = [{"localidadeDoGasto": "VITÓRIA - ES", "tipoEmenda": "Emenda Individual", "subfuncao": "Atenção Básica", "valorEmpenhado": "1.000,00", "valorLiquidado": "500,00", "valorPago": "250,50"},
                 {"localidadeDoGasto": "MULTI", "tipoEmenda": "Emenda de Bancada", "subfuncao": "Atenção Básica", "valorEmpenhado": "10,00", "valorLiquidado": "0", "valorPago": "0"}]
         a = em.agregar(regs, self.NOMES, self.SIG)
-        self.assertEqual(a["total"], {"empenhado": 1010.0, "liquidado": 500.0, "pago": 250.5, "n": 2})
+        self.assertEqual({k: a["total"][k] for k in ("empenhado", "liquidado", "pago", "n")}, {"empenhado": 1010.0, "liquidado": 500.0, "pago": 250.5, "n": 2})
+        self.assertIn("pct_empenhado_com_uf", a["total"])
         self.assertEqual(a["por_uf"]["ES"]["pago"], 250.5)
         self.assertEqual(a["por_uf"]["ND"]["n"], 1)
         self.assertEqual(a["por_subfuncao"]["Atenção Básica"]["n"], 2)

@@ -6,11 +6,18 @@ import io, json, os, re, sys, zipfile, urllib.request
 from comum import UA, escrever_json, ler_json, agora, resumo_actions
 
 URL = "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/CNES/cnes_estabelecimentos_json.zip"
-# Codigos do campo TP_UNIDADE usados nos agrupamentos do painel (conferir com a tabela oficial do CNES na rodada 5).
-GRUPOS = {"01": "Atencao basica", "02": "Atencao basica", "05": "Hospitais", "07": "Hospitais", "62": "Hospitais",
-          "15": "Urgencia e unidade mista", "20": "Urgencia e unidade mista", "21": "Urgencia e unidade mista", "73": "Urgencia e unidade mista",
-          "04": "Ambulatorial especializado", "36": "Ambulatorial especializado", "22": "Ambulatorial especializado",
-          "39": "Apoio diagnostico"}
+# Codigos do campo TP_UNIDADE (tabela de dominio do CNES). Agrupamento para leitura gerencial; conferir com a tabela oficial antes de decidir com base nele.
+GRUPOS = {"01": "Atenção básica", "02": "Atenção básica",
+          "05": "Hospitais", "07": "Hospitais", "62": "Hospitais",
+          "15": "Urgência e unidade mista", "20": "Urgência e unidade mista", "21": "Urgência e unidade mista", "73": "Urgência e unidade mista", "42": "Urgência e unidade mista",
+          "04": "Ambulatório especializado", "36": "Ambulatório especializado",
+          "22": "Consultório isolado",
+          "39": "Apoio diagnóstico e terapêutico",
+          "43": "Farmácia",
+          "70": "Saúde mental (CAPS)",
+          "50": "Vigilância, regulação e gestão", "64": "Vigilância, regulação e gestão", "68": "Vigilância, regulação e gestão", "76": "Vigilância, regulação e gestão", "81": "Vigilância, regulação e gestão",
+          "32": "Unidades móveis", "40": "Unidades móveis",
+          "77": "Atenção domiciliar"}
 SEP = re.compile(r"\}\s*,\s*\{")
 
 def esfera_curta(txt):

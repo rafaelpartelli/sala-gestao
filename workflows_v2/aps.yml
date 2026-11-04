@@ -1,0 +1,49 @@
+name: Coletar Atencao Primaria, planos (ANS) e despesa (DCA)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 1 * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: coleta-aps
+  cancel-in-progress: false
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Testes
+        run: python3 -I -m unittest discover -s tests
+      - name: Coletar
+        working-directory: .
+        run: python3 robo/coletar_aps.py
+      - name: Coletar planos de saude (ANS)
+        if: always()
+        run: python3 robo/coletar_ans.py
+      - name: Coletar despesa em saude (DCA)
+        if: always()
+        env:
+          TRABALHADORES: "6"
+        run: python3 robo/coletar_despesa.py
+      - name: Publicar resultado
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dados
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "dados: APS $(date -u +%d/%m/%Y\ %H:%M)"
+          for i in 1 2 3 4; do
+            if git pull --rebase -X theirs origin main && git push; then exit 0; fi
+            sleep 7
+          done
+          exit 1

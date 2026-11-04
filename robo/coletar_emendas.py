@@ -29,7 +29,9 @@ def agregar(registros, nomes_uf, siglas):
             d = dic.setdefault(chave, {"empenhado": 0.0, "liquidado": 0.0, "pago": 0.0, "n": 0})
             d["empenhado"] += e; d["liquidado"] += l; d["pago"] += p; d["n"] += 1
         tot["empenhado"] += e; tot["liquidado"] += l; tot["pago"] += p; tot["n"] += 1
-    arred = lambda d: {k: (round(v, 2) if k != "n" else v) for k, v in d.items()}
+    ident = sum(v["empenhado"] for k, v in por_uf.items() if k != "ND")
+    tot["pct_empenhado_com_uf"] = round(100 * ident / tot["empenhado"], 1) if tot["empenhado"] else None
+    arred = lambda d: {k: (round(v, 2) if k != "n" and v is not None else v) for k, v in d.items()}
     return {"total": arred(tot), "por_uf": {k: arred(v) for k, v in sorted(por_uf.items())},
             "por_tipo": {k: arred(v) for k, v in sorted(por_tipo.items())}, "por_subfuncao": {k: arred(v) for k, v in sorted(por_sub.items())}}
 

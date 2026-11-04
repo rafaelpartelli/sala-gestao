@@ -25,8 +25,17 @@ jobs:
         run: python3 -I -m unittest discover -s tests
       - name: Coletar
         working-directory: .
+        env:
+          TRABALHADORES: "6"
+        run: python3 robo/coletar_dengue.py
+      - name: Coletar chikungunya
+        if: always()
+        env:
+          DOENCA: chikungunya
+          TRABALHADORES: "6"
         run: python3 robo/coletar_dengue.py
       - name: Publicar resultado
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
