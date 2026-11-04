@@ -1,0 +1,1131 @@
+{
+ "rodada": 7,
+ "gerado_em": "2026-11-04T14:04:18-03:00",
+ "ambiente": "GitHub Actions",
+ "resumo": {
+  "ok": 2,
+  "falha": 0
+ },
+ "fontes": [
+  {
+   "id": "elasticnes",
+   "nome": "ElastiCNES a partir do GitHub",
+   "testes": {
+    "pagina_profissionais": {
+     "status": 200,
+     "erro": null,
+     "tipo": "text/html",
+     "ms": 834,
+     "iframes": [
+      "iframeSrc"
+     ],
+     "scripts": 2,
+     "titulo": "ElastiCNES — CNES"
+    },
+    "robots": {
+     "status": 200,
+     "erro": null,
+     "tipo": "text/html",
+     "ms": 1535,
+     "inicio": "<!DOCTYPE html> <html lang=\"pt-BR\"> <head> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <meta name=\"description"
+    },
+    "kibana_status": {
+     "status": 200,
+     "erro": null,
+     "tipo": "application/json; charset=utf-8",
+     "ms": 1229,
+     "inicio": "{\"name\":\"proddf0220\",\"uuid\":\"f3ef5883-0c7f-448e-b685-6a5684ec3e5c\",\"version\":{\"number\":\"8.8.2\",\"build_hash\":\"c7c074756dcb999f9fdf4c153c5445a00653fa44\",\"build_nu"
+    },
+    "kibana_dashboards": {
+     "status": 200,
+     "erro": null,
+     "tipo": "text/html; charset=utf-8",
+     "ms": 1361,
+     "inicio": "<!DOCTYPE html><html lang=\"pt-br\"><head><meta charSet=\"utf-8\"/><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"/><meta name=\"viewport\" content=\"wid"
+    },
+    "kibana_reporting": {
+     "status": 200,
+     "erro": null,
+     "tipo": "application/json; charset=utf-8",
+     "ms": 1511,
+     "inicio": "[{\"id\":\"mrmq0fpl08u65957f57869sj\",\"index\":\".reporting-2026-07-12\",\"kibana_name\":\"proddf0220\",\"kibana_id\":\"f3ef5883-0c7f-448e-b685-6a5684ec3e5c\",\"jobtype\":\"csv_s"
+    },
+    "bsearch_lote_vazio": {
+     "url": "https://elasticnes.saude.gov.br/kibana/internal/bsearch",
+     "metodo": "POST (lote vazio)",
+     "status": 200,
+     "inicio": "",
+     "ms": 672
+    }
+   },
+   "ok": true,
+   "nota": "so status; nenhuma consulta de dados foi feita no painel"
+  },
+  {
+   "id": "ftp_cnes_pf_eq",
+   "nome": "DATASUS FTP: CNES profissionais (PF) e equipes (EQ)",
+   "url": "ftp://ftp.datasus.gov.br/dissemin/publicos/CNES/200508_/Dados",
+   "subpastas_dados": [
+    "DC",
+    "EE",
+    "EF",
+    "EP",
+    "EQ",
+    "GM",
+    "HB",
+    "IN",
+    "LT",
+    "PF",
+    "RC",
+    "SR",
+    "ST"
+   ],
+   "pastas": {
+    "EQ": {
+     "pasta": "/dissemin/publicos/CNES/200508_/Dados/EQ",
+     "total": 6857,
+     "padrao_reconhecido": 6857,
+     "competencia_mais_recente": "2609",
+     "ufs_na_mais_recente": 27,
+     "ufs": [
+      "AC",
+      "AL",
+      "AM",
+      "AP",
+      "BA",
+      "CE",
+      "DF",
+      "ES",
+      "GO",
+      "MA",
+      "MG",
+      "MS",
+      "MT",
+      "PA",
+      "PB",
+      "PE",
+      "PI",
+      "PR",
+      "RJ",
+      "RN",
+      "RO",
+      "RR",
+      "RS",
+      "SC",
+      "SE",
+      "SP",
+      "TO"
+     ],
+     "primeira_competencia": "0508",
+     "n_competencias": 254,
+     "tamanho_bytes_ultima_competencia": {
+      "ES": 254499,
+      "SP": 2367574,
+      "MG": 1433391
+     },
+     "tamanho_total_mb_ultima_competencia": 10.1,
+     "cabecalho_ES": {
+      "versao_dbase": 3,
+      "registros": 26875,
+      "tam_cabecalho": 929,
+      "tam_registro": 104,
+      "n_campos": 28,
+      "campos": [
+       {
+        "campo": "CNES",
+        "tipo": "C",
+        "tam": 7
+       },
+       {
+        "campo": "CODUFMUN",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "REGSAUDE",
+        "tipo": "C",
+        "tam": 4
+       },
+       {
+        "campo": "MICR_REG",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "DISTRSAN",
+        "tipo": "C",
+        "tam": 4
+       },
+       {
+        "campo": "DISTRADM",
+        "tipo": "C",
+        "tam": 4
+       },
+       {
+        "campo": "TPGESTAO",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "PF_PJ",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "CPF_CNPJ",
+        "tipo": "C",
+        "tam": 14
+       },
+       {
+        "campo": "NIV_DEP",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "CNPJ_MAN",
+        "tipo": "C",
+        "tam": 14
+       },
+       {
+        "campo": "ESFERA_A",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "ATIVIDAD",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "RETENCAO",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "NATUREZA",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "CLIENTEL",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TP_UNID",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TURNO_AT",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "NIV_HIER",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TERCEIRO",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "TIPEQUIP",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "CODEQUIP",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "QT_EXIST",
+        "tipo": "N",
+        "tam": 4
+       },
+       {
+        "campo": "QT_USO",
+        "tipo": "N",
+        "tam": 4
+       },
+       {
+        "campo": "IND_SUS",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "IND_NSUS",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "COMPETEN",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "NAT_JUR",
+        "tipo": "C",
+        "tam": 4
+       }
+      ],
+      "cabecalho_completo": true
+     }
+    },
+    "PF": {
+     "pasta": "/dissemin/publicos/CNES/200508_/Dados/PF",
+     "total": 6858,
+     "padrao_reconhecido": 6858,
+     "competencia_mais_recente": "2609",
+     "ufs_na_mais_recente": 27,
+     "ufs": [
+      "AC",
+      "AL",
+      "AM",
+      "AP",
+      "BA",
+      "CE",
+      "DF",
+      "ES",
+      "GO",
+      "MA",
+      "MG",
+      "MS",
+      "MT",
+      "PA",
+      "PB",
+      "PE",
+      "PI",
+      "PR",
+      "RJ",
+      "RN",
+      "RO",
+      "RR",
+      "RS",
+      "SC",
+      "SE",
+      "SP",
+      "TO"
+     ],
+     "primeira_competencia": "0508",
+     "n_competencias": 254,
+     "tamanho_bytes_ultima_competencia": {
+      "ES": 7591080,
+      "SP": 81988117,
+      "MG": 40705200
+     },
+     "tamanho_total_mb_ultima_competencia": 332.9,
+     "cabecalho_ES": {
+      "versao_dbase": 3,
+      "registros": 145836,
+      "tam_cabecalho": 1313,
+      "tam_registro": 230,
+      "n_campos": 40,
+      "campos": [
+       {
+        "campo": "CNES",
+        "tipo": "C",
+        "tam": 7
+       },
+       {
+        "campo": "CODUFMUN",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "REGSAUDE",
+        "tipo": "C",
+        "tam": 4
+       },
+       {
+        "campo": "MICR_REG",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "DISTRSAN",
+        "tipo": "C",
+        "tam": 4
+       },
+       {
+        "campo": "DISTRADM",
+        "tipo": "C",
+        "tam": 4
+       },
+       {
+        "campo": "TPGESTAO",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "PF_PJ",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "CPF_CNPJ",
+        "tipo": "C",
+        "tam": 14
+       },
+       {
+        "campo": "NIV_DEP",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "CNPJ_MAN",
+        "tipo": "C",
+        "tam": 14
+       },
+       {
+        "campo": "ESFERA_A",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "ATIVIDAD",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "RETENCAO",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "NATUREZA",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "CLIENTEL",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TP_UNID",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TURNO_AT",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "NIV_HIER",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TERCEIRO",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "CPF_PROF",
+        "tipo": "C",
+        "tam": 11
+       },
+       {
+        "campo": "CPFUNICO",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "CBO",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "CBOUNICO",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "NOMEPROF",
+        "tipo": "C",
+        "tam": 60
+       },
+       {
+        "campo": "CNS_PROF",
+        "tipo": "C",
+        "tam": 15
+       },
+       {
+        "campo": "CONSELHO",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "REGISTRO",
+        "tipo": "C",
+        "tam": 13
+       },
+       {
+        "campo": "VINCULAC",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "VINCUL_C",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "VINCUL_A",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "VINCUL_N",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "PROF_SUS",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "PROFNSUS",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "HORAOUTR",
+        "tipo": "N",
+        "tam": 3
+       },
+       {
+        "campo": "HORAHOSP",
+        "tipo": "N",
+        "tam": 3
+       },
+       {
+        "campo": "HORA_AMB",
+        "tipo": "N",
+        "tam": 3
+       },
+       {
+        "campo": "COMPETEN",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "UFMUNRES",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "NAT_JUR",
+        "tipo": "C",
+        "tam": 4
+       }
+      ],
+      "cabecalho_completo": true
+     }
+    },
+    "EP": {
+     "pasta": "/dissemin/publicos/CNES/200508_/Dados/EP",
+     "total": 6318,
+     "padrao_reconhecido": 6318,
+     "competencia_mais_recente": "2609",
+     "ufs_na_mais_recente": 27,
+     "ufs": [
+      "AC",
+      "AL",
+      "AM",
+      "AP",
+      "BA",
+      "CE",
+      "DF",
+      "ES",
+      "GO",
+      "MA",
+      "MG",
+      "MS",
+      "MT",
+      "PA",
+      "PB",
+      "PE",
+      "PI",
+      "PR",
+      "RJ",
+      "RN",
+      "RO",
+      "RR",
+      "RS",
+      "SC",
+      "SE",
+      "SP",
+      "TO"
+     ],
+     "primeira_competencia": "0704",
+     "n_competencias": 234,
+     "tamanho_bytes_ultima_competencia": {
+      "ES": 92378,
+      "SP": 677053,
+      "MG": 515366
+     },
+     "tamanho_total_mb_ultima_competencia": 4.3,
+     "cabecalho_ES": {
+      "versao_dbase": 3,
+      "registros": 2552,
+      "tam_cabecalho": 3489,
+      "tam_registro": 407,
+      "n_campos": 108,
+      "campos": [
+       {
+        "campo": "CNES",
+        "tipo": "C",
+        "tam": 7
+       },
+       {
+        "campo": "CODUFMUN",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "COD_CEP",
+        "tipo": "C",
+        "tam": 8
+       },
+       {
+        "campo": "CPF_CNPJ",
+        "tipo": "C",
+        "tam": 14
+       },
+       {
+        "campo": "PF_PJ",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "NIV_DEP",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "CNPJ_MAN",
+        "tipo": "C",
+        "tam": 14
+       },
+       {
+        "campo": "COD_IR",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "REGSAUDE",
+        "tipo": "C",
+        "tam": 4
+       },
+       {
+        "campo": "MICR_REG",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "DISTRSAN",
+        "tipo": "C",
+        "tam": 4
+       },
+       {
+        "campo": "DISTRADM",
+        "tipo": "C",
+        "tam": 4
+       },
+       {
+        "campo": "VINC_SUS",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "TPGESTAO",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "ESFERA_A",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "RETENCAO",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "ATIVIDAD",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "NATUREZA",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "CLIENTEL",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TP_UNID",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TURNO_AT",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "NIV_HIER",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TERCEIRO",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "TP_PREST",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "GESPRG1E",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG1M",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG2E",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG2M",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG4E",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG4M",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "NIVATE_A",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG3E",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG3M",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG5E",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG5M",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG6E",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "GESPRG6M",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "NIVATE_H",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP01CV01",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP01CV02",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP01CV05",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP01CV06",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP01CV03",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP01CV04",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP01CV07",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP02CV01",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP02CV02",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP02CV05",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP02CV06",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP02CV03",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP02CV04",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP02CV07",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP03CV01",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP03CV02",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP03CV05",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP03CV06",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP03CV03",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP03CV04",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP03CV07",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP04CV01",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP04CV02",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP04CV05",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP04CV06",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP04CV03",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP04CV04",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP04CV07",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP05CV01",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP05CV02",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP05CV05",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP05CV06",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP05CV03",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP05CV04",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP05CV07",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP06CV01",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP06CV02",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP06CV05",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP06CV06",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP06CV03",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP06CV04",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP06CV07",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP07CV01",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP07CV02",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP07CV05",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP07CV06",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP07CV03",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP07CV04",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "AP07CV07",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "ATEND_PR",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "IDEQUIPE",
+        "tipo": "C",
+        "tam": 18
+       },
+       {
+        "campo": "TIPO_EQP",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "NOME_EQP",
+        "tipo": "C",
+        "tam": 60
+       },
+       {
+        "campo": "ID_AREA",
+        "tipo": "C",
+        "tam": 10
+       },
+       {
+        "campo": "NOMEAREA",
+        "tipo": "C",
+        "tam": 60
+       },
+       {
+        "campo": "ID_SEGM",
+        "tipo": "C",
+        "tam": 8
+       },
+       {
+        "campo": "DESCSEGM",
+        "tipo": "C",
+        "tam": 60
+       },
+       {
+        "campo": "TIPOSEGM",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "DT_ATIVA",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "DT_DESAT",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "QUILOMBO",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "ASSENTAD",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "POPGERAL",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "ESCOLA",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "INDIGENA",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "PRONASCI",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "MOTDESAT",
+        "tipo": "C",
+        "tam": 2
+       },
+       {
+        "campo": "TP_DESAT",
+        "tipo": "C",
+        "tam": 1
+       },
+       {
+        "campo": "COMPETEN",
+        "tipo": "C",
+        "tam": 6
+       },
+       {
+        "campo": "NAT_JUR",
+        "tipo": "C",
+        "tam": 4
+       }
+      ],
+      "cabecalho_completo": true
+     }
+    }
+   },
+   "ok": true,
+   "ms": 22579
+  }
+ ]
+}
