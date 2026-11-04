@@ -1,0 +1,1250 @@
+{
+ "rodada": 4,
+ "gerado_em": "2026-11-04T11:39:49-03:00",
+ "ambiente": "GitHub Actions",
+ "resumo": {
+  "ok": 29,
+  "falha": 9,
+  "nao_testado": 0
+ },
+ "fontes": [
+  {
+   "id": "tg_fundoafundo_spec",
+   "nome": "Transferegov fundo a fundo: especificacao",
+   "url": "https://api-publica.transferegov.gestao.gov.br/fundoafundo/",
+   "metodo": "GET",
+   "ms": 676,
+   "especificacoes_candidatas": [
+    "https://api-publica.transferegov.gestao.gov.br/fundoafundo/openapi.json",
+    "https://api-publica.transferegov.gestao.gov.br/fundoafundo/swagger.json",
+    "https://api-publica.transferegov.gestao.gov.br/fundoafundo/openapi.json",
+    "https://api-publica.transferegov.gestao.gov.br/fundoafundo/swagger.json"
+   ],
+   "especificacao_ok": "https://api-publica.transferegov.gestao.gov.br/fundoafundo/openapi.json",
+   "caminhos": [
+    "/data-atualizacao",
+    "/empenhos",
+    "/gestao-financeira-lancamentos",
+    "/gestao-financeira-subtransacoes",
+    "/planos-acao",
+    "/planos-acao-analises",
+    "/planos-acao-analises-responsaveis",
+    "/planos-acao-dados-bancarios",
+    "/planos-acao-destinacao-recursos",
+    "/planos-acao-historico",
+    "/planos-acao-metas",
+    "/planos-acao-metas-acoes",
+    "/programas",
+    "/programas-beneficiarios",
+    "/programas-gestao-agil",
+    "/relatorios-gestao",
+    "/relatorios-gestao-acoes",
+    "/relatorios-gestao-analises",
+    "/relatorios-gestao-analises-responsaveis",
+    "/termos-adesao",
+    "/termos-adesao-historico"
+   ],
+   "total_caminhos": 21,
+   "amostras": [
+    {
+     "tabela": "/data-atualizacao",
+     "ok": true,
+     "campos": [
+      "data_ultima_atualizacao"
+     ],
+     "status": 200
+    },
+    {
+     "tabela": "/empenhos",
+     "ok": true,
+     "campos": [
+      "data",
+      "total_pages",
+      "total_items",
+      "page_number",
+      "page_size"
+     ],
+     "status": 200
+    },
+    {
+     "tabela": "/gestao-financeira-lancamentos",
+     "ok": true,
+     "campos": [
+      "data",
+      "total_pages",
+      "total_items",
+      "page_number",
+      "page_size"
+     ],
+     "status": 200
+    }
+   ],
+   "ok": true
+  },
+  {
+   "id": "tg_especiais_spec",
+   "nome": "Transferegov especiais: especificacao",
+   "url": "https://api-publica.transferegov.gestao.gov.br/especiais/",
+   "metodo": "GET",
+   "ms": 434,
+   "especificacoes_candidatas": [
+    "https://api-publica.transferegov.gestao.gov.br/especiais/openapi.json",
+    "https://api-publica.transferegov.gestao.gov.br/especiais/swagger.json",
+    "https://api-publica.transferegov.gestao.gov.br/especiais/openapi.json"
+   ],
+   "especificacao_ok": "https://api-publica.transferegov.gestao.gov.br/especiais/openapi.json",
+   "caminhos": [
+    "/beneficiarios-especiais",
+    "/data-atualizacao",
+    "/devolucao-especiais",
+    "/documentos-habeis-especiais",
+    "/empenhos-especiais",
+    "/executores-especiais",
+    "/finalidade-especiais",
+    "/gestao-financeira-lancamentos-especiais",
+    "/gestao-financeira-subtransacoes-especiais",
+    "/meta-especiais",
+    "/ordens-pagamentos-ordens-bancarias-especiais",
+    "/orgaos-analises-pendentes-especiais",
+    "/plano-trabalho-analise-historico-especiais",
+    "/planos-acao-especiais",
+    "/planos-acao-historico-especiais",
+    "/planos-trabalho-analises-especiais",
+    "/planos-trabalho-especiais",
+    "/planos-trabalho-historico",
+    "/programas-especiais",
+    "/relatorios-gestao-analise-especiais",
+    "/relatorios-gestao-documento-liquidacao-especiais",
+    "/relatorios-gestao-especiais",
+    "/relatorios-gestao-novos-especiais",
+    "/saldo-conta-gestao-financeira-especiais"
+   ],
+   "total_caminhos": 24,
+   "amostras": [
+    {
+     "tabela": "/beneficiarios-especiais",
+     "ok": true,
+     "campos": [
+      "data",
+      "total_pages",
+      "total_items",
+      "page_number",
+      "page_size"
+     ],
+     "status": 200
+    },
+    {
+     "tabela": "/data-atualizacao",
+     "ok": true,
+     "campos": [
+      "data_ultima_atualizacao"
+     ],
+     "status": 200
+    },
+    {
+     "tabela": "/devolucao-especiais",
+     "ok": true,
+     "campos": [
+      "data",
+      "total_pages",
+      "total_items",
+      "page_number",
+      "page_size"
+     ],
+     "status": 200
+    }
+   ],
+   "ok": true
+  },
+  {
+   "id": "ms_spec",
+   "nome": "API de Dados Abertos do MS: especificacao",
+   "url": "https://apidadosabertos.saude.gov.br/",
+   "metodo": "GET",
+   "ms": 784,
+   "especificacoes_candidatas": [
+    "https://apidadosabertos.saude.gov.br/swagger.json",
+    "https://apidadosabertos.saude.gov.br/v1/swagger.json",
+    "https://apidadosabertos.saude.gov.br/openapi.json"
+   ],
+   "ok": false
+  },
+  {
+   "id": "egestor_api",
+   "nome": "e-Gestor APS: API (raiz e caminhos no script)",
+   "url": "https://apiegestoraps.saude.gov.br",
+   "metodo": "GET",
+   "testes": [
+    {
+     "caminho": "/",
+     "status": null,
+     "erro": "RemoteDisconnected: Remote end closed connection without response",
+     "tipo": null,
+     "inicio": ""
+    },
+    {
+     "caminho": "/swagger-ui/index.html",
+     "status": null,
+     "erro": "RemoteDisconnected: Remote end closed connection without response",
+     "tipo": null,
+     "inicio": ""
+    },
+    {
+     "caminho": "/v3/api-docs",
+     "status": null,
+     "erro": "RemoteDisconnected: Remote end closed connection without response",
+     "tipo": null,
+     "inicio": ""
+    },
+    {
+     "caminho": "/v2/api-docs",
+     "status": null,
+     "erro": "RemoteDisconnected: Remote end closed connection without response",
+     "tipo": null,
+     "inicio": ""
+    },
+    {
+     "caminho": "/swagger-ui.html",
+     "status": null,
+     "erro": "RemoteDisconnected: Remote end closed connection without response",
+     "tipo": null,
+     "inicio": ""
+    }
+   ],
+   "caminhos_no_script": [],
+   "ok": false
+  },
+  {
+   "id": "pt_conv_pagina",
+   "nome": "Portal da Transparencia: pagina de convenios (padrao dos arquivos)",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios",
+   "metodo": "GET",
+   "nota": "",
+   "ms": 829,
+   "status": 200,
+   "ok": true,
+   "tipo": "text/html;charset=UTF-8",
+   "bytes_lidos": 84025,
+   "titulo": "Convenios | Portal da Transparência",
+   "links_encontrados": [
+    {
+     "texto": "Ir para o conteúdo (1/4) 1",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios#main-content"
+    },
+    {
+     "texto": "Ir para o menu (2/4) 2",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios#header-navigation"
+    },
+    {
+     "texto": "Ir para a busca (3/4) 3",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios#main-searchbox"
+    },
+    {
+     "texto": "Ir para o rodapé (4/4) 4",
+     "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios#footer"
+    },
+    {
+     "texto": "Órgãos de Governo",
+     "url": "https://www.gov.br/pt-br/orgaos-do-governo"
+    }
+   ],
+   "total_links_filtrados": 5,
+   "padroes_de_arquivo": []
+  },
+  {
+   "id": "pt_conv_UNICO",
+   "nome": "Convenios, arquivo UNICO (HEAD)",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios/UNICO",
+   "metodo": "HEAD",
+   "nota": "so cabecalhos",
+   "tentativas": 1,
+   "status": 403,
+   "ms": 887,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 403"
+  },
+  {
+   "id": "pt_conv_202610",
+   "nome": "Convenios, arquivo 202610 (HEAD)",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios/202610",
+   "metodo": "HEAD",
+   "nota": "so cabecalhos",
+   "tentativas": 1,
+   "status": 403,
+   "ms": 539,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 403"
+  },
+  {
+   "id": "pt_conv_202609",
+   "nome": "Convenios, arquivo 202609 (HEAD)",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios/202609",
+   "metodo": "HEAD",
+   "nota": "so cabecalhos",
+   "tentativas": 1,
+   "status": 403,
+   "ms": 752,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 403"
+  },
+  {
+   "id": "pt_conv_2026",
+   "nome": "Convenios, arquivo 2026 (HEAD)",
+   "url": "https://portaldatransparencia.gov.br/download-de-dados/convenios/2026",
+   "metodo": "HEAD",
+   "nota": "so cabecalhos",
+   "tentativas": 1,
+   "status": 403,
+   "ms": 566,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 403"
+  },
+  {
+   "id": "pt_api_emendas",
+   "nome": "API: emendas (2025, pagina 1)",
+   "url": "https://api.portaldatransparencia.gov.br/api-de-dados/emendas?ano=2025&pagina=1",
+   "metodo": "GET",
+   "nota": "chave vinda de segredo",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 479,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 7062,
+   "campos": [
+    "codigoEmenda",
+    "ano",
+    "tipoEmenda",
+    "autor",
+    "nomeAutor",
+    "numeroEmenda",
+    "localidadeDoGasto",
+    "funcao",
+    "subfuncao",
+    "valorEmpenhado",
+    "valorLiquidado",
+    "valorPago",
+    "valorRestoInscrito",
+    "valorRestoCancelado",
+    "valorRestoPago"
+   ],
+   "registros": 15,
+   "campos_item": [
+    "codigoEmenda",
+    "ano",
+    "tipoEmenda",
+    "autor",
+    "nomeAutor",
+    "numeroEmenda",
+    "localidadeDoGasto",
+    "funcao",
+    "subfuncao",
+    "valorEmpenhado",
+    "valorLiquidado",
+    "valorPago",
+    "valorRestoInscrito",
+    "valorRestoCancelado",
+    "valorRestoPago"
+   ]
+  },
+  {
+   "id": "pt_api_funcoes",
+   "nome": "API: funcoes da despesa",
+   "url": "https://api.portaldatransparencia.gov.br/api-de-dados/despesas/funcional-programatica/funcoes?pagina=1",
+   "metodo": "GET",
+   "nota": "chave vinda de segredo",
+   "tentativas": 1,
+   "status": 400,
+   "ms": 363,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 400"
+  },
+  {
+   "id": "pt_api_subfuncoes",
+   "nome": "API: subfuncoes da despesa",
+   "url": "https://api.portaldatransparencia.gov.br/api-de-dados/despesas/funcional-programatica/subfuncoes?pagina=1",
+   "metodo": "GET",
+   "nota": "chave vinda de segredo",
+   "tentativas": 1,
+   "status": 400,
+   "ms": 134,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 400"
+  },
+  {
+   "id": "extrato_vitoria",
+   "nome": "SICONFI extrato de entregas (Vitoria, 2025): demonstrativos",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/extrato_entregas?id_ente=3205309&an_referencia=2025",
+   "metodo": "GET",
+   "nota": "lista o que foi entregue",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 595,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 11518,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 39,
+   "campos_item": [
+    "exercicio",
+    "cod_ibge",
+    "populacao",
+    "instituicao",
+    "entregavel",
+    "periodo",
+    "periodicidade",
+    "status_relatorio",
+    "data_status",
+    "forma_envio",
+    "tipo_relatorio"
+   ],
+   "entregaveis": [
+    "Balanço Anual (DCA)",
+    "MSC Agregada",
+    "MSC Encerramento",
+    "Relatório Resumido de Execução Orçamentária",
+    "Relatório de Gestão Fiscal"
+   ],
+   "periodos": [
+    "1",
+    "10",
+    "11",
+    "12",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9"
+   ]
+  },
+  {
+   "id": "rreo_32_3_12",
+   "nome": "RREO Anexo 12 ES bim 3",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=3&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+12&id_ente=32",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 548,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 611,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_32_3_08",
+   "nome": "RREO Anexo 08 ES bim 3",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=3&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+08&id_ente=32",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 152,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 611,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_32_5_12",
+   "nome": "RREO Anexo 12 ES bim 5",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=5&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+12&id_ente=32",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 399,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 611,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_32_5_08",
+   "nome": "RREO Anexo 08 ES bim 5",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=5&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+08&id_ente=32",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 159,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 611,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3205309_3_12",
+   "nome": "RREO Anexo 12 Vitoria bim 3",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=3&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+12&id_ente=3205309",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 473,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3205309_3_08",
+   "nome": "RREO Anexo 08 Vitoria bim 3",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=3&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+08&id_ente=3205309",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 154,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3205309_5_12",
+   "nome": "RREO Anexo 12 Vitoria bim 5",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=5&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+12&id_ente=3205309",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 376,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3205309_5_08",
+   "nome": "RREO Anexo 08 Vitoria bim 5",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=5&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+08&id_ente=3205309",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 399,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3550308_3_12",
+   "nome": "RREO Anexo 12 Sao Paulo bim 3",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=3&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+12&id_ente=3550308",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 520,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3550308_3_08",
+   "nome": "RREO Anexo 08 Sao Paulo bim 3",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=3&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+08&id_ente=3550308",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 393,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3550308_5_12",
+   "nome": "RREO Anexo 12 Sao Paulo bim 5",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=5&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+12&id_ente=3550308",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 173,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3550308_5_08",
+   "nome": "RREO Anexo 08 Sao Paulo bim 5",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=5&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+08&id_ente=3550308",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 386,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3202900_3_12",
+   "nome": "RREO Anexo 12 Irupi (pequeno) bim 3",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=3&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+12&id_ente=3202900",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 411,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3202900_3_08",
+   "nome": "RREO Anexo 08 Irupi (pequeno) bim 3",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=3&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+08&id_ente=3202900",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 375,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3202900_5_12",
+   "nome": "RREO Anexo 12 Irupi (pequeno) bim 5",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=5&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+12&id_ente=3202900",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 373,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_3202900_5_08",
+   "nome": "RREO Anexo 08 Irupi (pequeno) bim 5",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=5&co_tipo_demonstrativo=RREO&no_anexo=RREO-Anexo+08&id_ente=3202900",
+   "metodo": "GET",
+   "nota": "busca do anexo de saude",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 382,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 621,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 0,
+   "total_itens": 0
+  },
+  {
+   "id": "rreo_simplificado",
+   "nome": "RREO simplificado (Irupi, bim 6)",
+   "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&nr_periodo=6&co_tipo_demonstrativo=RREO+Simplificado&id_ente=3202900",
+   "metodo": "GET",
+   "nota": "",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 995,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 652078,
+   "campos": [
+    "items",
+    "hasMore",
+    "limit",
+    "offset",
+    "count",
+    "links"
+   ],
+   "registros": 1678,
+   "total_itens": 1678,
+   "anexos_encontrados": [
+    "RREO-Anexo 01",
+    "RREO-Anexo 02",
+    "RREO-Anexo 03",
+    "RREO-Anexo 06",
+    "RREO-Anexo 07",
+    "RREO-Anexo 09",
+    "RREO-Anexo 11",
+    "RREO-Anexo 14"
+   ]
+  },
+  {
+   "id": "ckan_indicadores",
+   "nome": "Dados Abertos SUS: indicadores de desempenho SISAB (recursos)",
+   "url": "https://dadosabertos.saude.gov.br/dataset/indicadores_desempenho_sisab",
+   "metodo": "GET",
+   "recursos": [
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/02d7f831-06f1-493e-8cd8-c783ded4442d",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicador_desempenho/xml/sisab_indicador_desempenho_2024Q2.xml.zip"
+     ],
+     "tamanho_bytes": "1448391",
+     "ultima_modificacao": "Wed, 01 Oct 2025 21:16:42 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/057d2401-5cc6-4810-9e30-598ffd9663d8",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": []
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/0ecc907c-a29f-4d03-b89e-9193efd955e1",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": []
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/2860bd30-a353-498a-9be4-ecf01861748b",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicador_desempenho/json/sisab_indicador_desempenho_2024Q2.json.zip"
+     ],
+     "tamanho_bytes": "2041195",
+     "ultima_modificacao": "Wed, 01 Oct 2025 21:16:41 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/2d005a24-b590-404d-9135-0ad51c29e45e",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicador_desempenho/xml/sisab_indicador_desempenho_2024Q1.xml.zip"
+     ],
+     "tamanho_bytes": "2195382",
+     "ultima_modificacao": "Wed, 01 Oct 2025 21:16:33 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/52046b1d-7240-4f84-ac9c-b7d50ff65182",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": []
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/571ea9bf-f0f5-487c-bf54-4a4463620fbc",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": []
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/6c2421cf-7019-402d-9f8d-e21e4265da44",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicador_desempenho/xml/sisab_indicador_desempenho_2024Q3.xml.zip"
+     ],
+     "tamanho_bytes": "2208328",
+     "ultima_modificacao": "Wed, 01 Oct 2025 21:17:04 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/6f26beab-97ab-48f7-b79b-2aca7dad95f2",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicador_desempenho/json/sisab_indicador_desempenho_2024Q1.json.zip"
+     ],
+     "tamanho_bytes": "2037439",
+     "ultima_modificacao": "Wed, 01 Oct 2025 21:16:32 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/76c4710b-18cd-49f9-a856-4604f3890434",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": []
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/8c681cd0-34d1-45e1-a272-4784bc836d1b",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicador_desempenho/csv/sisab_indicador_desempenho_2024Q3.csv.zip"
+     ],
+     "tamanho_bytes": "1655760",
+     "ultima_modificacao": "Wed, 01 Oct 2025 21:17:03 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/8ee86300-b108-4784-ac52-76bc6e6f0eb1",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/sisab/indicadores_desempenho/PDA_2024_2026_etapa_1__dicionario_de_dados_indicadores_desempenho.xlsx"
+     ],
+     "tamanho_bytes": "24871",
+     "ultima_modificacao": "Fri, 19 Sep 2025 19:42:57 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/9326d2fc-eb8f-4e9b-b03f-010dd68eea6b",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": []
+    },
+    {
+     "pagina": "/dataset/indicadores_desempenho_sisab/resource/a75ea768-b773-4190-9766-f6c4d20bc4d6",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": []
+    }
+   ],
+   "ms": 1204,
+   "total_recursos_na_pagina": 14,
+   "ok": true
+  },
+  {
+   "id": "ckan_leitos",
+   "nome": "Dados Abertos SUS: hospitais e leitos (recursos)",
+   "url": "https://dadosabertos.saude.gov.br/dataset/hospitais-e-leitos",
+   "metodo": "GET",
+   "recursos": [
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/008344c7-89e8-40a9-93ee-ae1d8beb364a",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/xml/Leitos_2018.xml.zip"
+     ],
+     "tamanho_bytes": "2249471",
+     "ultima_modificacao": "Thu, 23 Jan 2025 17:57:58 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/012bbfb3-fee5-4b19-8803-439bb1e99aae",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/xml/Leitos_2021.xml.zip"
+     ],
+     "tamanho_bytes": "2367645",
+     "ultima_modificacao": "Thu, 23 Jan 2025 17:58:00 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/0972294a-bbaf-42dd-a64c-e7ef8155970d",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2012.json.zip"
+     ],
+     "tamanho_bytes": "1579987",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:06 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/0c8ee5d3-e419-4332-b8bb-e95ae2b0819b",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2013.json.zip"
+     ],
+     "tamanho_bytes": "1559939",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:07 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/0d125413-1b24-4765-9606-52d8c098c2ab",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/json/Leitos_2011.json.zip"
+     ],
+     "tamanho_bytes": "1555485",
+     "ultima_modificacao": "Thu, 23 Jan 2025 16:39:06 GMT",
+     "status_download": 200
+    },
+    {
+     "pagina": "/dataset/hospitais-e-leitos/resource/0f5bfff1-f292-4fd8-8314-d827275dfa88",
+     "titulo": "Portal de Dados Abertos do SUS",
+     "arquivos": [
+      "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/Leitos_SUS/Leitos_2018.csv"
+     ],
+     "tamanho_bytes": "24623933",
+     "ultima_modificacao": "Tue, 20 Jun 2023 17:32:14 GMT",
+     "status_download": 200
+    }
+   ],
+   "ms": 1161,
+   "total_recursos_na_pagina": 6,
+   "ok": true
+  },
+  {
+   "id": "nt_conasems_wp",
+   "nome": "CONASEMS: posts sobre nota tecnica (WordPress)",
+   "url": "https://www.conasems.org.br/wp-json/wp/v2/posts?search=nota%20t%C3%A9cnica&per_page=5&_fields=date,link,title",
+   "metodo": "GET",
+   "nota": "candidato: lista com data, titulo e link",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 1033,
+   "tipo": "text/html; charset=utf-8",
+   "tamanho_http": "237273",
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 237273,
+   "inicio": "<!DOCTYPE html><html lang=\"pt-br\"><head><meta charSet=\"utf-8\" data-next-head=\"\"/><meta name=\"viewport\" content=\"width=device-width\" data-next-head=\"\"/><script async=\"\" src=\"https://www.googletagmanage"
+  },
+  {
+   "id": "nt_conass_wp",
+   "nome": "CONASS: posts sobre nota tecnica (WordPress)",
+   "url": "https://www.conass.org.br/wp-json/wp/v2/posts?search=nota%20t%C3%A9cnica&per_page=5&_fields=date,link,title",
+   "metodo": "GET",
+   "nota": "candidato: lista com data, titulo e link",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 1903,
+   "tipo": "application/json; charset=UTF-8",
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": true,
+   "bytes_lidos": 2191,
+   "campos": [
+    "date",
+    "link",
+    "title"
+   ],
+   "registros": 5,
+   "itens": [
+    {
+     "data": "2026-09-30T09:56:14",
+     "titulo": "Conass Informa n. 191/2026 – Publicada Portaria GM n. 12.252 que dispõe sobre as regras relativas a emendas in",
+     "link": "https://www.conass.org.br/conass-informa-n-191-2026-publicada-portaria-gm-n-12-252-que-dispoe-sobre-as-regras-relativas-a-emendas-individuais-de-bancada-estadual-de-comissao-permanente-do-senado-federal-da-camar/"
+    },
+    {
+     "data": "2026-09-18T14:21:24",
+     "titulo": "Conass Informa n. 173/2026 – Publicada Portaria GM n. 12.137 que altera a Portaria de Consolidação GM/MS nº 5/",
+     "link": "https://www.conass.org.br/conass-informa-n-172-2026-publicada-portaria-gm-n-12-137-que-altera-a-portaria-de-consolidacao-gm-ms-no-5-17-e-substitui-a-portaria-gm-m-n-4-185-22-para-instituir-a-rede-nacio/"
+    },
+    {
+     "data": "2026-08-31T16:40:56",
+     "titulo": "Conass lança Nota Técnica com orientações para redução da mortalidade por sepse",
+     "link": "https://www.conass.org.br/conass-lanca-nota-tecnica-com-orientacoes-para-reducao-da-mortalidade-por-sepse/"
+    },
+    {
+     "data": "2026-08-27T12:06:51",
+     "titulo": "Reunião da CIT destaca integração entre gestores e avança em pactuações para o SUS",
+     "link": "https://www.conass.org.br/reuniao-da-cit-destaca-integracao-entre-gestores-e-avanca-em-pactuacoes-para-o-sus/"
+    },
+    {
+     "data": "2026-08-26T18:21:30",
+     "titulo": "Preparação do SUS para eventos climáticos associados ao El Niño é destaque na Assembleia do Conass",
+     "link": "https://www.conass.org.br/preparacao-do-sus-para-eventos-climaticos-associados-ao-el-nino-e-destaque-na-assembleia-do-conass/"
+    }
+   ]
+  },
+  {
+   "id": "rad_brasil",
+   "nome": "partelli.pro: /fundo/brasil.json",
+   "url": "https://partelli.pro/fundo/brasil.json",
+   "metodo": "GET",
+   "nota": "estrutura do arquivo publicado",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 232,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": "Sat, 31 Oct 2026 16:50:15 GMT",
+   "ok": true,
+   "bytes_lidos": 6642,
+   "campos": [
+    "meta",
+    "uf"
+   ],
+   "registros": null,
+   "chaves_topo": [
+    "meta",
+    "uf"
+   ],
+   "meta": {
+    "gerado": "31/10/2026 13:50",
+    "ufs": 27
+   },
+   "tamanhos": {
+    "meta": 2,
+    "uf": 27
+   }
+  },
+  {
+   "id": "rad_mapa",
+   "nome": "partelli.pro: /gestor/recursos/mapa-brasil.json",
+   "url": "https://partelli.pro/gestor/recursos/mapa-brasil.json",
+   "metodo": "GET",
+   "nota": "estrutura do arquivo publicado",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 253,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": "Fri, 23 Oct 2026 19:41:22 GMT",
+   "ok": true,
+   "bytes_lidos": 63381,
+   "campos": [
+    "fonte",
+    "viewBox",
+    "uf"
+   ],
+   "registros": null,
+   "chaves_topo": [
+    "fonte",
+    "viewBox",
+    "uf"
+   ],
+   "tamanhos": {
+    "uf": 27
+   }
+  },
+  {
+   "id": "rad_radar",
+   "nome": "partelli.pro: /radar/radar.json",
+   "url": "https://partelli.pro/radar/radar.json",
+   "metodo": "GET",
+   "nota": "estrutura do arquivo publicado",
+   "tentativas": 1,
+   "status": 200,
+   "ms": 246,
+   "tipo": "application/json",
+   "tamanho_http": null,
+   "ultima_modificacao": "Wed, 21 Oct 2026 11:03:31 GMT",
+   "ok": true,
+   "bytes_lidos": 50437,
+   "campos": [
+    "atualizado",
+    "portarias",
+    "nacional",
+    "es",
+    "noticias_em"
+   ],
+   "registros": null,
+   "chaves_topo": [
+    "atualizado",
+    "portarias",
+    "nacional",
+    "es",
+    "noticias_em"
+   ],
+   "tamanhos": {
+    "portarias": 80,
+    "nacional": 10,
+    "es": 0
+   }
+  },
+  {
+   "id": "rad_novidades",
+   "nome": "partelli.pro: /gestor/novidades.json",
+   "url": "https://partelli.pro/gestor/novidades.json",
+   "metodo": "GET",
+   "nota": "estrutura do arquivo publicado",
+   "tentativas": 1,
+   "status": 404,
+   "ms": 198,
+   "tipo": null,
+   "tamanho_http": null,
+   "ultima_modificacao": null,
+   "ok": false,
+   "erro": "HTTP 404"
+  }
+ ]
+}
