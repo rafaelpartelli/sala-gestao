@@ -15,6 +15,10 @@ class T(unittest.TestCase):
         self.assertEqual(b["por_uf"]["ES"]["pop_soma"], 860000)
         self.assertTrue(b["municipios"][1]["capital"])
 
+    def test_sigla_da_uf_vem_dos_municipios(self):
+        b = ct.montar([ente("3205309", "Vitoria", "ES", "M"), {"cod_ibge": "32", "ente": "Espirito Santo", "uf": "BR", "esfera": "E", "populacao": 1, "regiao": "SE"}])
+        self.assertEqual(b["ufs"][0]["uf"], "ES")
+
     def test_ignora_codigo_invalido_e_duplicado(self):
         b = ct.montar([ente("320530", "Curto", "ES", "M"), ente("3205309", "A", "ES", "M"), ente("3205309", "A", "ES", "M")])
         self.assertEqual(len(b["municipios"]), 1)

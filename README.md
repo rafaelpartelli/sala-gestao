@@ -7,6 +7,7 @@ Painel para gestores de saúde, alimentado por APIs e bases públicas. Cobertura
 - `robo/sondar_r3.py` (rodada 3): especificações de API (MS e Transferegov), paginação do RREO, teste de 500 municípios no InfoDengue, SINASC, Atenção Primária (indicadores, e-Gestor APS, SISAB) e radar de notas técnicas. Grava `dados/sondagem_r3.json`.
 - Escopo: a sala é para o **gestor de saúde**. Compras e editais (PNCP) ficam no Painel de Editais, voltado ao prestador.
 - A rodada 3 também sonda: Portal da Transparência da União (CSV e API), portais estaduais (ES, SP, PR, MG, PE), FNS e a ligação com os dados já coletados no Radar de Recursos (partelli.pro/gestor/recursos).
+- `robo/sondar_r4.py` (rodada 4): especificações de API (Transferegov, MS, e-Gestor APS), padrão dos arquivos do Portal da Transparência, anexo de saúde do RREO, arquivos dos conjuntos do Dados Abertos SUS, notas técnicas via WordPress e estrutura dos arquivos do Radar de Recursos. Grava `dados/sondagem_r4.json`.
 - `robo/coletar_territorio.py`: base territorial (27 UFs e 5.570 municípios) a partir do SICONFI. Grava `dados/territorio.json`. Roda todo dia 1 às 02:17 (Brasília) e sob demanda.
 - Testes offline em `tests/` (rodam antes de cada coleta).
 - Os módulos só serão construídos sobre as fontes que a sondagem confirmar.

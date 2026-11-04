@@ -35,6 +35,11 @@ def montar(itens):
                          "capital": str(e.get("capital", "")).strip() in ("1", "S", "SIM", "True", "true")}
         elif esfera in ("E", "D") and len(cod) == 2:
             ufs[cod] = {"cod": cod, "nome": e.get("ente"), "uf": e.get("uf"), "regiao": e.get("regiao"), "pop": e.get("populacao")}
+    sigla = {}
+    for m in muni.values():
+        sigla.setdefault(m["cod"][:2], m["uf"])
+    for u in ufs.values():
+        u["uf"] = sigla.get(u["cod"], u["uf"])
     por_uf = {}
     for m in muni.values():
         u = por_uf.setdefault(m["uf"], {"municipios": 0, "pop_soma": 0})
