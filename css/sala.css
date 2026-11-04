@@ -204,3 +204,32 @@ body{padding-bottom:84px}
   .ecg polyline{stroke-dashoffset:0}
 }
 @media print{.rev{opacity:1!important;transform:none!important}.jornada,.toast,.ecg{display:none}}
+
+/* ---------- cabecalho e rodape no padrao do partelli.pro ---------- */
+.topbar{background:#0c326f;position:relative;z-index:30;border-bottom:1px solid rgba(255,255,255,.12)}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+.brand{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:18px;text-decoration:none}
+.brand .flag{flex:none;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.55)}
+.brand span{margin-left:4px}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:6px;font-size:15px;transition:background .2s}
+.nav a:hover{background:rgba(255,255,255,.14)}
+.nav .nav-hl em{display:block;font-style:normal;font-size:11px;opacity:.8;line-height:1.1}
+.nav .nav-cta{background:var(--verde);font-weight:700}
+.nav .nav-cta:hover{background:#127019}
+.menu-btn{display:none;background:transparent;border:1px solid #fff;color:#fff;padding:8px 14px;border-radius:6px;font:inherit;font-size:15px;cursor:pointer;min-height:40px}
+@media (max-width:880px){
+  .menu-btn{display:block}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:#0c326f;flex-direction:column;align-items:stretch;padding:8px 16px 14px;gap:2px;border-bottom:1px solid rgba(255,255,255,.2)}
+  .nav.aberto{display:flex}
+  .nav a{padding:12px}
+}
+.topo{padding-top:24px}
+.rodape{background:#08234f;color:#d5e0f5;border-top:0;padding:30px 0 22px}
+.rodape a{color:#fff}
+.rodape b{color:#fff}
+.rodape .fontes{font-size:.8rem;color:#b8c7e4;max-width:100ch}
+.rodape .lgpd{font-size:.78rem;color:#b8c7e4;max-width:90ch}
+.rodape .copy{font-size:.78rem}
+body{padding-bottom:0}
+.rodape{padding-bottom:100px}

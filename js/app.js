@@ -526,6 +526,8 @@ async function render() {
 (async () => {
   montarFiltros();
   preencherIcones();
+  const mb = $('menuBtn'); mb?.addEventListener('click', () => { const ab = $('nav').classList.toggle('aberto'); mb.setAttribute('aria-expanded', String(ab)); });
+  $('ano').textContent = new Date().getFullYear();
   $('btnLocal').addEventListener('click', usarLocalizacao);
   $('btnSorte').addEventListener('click', surpreender);
   await carregarBase();
