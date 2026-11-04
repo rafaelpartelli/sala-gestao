@@ -1,0 +1,905 @@
+{
+ "gerado_em": "2026-11-04T16:05:43-03:00",
+ "rodada": 8,
+ "consulta": {
+  "id": "siops_consulta",
+  "url": "http://siops.datasus.gov.br/consleirespfiscal.php",
+  "status": 200,
+  "erro": null,
+  "bytes": 44574,
+  "titulo": ". : SIOPS - Consulta de Lei de Responsabil i dade Fisca l.",
+  "formularios": [
+   {
+    "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+    "metodo": "post",
+    "campos": [
+     {
+      "input": "Busca",
+      "tipo": "text",
+      "valor": "Busca"
+     },
+     {
+      "input": "Buscar",
+      "tipo": "button",
+      "valor": "Buscar"
+     }
+    ]
+   },
+   {
+    "acao": "",
+    "metodo": "post",
+    "campos": [
+     {
+      "input": "voltar",
+      "tipo": "button",
+      "valor": "Voltar"
+     },
+     {
+      "input": "BtConsultar",
+      "tipo": "Submit",
+      "valor": "Consultar"
+     },
+     {
+      "select": "cmbAno",
+      "opcoes": 24,
+      "primeiras": [
+       [
+        "2026",
+        "2026"
+       ],
+       [
+        "2025",
+        "2025"
+       ],
+       [
+        "2024",
+        "2024"
+       ],
+       [
+        "2023",
+        "2023"
+       ],
+       [
+        "2022",
+        "2022"
+       ],
+       [
+        "2021",
+        "2021"
+       ]
+      ],
+      "ultimas": [
+       [
+        "2005",
+        "2005"
+       ],
+       [
+        "2004",
+        "2004"
+       ],
+       [
+        "2003",
+        "2003"
+       ]
+      ]
+     },
+     {
+      "select": "cmbUF",
+      "opcoes": 26,
+      "primeiras": [
+       [
+        "12",
+        "Acre"
+       ],
+       [
+        "27",
+        "Alagoas"
+       ],
+       [
+        "16",
+        "Amapá"
+       ],
+       [
+        "13",
+        "Amazonas"
+       ],
+       [
+        "29",
+        "Bahia"
+       ],
+       [
+        "23",
+        "Ceará"
+       ]
+      ],
+      "ultimas": [
+       [
+        "35",
+        "São Paulo"
+       ],
+       [
+        "28",
+        "Sergipe"
+       ],
+       [
+        "17",
+        "Tocantins"
+       ]
+      ]
+     },
+     {
+      "select": "cmbPeriodo",
+      "opcoes": 5,
+      "primeiras": [
+       [
+        "12",
+        "1º Bimestre"
+       ],
+       [
+        "14",
+        "2º Bimestre"
+       ],
+       [
+        "1",
+        "3º Bimestre"
+       ],
+       [
+        "18",
+        "4º Bimestre"
+       ],
+       [
+        "20",
+        "5º Bimestre"
+       ]
+      ],
+      "ultimas": [
+       [
+        "1",
+        "3º Bimestre"
+       ],
+       [
+        "18",
+        "4º Bimestre"
+       ],
+       [
+        "20",
+        "5º Bimestre"
+       ]
+      ]
+     },
+     {
+      "select": "cmbMunicipio[]",
+      "opcoes": 0,
+      "primeiras": [],
+      "ultimas": []
+     }
+    ]
+   }
+  ],
+  "links": [
+   "acompfin.php",
+   "index.php",
+   "leirespfiscal.php",
+   "rel_LRF.php",
+   "relleirespfiscal_2002_1.php",
+   "relleirespfiscal_2002_2.php",
+   "relleirespfiscal_2003_1.php",
+   "relleirespfiscal_2003_2.php",
+   "relleirespfiscal_2004_1.php",
+   "relleirespfiscal_2004_2.php",
+   "relleirespfiscal_2005_1.php",
+   "relleirespfiscal_2005_2.php",
+   "relmun.php"
+  ],
+  "chamadas_php_no_script": [
+   "consleirespfiscal.php?UF="
+  ]
+ },
+ "candidatos": [
+  {
+   "url": "http://siops.datasus.gov.br/rel_LRF.php?S=1&UF=32;&Municipio=320530;&Ano=2025&Periodo=6",
+   "status": 200,
+   "erro": null,
+   "ms": 1577,
+   "bytes": 107911,
+   "titulo": ". : SIOPS - Demonstrativo da Lei de Responsabilidade Fiscal.",
+   "linhas_chave": [
+    "Vitória RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA DEMONSTRATIVO DAS RECEITAS E DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL 1º Bimestre de 2025 Dados Homo",
+    "5º da Lei Complementar 173/2020 77.894.933,00 100.493.060,99 50.970.690,47 50,72 18.825.401,44 18,73 16.407.749,85 16,33 32.145.289,03 TOTAL DAS DESPESAS EXECUTADAS COM RECURSOS PRÓPRIOS (XLIX) 445.59"
+   ],
+   "estrutura": {
+    "formularios": [
+     {
+      "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+      "metodo": "post",
+      "campos": [
+       {
+        "input": "Busca",
+        "tipo": "text",
+        "valor": "Busca"
+       },
+       {
+        "input": "Buscar",
+        "tipo": "button",
+        "valor": "Buscar"
+       }
+      ]
+     }
+    ],
+    "links": [
+     "index.php",
+     "municipio.php",
+     "relmun.php"
+    ]
+   }
+  },
+  {
+   "url": "http://siops.datasus.gov.br/rel_LRF.php?S=1&UF=32;&Municipio=320530;&Ano=2025&Periodo=20",
+   "status": 200,
+   "erro": null,
+   "ms": 1478,
+   "bytes": 108116,
+   "titulo": ". : SIOPS - Demonstrativo da Lei de Responsabilidade Fiscal.",
+   "linhas_chave": [
+    "Vitória RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA DEMONSTRATIVO DAS RECEITAS E DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL 5º Bimestre de 2025 Dados Homo",
+    "5º da Lei Complementar 173/2020 77.894.933,00 122.667.999,20 112.219.203,58 91,48 102.249.317,05 83,35 100.435.563,12 81,88 9.969.886,53 TOTAL DAS DESPESAS EXECUTADAS COM RECURSOS PRÓPRIOS (XLIX) 445."
+   ],
+   "estrutura": {
+    "formularios": [
+     {
+      "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+      "metodo": "post",
+      "campos": [
+       {
+        "input": "Busca",
+        "tipo": "text",
+        "valor": "Busca"
+       },
+       {
+        "input": "Buscar",
+        "tipo": "button",
+        "valor": "Buscar"
+       }
+      ]
+     }
+    ],
+    "links": [
+     "index.php",
+     "municipio.php",
+     "relmun.php"
+    ]
+   }
+  },
+  {
+   "url": "http://siops.datasus.gov.br/rel_LRF.php?S=1&UF=32;&Municipio=320530;&Ano=2025&Periodo=14",
+   "status": 200,
+   "erro": null,
+   "ms": 1006,
+   "bytes": 108020,
+   "titulo": ". : SIOPS - Demonstrativo da Lei de Responsabilidade Fiscal.",
+   "linhas_chave": [
+    "Vitória RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA DEMONSTRATIVO DAS RECEITAS E DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL 2º Bimestre de 2025 Dados Homo",
+    "5º da Lei Complementar 173/2020 77.894.933,00 101.225.671,76 69.623.975,17 68,78 35.431.954,99 35,00 33.962.448,27 33,55 34.192.020,18 TOTAL DAS DESPESAS EXECUTADAS COM RECURSOS PRÓPRIOS (XLIX) 445.59"
+   ],
+   "estrutura": {
+    "formularios": [
+     {
+      "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+      "metodo": "post",
+      "campos": [
+       {
+        "input": "Busca",
+        "tipo": "text",
+        "valor": "Busca"
+       },
+       {
+        "input": "Buscar",
+        "tipo": "button",
+        "valor": "Buscar"
+       }
+      ]
+     }
+    ],
+    "links": [
+     "index.php",
+     "municipio.php",
+     "relmun.php"
+    ]
+   }
+  },
+  {
+   "url": "http://siops.datasus.gov.br/rel_LRF.php?S=1&UF=32;&Municipio=320530;&Ano=2025&Periodo=12",
+   "status": 200,
+   "erro": null,
+   "ms": 1135,
+   "bytes": 107911,
+   "titulo": ". : SIOPS - Demonstrativo da Lei de Responsabilidade Fiscal.",
+   "linhas_chave": [
+    "Vitória RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA DEMONSTRATIVO DAS RECEITAS E DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL 1º Bimestre de 2025 Dados Homo",
+    "5º da Lei Complementar 173/2020 77.894.933,00 100.493.060,99 50.970.690,47 50,72 18.825.401,44 18,73 16.407.749,85 16,33 32.145.289,03 TOTAL DAS DESPESAS EXECUTADAS COM RECURSOS PRÓPRIOS (XLIX) 445.59"
+   ],
+   "estrutura": {
+    "formularios": [
+     {
+      "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+      "metodo": "post",
+      "campos": [
+       {
+        "input": "Busca",
+        "tipo": "text",
+        "valor": "Busca"
+       },
+       {
+        "input": "Buscar",
+        "tipo": "button",
+        "valor": "Buscar"
+       }
+      ]
+     }
+    ],
+    "links": [
+     "index.php",
+     "municipio.php",
+     "relmun.php"
+    ]
+   }
+  },
+  {
+   "url": "http://siops.datasus.gov.br/rel_LRF.php?S=1&UF=32;&Municipio=320530;&Ano=2024&Periodo=6",
+   "status": 200,
+   "erro": null,
+   "ms": 1039,
+   "bytes": 107095,
+   "titulo": ". : SIOPS - Demonstrativo da Lei de Responsabilidade Fiscal.",
+   "linhas_chave": [
+    "Vitória RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA DEMONSTRATIVO DAS RECEITAS E DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL 1º Bimestre de 2024 Dados Homo",
+    "5º da Lei Complementar 173/2020 84.494.727,00 85.666.658,65 43.860.736,16 51,20 4.662.012,73 5,44 3.515.382,09 4,10 39.198.723,43 TOTAL DAS DESPESAS EXECUTADAS COM RECURSOS PRÓPRIOS (XLIX) 398.942.275"
+   ],
+   "estrutura": {
+    "formularios": [
+     {
+      "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+      "metodo": "post",
+      "campos": [
+       {
+        "input": "Busca",
+        "tipo": "text",
+        "valor": "Busca"
+       },
+       {
+        "input": "Buscar",
+        "tipo": "button",
+        "valor": "Buscar"
+       }
+      ]
+     }
+    ],
+    "links": [
+     "index.php",
+     "municipio.php",
+     "relmun.php"
+    ]
+   }
+  },
+  {
+   "url": "http://siops.datasus.gov.br/rel_LRF.php?S=1&UF=32;&Municipio=320530;&Ano=2024&Periodo=20",
+   "status": 200,
+   "erro": null,
+   "ms": 1674,
+   "bytes": 107404,
+   "titulo": ". : SIOPS - Demonstrativo da Lei de Responsabilidade Fiscal.",
+   "linhas_chave": [
+    "Vitória RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA DEMONSTRATIVO DAS RECEITAS E DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL 5º Bimestre de 2024 Dados Homo",
+    "5º da Lei Complementar 173/2020 84.494.727,00 132.243.390,29 111.046.247,26 83,97 90.873.055,46 68,72 87.506.280,13 66,17 20.173.191,80 TOTAL DAS DESPESAS EXECUTADAS COM RECURSOS PRÓPRIOS (XLIX) 398.9"
+   ],
+   "estrutura": {
+    "formularios": [
+     {
+      "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+      "metodo": "post",
+      "campos": [
+       {
+        "input": "Busca",
+        "tipo": "text",
+        "valor": "Busca"
+       },
+       {
+        "input": "Buscar",
+        "tipo": "button",
+        "valor": "Buscar"
+       }
+      ]
+     }
+    ],
+    "links": [
+     "index.php",
+     "municipio.php",
+     "relmun.php"
+    ]
+   }
+  },
+  {
+   "url": "http://siops.datasus.gov.br/rel_LRF.php?S=1&UF=32;&Municipio=320530;&Ano=2024&Periodo=14",
+   "status": 200,
+   "erro": null,
+   "ms": 1126,
+   "bytes": 107254,
+   "titulo": ". : SIOPS - Demonstrativo da Lei de Responsabilidade Fiscal.",
+   "linhas_chave": [
+    "Vitória RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA DEMONSTRATIVO DAS RECEITAS E DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL 2º Bimestre de 2024 Dados Homo",
+    "5º da Lei Complementar 173/2020 75.242.727,00 104.977.932,55 69.950.940,21 66,63 30.572.304,48 29,12 30.277.681,17 28,84 39.378.635,73 TOTAL DAS DESPESAS EXECUTADAS COM RECURSOS PRÓPRIOS (XLIX) 398.94"
+   ],
+   "estrutura": {
+    "formularios": [
+     {
+      "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+      "metodo": "post",
+      "campos": [
+       {
+        "input": "Busca",
+        "tipo": "text",
+        "valor": "Busca"
+       },
+       {
+        "input": "Buscar",
+        "tipo": "button",
+        "valor": "Buscar"
+       }
+      ]
+     }
+    ],
+    "links": [
+     "index.php",
+     "municipio.php",
+     "relmun.php"
+    ]
+   }
+  },
+  {
+   "url": "http://siops.datasus.gov.br/rel_LRF.php?S=1&UF=32;&Municipio=320530;&Ano=2024&Periodo=12",
+   "status": 200,
+   "erro": null,
+   "ms": 1011,
+   "bytes": 107095,
+   "titulo": ". : SIOPS - Demonstrativo da Lei de Responsabilidade Fiscal.",
+   "linhas_chave": [
+    "Vitória RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA DEMONSTRATIVO DAS RECEITAS E DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE ORÇAMENTOS FISCAL E DA SEGURIDADE SOCIAL 1º Bimestre de 2024 Dados Homo",
+    "5º da Lei Complementar 173/2020 84.494.727,00 85.666.658,65 43.860.736,16 51,20 4.662.012,73 5,44 3.515.382,09 4,10 39.198.723,43 TOTAL DAS DESPESAS EXECUTADAS COM RECURSOS PRÓPRIOS (XLIX) 398.942.275"
+   ],
+   "estrutura": {
+    "formularios": [
+     {
+      "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+      "metodo": "post",
+      "campos": [
+       {
+        "input": "Busca",
+        "tipo": "text",
+        "valor": "Busca"
+       },
+       {
+        "input": "Buscar",
+        "tipo": "button",
+        "valor": "Buscar"
+       }
+      ]
+     }
+    ],
+    "links": [
+     "index.php",
+     "municipio.php",
+     "relmun.php"
+    ]
+   }
+  },
+  {
+   "url": "http://siops.datasus.gov.br/consindicadores.php",
+   "status": 200,
+   "erro": null,
+   "ms": 790,
+   "bytes": 44085,
+   "titulo": "SIOPS - Consulta Indicadores",
+   "linhas_chave": [],
+   "estrutura": {
+    "formularios": [
+     {
+      "acao": "http://portalsaude.saude.gov.br/portalsaude/busca",
+      "metodo": "post",
+      "campos": [
+       {
+        "input": "Busca",
+        "tipo": "text",
+        "valor": "Busca"
+       },
+       {
+        "input": "Buscar",
+        "tipo": "button",
+        "valor": "Buscar"
+       }
+      ]
+     },
+     {
+      "acao": "javascript: gerarel();",
+      "metodo": "POST",
+      "campos": [
+       {
+        "input": "Submit",
+        "tipo": "Submit",
+        "valor": "Consultar"
+       },
+       {
+        "select": "cmbAno",
+        "opcoes": 25,
+        "primeiras": [
+         [
+          "2026",
+          "2026"
+         ],
+         [
+          "2025",
+          "2025"
+         ],
+         [
+          "2024",
+          "2024"
+         ],
+         [
+          "2023",
+          "2023"
+         ],
+         [
+          "2022",
+          "2022"
+         ],
+         [
+          "2021",
+          "2021"
+         ]
+        ],
+        "ultimas": [
+         [
+          "2004",
+          "2004"
+         ],
+         [
+          "2003",
+          "2003"
+         ],
+         [
+          "2002",
+          "2002"
+         ]
+        ]
+       },
+       {
+        "select": "cmbUF",
+        "opcoes": 27,
+        "primeiras": [
+         [
+          "-1",
+          "Todas UFs"
+         ],
+         [
+          "12",
+          "Acre"
+         ],
+         [
+          "27",
+          "Alagoas"
+         ],
+         [
+          "16",
+          "Amapá"
+         ],
+         [
+          "13",
+          "Amazonas"
+         ],
+         [
+          "29",
+          "Bahia"
+         ]
+        ],
+        "ultimas": [
+         [
+          "35",
+          "São Paulo"
+         ],
+         [
+          "28",
+          "Sergipe"
+         ],
+         [
+          "17",
+          "Tocantins"
+         ]
+        ]
+       },
+       {
+        "select": "cmbPeriodo",
+        "opcoes": 5,
+        "primeiras": [
+         [
+          "12",
+          "1º Bimestre"
+         ],
+         [
+          "14",
+          "2º Bimestre"
+         ],
+         [
+          "1",
+          "3º Bimestre"
+         ],
+         [
+          "18",
+          "4º Bimestre"
+         ],
+         [
+          "20",
+          "5º Bimestre"
+         ]
+        ],
+        "ultimas": [
+         [
+          "1",
+          "3º Bimestre"
+         ],
+         [
+          "18",
+          "4º Bimestre"
+         ],
+         [
+          "20",
+          "5º Bimestre"
+         ]
+        ]
+       },
+       {
+        "select": "cmbMunicipio[]",
+        "opcoes": 1,
+        "primeiras": [
+         [
+          "-1",
+          "Todos municípios"
+         ]
+        ],
+        "ultimas": [
+         [
+          "-1",
+          "Todos municípios"
+         ]
+        ]
+       },
+       {
+        "select": "cmbTipoIndicador",
+        "opcoes": 5,
+        "primeiras": [
+         [
+          "2",
+          "Prev. Atualizada / Dotação Atualizada"
+         ],
+         [
+          "4",
+          "Receita Realizada / Despesa Empenhada"
+         ],
+         [
+          "1",
+          "Receita Realizada / Despesa Liquidada"
+         ],
+         [
+          "5",
+          "Receita Realizada / Despesa Paga"
+         ],
+         [
+          "3",
+          "Receita Orçada / Despesa Orçada próx. an"
+         ]
+        ],
+        "ultimas": [
+         [
+          "1",
+          "Receita Realizada / Despesa Liquidada"
+         ],
+         [
+          "5",
+          "Receita Realizada / Despesa Paga"
+         ],
+         [
+          "3",
+          "Receita Orçada / Despesa Orçada próx. an"
+         ]
+        ]
+       }
+      ]
+     }
+    ],
+    "links": [
+     "index.php",
+     "indicamun.php",
+     "municipio.php"
+    ],
+    "chamadas_php_no_script": [
+     "consindicadores.php?UF="
+    ]
+   }
+  },
+  {
+   "url": "http://siops.datasus.gov.br/consleiresp.php",
+   "status": 404,
+   "erro": "HTTP 404",
+   "ms": 762
+  },
+  {
+   "url": "http://siops.datasus.gov.br/conssiops.php",
+   "status": 404,
+   "erro": "HTTP 404",
+   "ms": 439
+  },
+  {
+   "url": "http://siops.datasus.gov.br/relatorios.php",
+   "status": 404,
+   "erro": "HTTP 404",
+   "ms": 269
+  },
+  {
+   "url": "http://siops.datasus.gov.br/indicadores.php",
+   "status": 404,
+   "erro": "HTTP 404",
+   "ms": 940
+  }
+ ],
+ "downloads": [
+  {
+   "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/indicadores",
+   "status": 200,
+   "erro": null,
+   "links_download": [],
+   "links_siops": [
+    "http://portalsaudeadm.saude.gov/portais/portalsaude/index.php/o-ministerio/principal/siops/mais-sobre-siops/6161-indicadores-uniao-consultar-por-ano",
+    "http://portalsaudeadm.saude.gov/portais/portalsaude/index.php/o-ministerio/principal/siops/mais-sobre-siops/6162-indicadores-uniao-consultar-por-fase-da-despesa",
+    "http://portalsaudeadm.saude.gov/portais/portalsaude/index.php/o-ministerio/principal/siops/mais-sobre-siops/6166-indicadores-estados-e-distrito-federal-consultar-por-fase-de-despesa",
+    "http://portalsaudeadm.saude.gov/portais/portalsaude/index.php/o-ministerio/principal/siops/mais-sobre-siops/6700-indicadores-municipios-consultas-fases-das-despesas",
+    "http://siops-asp.datasus.gov.br/cgi/siops/serhist/MUNICIPIO/indicadores.HTM",
+    "http://siops-asp.datasus.gov.br/cgi/tabcgi.exe?SIOPS/SerHist/ESTADO/indicdf.def",
+    "http://siops-asp.datasus.gov.br/cgi/tabcgi.exe?SIOPS/SerHist/ESTADO/indicuf.def",
+    "http://siops.datasus.gov.br/relUN.php?acao=6",
+    "http://siops.datasus.gov.br/relindicadoresmun2.php?escmun=3",
+    "http://siops.datasus.gov.br/relindicadoresuf.php?escuf=3",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/indicadores",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/indicadores/indicadores",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/indicadores/indicadores/",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/indicadores/notas-tecnicas"
+   ]
+  },
+  {
+   "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes",
+   "status": 200,
+   "erro": null,
+   "links_download": [],
+   "links_siops": [
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes/boletins",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes/comunicados",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes/manuais",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes/notas-tecnicas",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes/publicacoes",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes/publicacoes-secretaria-especial-do-tesouro-nacional",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes/publicacoes/"
+   ]
+  },
+  {
+   "url": "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops",
+   "status": 200,
+   "erro": null,
+   "links_download": [],
+   "links_siops": [
+    "/saude/pt-br/acesso-a-informacao/siops/contatos",
+    "/saude/pt-br/acesso-a-informacao/siops/faq",
+    "http://siops.datasus.gov.br/bim_sistema.php",
+    "http://siops.datasus.gov.br/login.php",
+    "http://siops.datasus.gov.br/mce_loginCd.php",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/certificado-digital",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/demonstrativos-e-dados-informados",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/entrega-de-dados",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/historico-de-institucionalizacao-do-siops",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/implicacoes-legais",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/indicadores",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/legislacao",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/medidas-preliminares-e-regularizacao",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/publicacoes",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/siops",
+    "https://www.gov.br/saude/pt-br/acesso-a-informacao/siops/siops/"
+   ]
+  },
+  {
+   "url": "http://siops.datasus.gov.br/",
+   "status": 200,
+   "erro": null,
+   "links_download": [],
+   "links_siops": []
+  }
+ ],
+ "tabnet_180s": {
+  "url": "http://siops-asp.datasus.gov.br/CGI/deftohtm.exe?SIOPS/serhist/municipio/mIndicadores.def",
+  "status": 200,
+  "erro": null,
+  "ms": 4962,
+  "bytes": 284631,
+  "estrutura": {
+   "formularios": [
+    {
+     "acao": null,
+     "metodo": "GET",
+     "campos": [
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      },
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      },
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      },
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      },
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      },
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      },
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      },
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      },
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      },
+      {
+       "select": null,
+       "opcoes": 0,
+       "primeiras": [],
+       "ultimas": []
+      }
+     ]
+    }
+   ],
+   "links": [],
+   "chamadas_php_no_script": []
+  }
+ }
+}
