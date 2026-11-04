@@ -8,35 +8,40 @@
 <meta property="og:title" content="Sala de Gestão Estratégica em Saúde">
 <meta property="og:description" content="Dados públicos de saúde dos 5.570 municípios brasileiros em um só painel, com a fonte e a data de cada informação.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231351B4'/%3E%3Cpath d='M14 7h4v7h7v4h-7v7h-4v-7H7v-4h7z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:url" content="https://partelli.pro/gestor/sala/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="canonical" href="https://partelli.pro/gestor/sala/">
 <meta name="theme-color" content="#0c326f">
-<link rel="stylesheet" href="css/sala.css?v=6">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="css/sala.css?v=9">
 </head>
 <body>
 <noscript><p class="sem-js">Este painel precisa de JavaScript para carregar os dados.</p></noscript>
 <a class="pular" href="#conteudo">Ir para o conteúdo</a>
 <header class="topbar">
   <div class="miolo topbar-in">
-    <a class="brand" href="https://partelli.pro/" aria-label="Rafael Partelli, página inicial"><svg class="flag" viewBox="0 0 30 21" width="30" height="21" aria-hidden="true" focusable="false" style="margin-right:-4px"><rect width="30" height="21" fill="#009C3B"/><path d="M2.5 10.5L15 2.4L27.5 10.5L15 18.6Z" fill="#FFDF00"/><circle cx="15" cy="10.5" r="5.1" fill="#002776"/><path d="M9.95 11.9Q14.6 8.7 20.05 9.3" fill="none" stroke="#fff" stroke-width="1"/></svg><svg class="flag" viewBox="0 0 30 21" width="30" height="21" aria-hidden="true" focusable="false"><rect width="30" height="7" fill="#4C93D6"/><rect y="7" width="30" height="7" fill="#fff"/><rect y="14" width="30" height="7" fill="#F1A7BF"/><path d="M9 11.6Q15 8.4 21 11.6" fill="none" stroke="#2F6DB5" stroke-width="1.3" stroke-linecap="round"/></svg><span>Rafael Partelli</span></a>
+    <a class="brand" href="/" aria-label="Rafael Partelli, início"><svg class="flag" viewBox="0 0 30 21" width="30" height="21" aria-hidden="true" focusable="false" style="margin-right:-4px"><rect width="30" height="21" fill="#009C3B"/><path d="M2.5 10.5L15 2.4L27.5 10.5L15 18.6Z" fill="#FFDF00"/><circle cx="15" cy="10.5" r="5.1" fill="#002776"/><path d="M9.95 11.9Q14.6 8.7 20.05 9.3" fill="none" stroke="#fff" stroke-width="1"/></svg><svg class="flag" viewBox="0 0 30 21" width="30" height="21" aria-hidden="true" focusable="false"><rect width="30" height="7" fill="#4C93D6"/><rect y="7" width="30" height="7" fill="#fff"/><rect y="14" width="30" height="7" fill="#F1A7BF"/><path d="M9 11.6Q15 8.4 21 11.6" fill="none" stroke="#2F6DB5" stroke-width="1.3" stroke-linecap="round"/></svg><span>Rafael Partelli</span></a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav id="nav" class="nav" aria-label="Principal">
-      <a class="nav-hl" href="https://partelli.pro/gestor/">Área do Gestor <em>Guias e Radar</em></a>
-      <a href="https://partelli.pro/gestor/recursos/">Radar de Recursos</a>
-      <a href="https://partelli.pro/#servicos">Serviços</a>
-      <a href="https://partelli.pro/reuniao/">Reunião online</a>
-      <a class="nav-cta" href="https://partelli.pro/#contato">Falar comigo</a>
+      <a class="nav-hl" href="/gestor/">Área do Gestor <em>Guias e Radar</em></a>
+      <a href="/">Início</a>
+      <a href="/profissionais/">Para profissionais</a>
+      <a href="/cidadao/">Para o cidadão</a>
+      <a href="/gestor/radar/">Radar Saúde</a>
+      <a class="nav-reuniao" href="/reuniao/" aria-label="Reunião online" title="Reunião online"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10.5 22 7v10l-6-3.5z"/></svg><span class="nr-t">Reunião online</span></a>
+      <a class="nav-cta" href="/#contato">Falar comigo</a>
     </nav>
   </div>
 </header>
-<header class="topo">
+<div class="topo">
   <div class="miolo">
-    <p class="marca">Painel nacional do gestor de saúde</p>
+    <p class="crumb"><a href="/">Início</a> &#8250; <a href="/gestor/">Área do Gestor</a> &#8250; Sala de Gestão Estratégica</p>
+    <p class="upd" id="upd" role="status">Carregando dados...</p>
     <h1>Sala de Gestão Estratégica em Saúde</h1>
     <p class="lead">Situação da saúde nos 27 estados e 5.570 municípios, a partir de bases públicas. Cada bloco mostra a fonte e a data da última coleta.</p>
     <p class="convite" data-ico="trilha" data-tam="18">Faça a jornada: visite cada parada, libere as descobertas e compare o seu território com o Brasil.</p>
   </div>
-  <svg class="ecg" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><polyline points="0,30 80,30 100,30 112,8 126,52 140,18 152,30 260,30 290,30 302,8 316,52 330,18 342,30 450,30 480,30 492,8 506,52 520,18 532,30 600,30"/></svg>
-</header>
+</div>
 
 <nav class="filtros" aria-label="Escolha do território">
   <div class="miolo filtros-linha">
@@ -150,17 +155,23 @@
   </section>
 </main>
 
-<footer class="rodape">
-  <div class="miolo">
+<div class="miolo">
+  <aside class="cta-box" aria-labelledby="h-cta">
+    <h2 id="h-cta">Quer usar estes números no planejamento do seu município ou da sua instituição?</h2>
+    <p>Apoio a secretarias, hospitais e organizações da sociedade civil para transformar planos em execução e execução em resultado.</p>
+    <a href="/#contato">Falar comigo</a>
+  </aside>
+</div>
+<footer class="rodape footer">
+  <div class="miolo foot-in">
     <p><b>Rafael Tartaglias Partelli</b> · Administrador · CRA/ES 15721 · Espírito Santo</p>
-    <p><a href="https://partelli.pro/">partelli.pro</a> · <a href="https://www.linkedin.com/in/rafael-partelli-103a7728" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.instagram.com/rafaelpartelli" target="_blank" rel="noopener">Instagram</a> · <a href="#privacidade">Aviso de privacidade</a></p>
-    <p><a href="https://partelli.pro/gestor/">Área do Gestor</a> · <a href="https://partelli.pro/gestor/recursos/">Radar de Recursos</a> · <a href="https://partelli.pro/#contato">Falar comigo</a></p>
+    <p><a href="/">Página inicial</a> · <a href="/profissionais/">Para profissionais de saúde</a> · <a href="/cidadao/">Para o cidadão</a> · <a href="/gestor/recursos/">Radar de Recursos</a> · <a href="/#privacidade">Aviso de privacidade</a></p>
     <p class="fontes">Dados públicos: IBGE e SICONFI (território e despesa), InfoDengue, CNES e Dados Abertos do SUS, InvestSUS (FNS), Portal da Transparência, CAUC (Tesouro Nacional), ANS, CONASS, Ministério da Saúde e DOU. Mapa dos estados: <a href="https://github.com/VictorCazanave/svg-maps" rel="noopener">@svg-maps/brazil</a>, de Victor Cazanave, licença <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>. Malhas municipais: IBGE.</p>
-    <p id="privacidade" class="lgpd">Aviso de privacidade (LGPD): este painel usa somente dados públicos e agregados, não usa cookies de rastreamento e não grava dados pessoais. O andamento da sua jornada fica guardado só no seu navegador. A localização, quando você permite, é usada no seu aparelho para achar o município e não é enviada nem gravada. Para solicitar informações, escreva para rafael@partelli.pro.</p>
+    <p id="privacidade" class="lgpd">Este painel não usa cookies de rastreamento e não grava dados pessoais. O andamento da sua jornada fica guardado só no seu navegador. A localização, quando você permite, é usada no seu aparelho para achar o município e não é enviada nem gravada. Para solicitar informações ou exclusão, escreva para rafael@partelli.pro.</p>
     <p class="copy">© <span id="ano">2026</span> Rafael Partelli. Todos os direitos reservados.</p>
   </div>
 </footer>
 <aside id="jornada" class="jornada" aria-label="Sua jornada pela Sala"></aside>
-<script type="module" src="js/app.js?v=4"></script>
+<script type="module" src="js/app.js?v=6"></script>
 </body>
 </html>

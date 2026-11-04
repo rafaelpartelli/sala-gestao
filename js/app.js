@@ -46,6 +46,9 @@ async function carregarBase() {
   const fontes = chaves.filter(k => k !== 'terr');
   const n = fontes.filter(k => D[k]).length;
   $('selo').textContent = `Fontes com dados: ${n} de ${fontes.length}. Cada bloco mostra a data da sua coleta.`;
+  const datas = fontes.map(k => D[k]?.gerado_em || D[k]?.baixado_em || D[k]?.atualizado).filter(Boolean).sort();
+  const ult = datas[datas.length - 1], idade = dias(ult), upd = limpar($('upd'));
+  upd.append(...[el('span', null, `Atualizado em ${dataBR(ult)}`), el('span', {class: 'sub'}, `${n} de ${fontes.length} fontes com dados`), idade >= 2 ? el('span', {class: 'idade'}, `há ${idade} dias`) : null].filter(Boolean));
 }
 
 function montarFiltros() {
