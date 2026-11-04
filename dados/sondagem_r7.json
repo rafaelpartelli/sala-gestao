@@ -34,7 +34,7 @@
      "erro": null,
      "tipo": "application/json; charset=utf-8",
      "ms": 1229,
-     "inicio": "{\"name\":\"proddf0220\",\"uuid\":\"f3ef5883-0c7f-448e-b685-6a5684ec3e5c\",\"version\":{\"number\":\"8.8.2\",\"build_hash\":\"c7c074756dcb999f9fdf4c153c5445a00653fa44\",\"build_nu"
+     "inicio": "(omitido)"
     },
     "kibana_dashboards": {
      "status": 200,
@@ -48,7 +48,7 @@
      "erro": null,
      "tipo": "application/json; charset=utf-8",
      "ms": 1511,
-     "inicio": "[{\"id\":\"mrmq0fpl08u65957f57869sj\",\"index\":\".reporting-2026-07-12\",\"kibana_name\":\"proddf0220\",\"kibana_id\":\"f3ef5883-0c7f-448e-b685-6a5684ec3e5c\",\"jobtype\":\"csv_s"
+     "inicio": "(omitido)"
     },
     "bsearch_lote_vazio": {
      "url": "https://elasticnes.saude.gov.br/kibana/internal/bsearch",
