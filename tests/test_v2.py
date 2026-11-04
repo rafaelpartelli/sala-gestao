@@ -54,7 +54,7 @@ class Equipes(unittest.TestCase):
                 {"CNES": "1", "CODUFMUN": "320530", "TIPO_EQP": "70", "IDEQUIPE": "0000000001", "ID_AREA": "", "DT_DESAT": ""},   # repetida
                 {"CNES": "1", "CODUFMUN": "320530", "TIPO_EQP": "71", "IDEQUIPE": "0000000002", "ID_AREA": "", "DT_DESAT": "      "},
                 {"CNES": "1", "CODUFMUN": "320530", "TIPO_EQP": "70", "IDEQUIPE": "0000000003", "ID_AREA": "", "DT_DESAT": "202501"},  # desativada
-                {"CNES": "9", "CODUFMUN": "320530", "TIPO_EQP": "76", "IDEQUIPE": "", "ID_AREA": "A1", "DT_DESAT": ""},
+                {"CNES": "9", "CODUFMUN": "320530", "TIPO_EQP": "76", "IDEQUIPE": "", "ID_AREA": "A1", "DT_DESAT": "900001"},  # codigo de ativa
                 {"CNES": "9", "CODUFMUN": "888888", "TIPO_EQP": "70", "IDEQUIPE": "5", "ID_AREA": "", "DT_DESAT": ""}]
         por, lidos, sem, inat = eq.agregar(regs, MAPA6)
         self.assertEqual(por, {"3205309": {"70": 1, "71": 1, "76": 1}})

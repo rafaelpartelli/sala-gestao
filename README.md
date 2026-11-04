@@ -25,6 +25,9 @@ Coletores em Python (somente biblioteca padrão) rodam no GitHub Actions, gravam
 
 Os workflows ficam em `.github/workflows/`. Segredo necessário: `PORTAL_TRANSPARENCIA_KEY` (só para emendas). A chave nunca vai no código.
 
+## CNES: natureza, hospitais e equipamentos
+O coletor da rede (`coletar_rede.py`) classifica os estabelecimentos pela natureza jurídica (pública, privada com fins lucrativos, privada sem fins lucrativos, que inclui as filantrópicas) e grava a lista de hospitais ativos em `dados/hospitais/<UF>.json`. O coletor `coletar_equipamentos.py` lê os arquivos EQ do FTP do DATASUS e grava `dados/equipamentos.json`. O CNES não informa o CEBAS, então filantrópico aqui significa privado sem fins lucrativos.
+
 ## Agenda (fila diária às 02:35)
 O workflow "Coleta diaria (02:35)" (`sondar.yml`) roda todo dia às 02:35 de Brasília (05:35 UTC) e chama os demais em fila, um após o outro: base territorial (só dia 1), notas, emendas, financiamento (com CAUC e transferências), dengue (com chikungunya), CNES (só segunda) e Atenção Primária, ANS e despesa (só dia 1). Se uma etapa falhar, as seguintes continuam. Cada workflow continua disponível para execução manual (Run workflow). A coluna "Agenda" da tabela acima vale para a periodicidade da fonte, e o horário é sempre o da fila.
 

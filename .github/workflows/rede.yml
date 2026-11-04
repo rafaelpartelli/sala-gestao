@@ -1,4 +1,4 @@
-name: Coletar rede, leitos, profissionais e equipes (CNES)
+name: Coletar rede, leitos, equipes, equipamentos e profissionais (CNES)
 
 on:
   workflow_dispatch:
@@ -31,6 +31,9 @@ jobs:
       - name: Coletar equipes
         if: always()
         run: python3 robo/coletar_equipes.py
+      - name: Coletar equipamentos
+        if: always()
+        run: python3 robo/coletar_equipamentos.py
       - name: Coletar profissionais
         if: always()
         run: python3 robo/coletar_profissionais.py

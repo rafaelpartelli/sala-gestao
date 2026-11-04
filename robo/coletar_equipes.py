@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Equipes de saude ativas por municipio e tipo (CNES, arquivos EP do FTP do DATASUS).
-Conta equipes distintas (IDEQUIPE, o INE) com data de desativacao em branco. Nao guarda nomes de equipes nem de profissionais.
+Conta equipes distintas (IDEQUIPE, o INE) sem data de desativacao (campo em branco ou codigo 900001). Nao guarda nomes de equipes nem de profissionais.
 Saida: dados/equipes.json."""
 import os, sys
 import cnes_ftp, dbc
@@ -11,12 +11,17 @@ TIPOS = {"70": "Saúde da Família (eSF e variantes, inclui eACS)", "71": "Saúd
          "74": "Atenção Primária Prisional (eAPP)", "76": "Atenção Primária (eAP)"}
 CAMPOS = ["CNES", "CODUFMUN", "TIPO_EQP", "IDEQUIPE", "ID_AREA", "DT_DESAT"]
 
+def desativada(valor):
+    """DT_DESAT vem em branco ou com o codigo 900001 (sem desativacao) nas equipes ativas; data AAAAMM (ex.: 202307) indica desativada."""
+    v = (valor or "").strip()
+    return bool(v) and not v.startswith("9")
+
 def agregar(registros, mapa6):
     """Devolve ({cod7: {tipo: n}}, lidos, sem_municipio, inativas)."""
     vistos, por, lidos, sem, inativas = set(), {}, 0, 0, 0
     for r in registros:
         lidos += 1
-        if (r.get("DT_DESAT") or "").strip():
+        if desativada(r.get("DT_DESAT")):
             inativas += 1
             continue
         cod = mapa6.get((r.get("CODUFMUN") or "")[:6])

@@ -34,7 +34,7 @@ const semana = se => se ? `${String(se).slice(4)}/${String(se).slice(0, 4)}` : '
 
 // ---------- carga ----------
 const ARQUIVOS = {terr: 'dados/territorio.json', dengueRes: 'dados/dengue_resumo.json', chikRes: 'dados/chikungunya_resumo.json', redeRes: 'dados/rede_resumo.json',
-  profRes: 'dados/profissionais_resumo.json', equipes: 'dados/equipes.json', leitos: 'dados/leitos.json', fin: 'dados/financiamento.json', em: 'dados/emendas.json',
+  profRes: 'dados/profissionais_resumo.json', equipes: 'dados/equipes.json', equip: 'dados/equipamentos.json', leitos: 'dados/leitos.json', fin: 'dados/financiamento.json', em: 'dados/emendas.json',
   transf: 'dados/transferencias.json', desp: 'dados/despesa.json', cauc: 'dados/cauc.json', ans: 'dados/ans.json', aps: 'dados/aps_meta.json',
   notas: 'dados/notas.json', port: 'dados/portarias.json'};
 
@@ -107,6 +107,7 @@ async function rResumo() {
 // ---------- dengue ----------
 const dengueUF = uf => uf === 'BR' ? null : carregar(`dados/dengue/${uf}.json`);
 const chikUF = uf => uf === 'BR' ? null : carregar(`dados/chikungunya/${uf}.json`);
+const hospUF = uf => uf === 'BR' ? null : carregar(`dados/hospitais/${uf}.json`);
 const redeUF = uf => uf === 'BR' ? null : carregar(`dados/rede/${uf}.json`);
 
 const rDengue = () => rArbo({nome: 'dengue', res: D.dengueRes, uf: dengueUF, alvo: 'dengue', fonte: 'fonte-dengue'});
@@ -160,15 +161,17 @@ async function rRede() {
   if (!D.redeRes) { fonte.textContent = ''; return indisponivel(alvo); }
   const r = D.redeRes, ufs = ufsAlvo();
   fonte.textContent = `Fonte: ${r.fonte}. Coleta em ${dataBR(r.gerado_em)}. Contagem de estabelecimentos ativos cadastrados, não de leitos nem de equipes.`;
-  let grupos = {}, esfera = {}, ativos = 0, total = 0;
+  let grupos = {}, esfera = {}, nat = {}, gn = {}, ativos = 0, total = 0;
   if (S.mun) {
     const rd = await redeUF(S.uf), m = rd?.m?.[S.mun];
     if (!m) return alvo.append(aviso('Sem estabelecimentos registrados para este município.'));
-    grupos = m.grupos; esfera = m.esfera; ativos = m.ativos; total = m.total;
+    grupos = m.grupos; esfera = m.esfera; nat = m.nat || {}; gn = m.gn || {}; ativos = m.ativos; total = m.total;
   } else {
     ufs.forEach(u => { const x = r.ufs[u]; if (!x) return; ativos += x.ativos; total += x.total;
       for (const [k, v] of Object.entries(x.grupos)) grupos[k] = (grupos[k] || 0) + v;
-      for (const [k, v] of Object.entries(x.esfera)) esfera[k] = (esfera[k] || 0) + v; });
+      for (const [k, v] of Object.entries(x.esfera)) esfera[k] = (esfera[k] || 0) + v;
+      for (const [k, v] of Object.entries(x.nat || {})) nat[k] = (nat[k] || 0) + v;
+      for (const [g, o] of Object.entries(x.gn || {})) for (const [k, v] of Object.entries(o)) { gn[g] = gn[g] || {}; gn[g][k] = (gn[g][k] || 0) + v; } });
   }
   const ord = o => Object.entries(o).sort((a, b) => b[1] - a[1]).map(([nome, v]) => ({nome, valor: v, rotulo: inteiro(v)}));
   alvo.append(el('p', null, `${nomeTerritorio()}: ${inteiro(ativos)} estabelecimentos ativos (${inteiro(total)} cadastrados, incluindo desabilitados).`),
@@ -176,6 +179,56 @@ async function rRede() {
       el('div', null, el('h3', null, 'Por tipo de unidade'), ranking(ord(grupos))),
       el('div', null, el('h3', null, 'Por esfera administrativa'), rosca(ord(esfera).slice(0, 4), {titulo: 'Estabelecimentos por esfera'}))),
     verTabela('Ver em tabela', ['Tipo de unidade', 'Estabelecimentos ativos'], ord(grupos).map(g => [g.nome, g.rotulo]), [1]));
+  await rNatureza(alvo, {nat, gn, ativos});
+  await rHospitais(alvo);
+  rEquipamentos(alvo);
+}
+
+// Natureza juridica: publico, privado com fins lucrativos e privado sem fins lucrativos (inclui filantropicos).
+const NAT = ['Pública', 'Privada com fins lucrativos', 'Privada sem fins lucrativos', 'Pessoa física', 'Outra'];
+async function rNatureza(alvo, {nat, gn, ativos}) {
+  if (!Object.keys(nat).length) return;
+  const pc = (v, t) => t ? pct(v / t, 1) : '';
+  const partes = NAT.filter(n => nat[n]).map(n => ({nome: n, valor: nat[n], rotulo: `${inteiro(nat[n])} (${pc(nat[n], ativos)})`}));
+  const linhas = Object.entries(gn).map(([g, o]) => { const t = Object.values(o).reduce((a, b) => a + b, 0); return [g, ...NAT.slice(0, 3).map(n => inteiro(o[n] || 0)), inteiro(t), pc(o['Pública'] || 0, t)]; })
+    .sort((a, b) => +b[4].replace(/\./g, '') - +a[4].replace(/\./g, ''));
+  alvo.append(el('h3', null, 'Público, privado e filantrópico'),
+    el('div', {class: 'grade2'}, rosca(partes, {titulo: 'Estabelecimentos por natureza', centro: inteiro(ativos)}), ranking(partes)),
+    el('p', {class: 'fonte'}, 'Classificação pela natureza jurídica do CNES. "Privada sem fins lucrativos" inclui as entidades filantrópicas, mas o CNES não informa quais têm o certificado CEBAS.'),
+    verTabela('Tipo de unidade por natureza', ['Tipo de unidade', 'Pública', 'Privada com fins lucrativos', 'Privada sem fins lucrativos', 'Total', '% pública'], linhas, [1, 2, 3, 4, 5]));
+}
+
+// Lista de hospitais do territorio (pessoas juridicas, ativos).
+const TIPO_HOSP = {'05': 'Hospital geral', '07': 'Hospital especializado', '62': 'Hospital-dia'};
+async function rHospitais(alvo) {
+  if (S.uf === 'BR') return;
+  const hu = await hospUF(S.uf);
+  if (!hu) return;
+  let lista = hu.h.filter(h => !S.mun || h[2] === S.mun);
+  if (!lista.length) return;
+  const cont = {};
+  lista.forEach(h => { cont[h[4]] = (cont[h[4]] || 0) + 1; });
+  const resumo = NAT.filter(n => cont[n]).map(n => `${inteiro(cont[n])} ${n.toLowerCase()}`).join(', ');
+  alvo.append(el('h3', null, `Hospitais em ${nomeTerritorio()}`), el('p', null, `${inteiro(lista.length)} hospitais ativos: ${resumo}.`),
+    verTabela(`Ver os hospitais (${inteiro(lista.length)})`, ['Hospital', 'Município', 'Tipo', 'Natureza', 'Atende SUS'], lista.slice(0, 500).map(h => [h[1], nomeMun(h[2]), TIPO_HOSP[h[3]] || 'Hospital', h[4], h[5] ? 'Sim' : 'Não']), []));
+}
+
+// Equipamentos (CNES, arquivos EQ): grupos, disponibilidade ao SUS e participacao por natureza.
+function rEquipamentos(alvo) {
+  const E = D.equip;
+  if (!E) return;
+  const ufs = ufsAlvo(), tipos = E.tipos || {};
+  const acc = {};
+  const somar = (o) => Object.entries(o || {}).forEach(([t, v]) => { const a = acc[t] = acc[t] || [0, 0, 0]; for (let i = 0; i < 3; i++) a[i] += v[i] || 0; });
+  if (S.mun) somar(E.mun?.[S.mun]); else ufs.forEach(u => somar(E.ufs?.[u]));
+  const linhas = Object.entries(acc).filter(([, v]) => v[0]).sort((a, b) => b[1][0] - a[1][0]);
+  if (!linhas.length) return;
+  const tot = linhas.reduce((a, [, v]) => a + v[0], 0), sus = linhas.reduce((a, [, v]) => a + v[2], 0);
+  alvo.append(el('h3', null, 'Equipamentos de saúde'),
+    el('p', null, `${nomeTerritorio()}: ${inteiro(tot)} equipamentos cadastrados, ${pct(sus / tot, 0)} disponíveis ao SUS.`),
+    ranking(linhas.map(([t, v]) => ({nome: tipos[t] || `Grupo ${t}`, valor: v[0], rotulo: `${inteiro(v[0])} (${pct(v[2] / v[0], 0)} SUS)`}))),
+    el('p', {class: 'fonte'}, `Fonte: ${E.fonte}, competência ${E.competencia}. ${E.observacao}`),
+    verTabela('Equipamentos em tabela', ['Grupo', 'Existentes', 'Em uso', 'Disponíveis ao SUS'], linhas.map(([t, v]) => [tipos[t] || `Grupo ${t}`, inteiro(v[0]), inteiro(v[1]), inteiro(v[2])]), [1, 2, 3]));
 }
 
 // ---------- financiamento ----------
