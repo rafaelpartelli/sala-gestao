@@ -1,0 +1,39 @@
+name: Sondar fontes da Sala de Gestao (rodada 3)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sondar-fontes
+  cancel-in-progress: false
+
+jobs:
+  sondar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Testes
+        run: python3 -I -m unittest discover -s tests
+      - name: Sondar (rodada 3)
+        env:
+          PORTAL_TRANSPARENCIA_KEY: ${{ secrets.PORTAL_TRANSPARENCIA_KEY }}
+        run: python3 robo/sondar_r3.py
+      - name: Publicar resultado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dados
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "dados: sondagem rodada 3 $(date -u +%d/%m/%Y\ %H:%M)"
+          for i in 1 2 3; do
+            if git pull --rebase origin main && git push; then exit 0; fi
+            sleep 5
+          done
+          exit 1

@@ -222,8 +222,7 @@ def main():
         fontes.append(sondar("ms_" + caminho.split("?")[0].replace("/", "_"), f"API do MS: {nome}", "https://apidadosabertos.saude.gov.br/" + caminho, nota="caminho candidato"))
     for i, u in enumerate(("https://dadosabertos.saude.gov.br/dataset/hospitais-e-leitos", "https://dadosabertos.saude.gov.br/api/action/package_show?id=hospitais-e-leitos", "https://dadosabertos.saude.gov.br/api/3/action/package_search?q=leitos&rows=3")):
         fontes.append(sondar(f"leitos_{i}", "Hospitais e Leitos (variante %d)" % (i + 1), u, nota="achar a forma de listar os arquivos por competencia"))
-    # 5. Compras, normas, suplementar
-    fontes.append(sondar("pncp_controle", "PNCP propostas abertas (controle, ES)", "https://pncp.gov.br/api/consulta/v1/contratacoes/proposta?dataFinal=" + (datetime.now(BRT) + timedelta(days=180)).strftime("%Y%m%d") + "&uf=ES&pagina=1&tamanhoPagina=10", timeout=60, tentativas=3))
+    # 5. Normas e saude suplementar (compras/PNCP ficam fora: a sala e para o gestor, nao para o prestador)
     fontes.append(sondar("querido_diario", "Querido Diario (busca 'saude', Vitoria)", f"https://api.queridodiario.org.br/gazettes?querystring=saude&territory_ids={VITORIA}&size=1", timeout=45))
     fontes.append(sondar("ans_http", "ANS dados abertos (diretorio PDA)", "https://dadosabertos.ans.gov.br/FTP/PDA/", nota="candidato"))
     # 6. DATASUS FTP: pastas e arquivos mais recentes
