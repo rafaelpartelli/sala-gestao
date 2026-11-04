@@ -68,6 +68,12 @@ export function indicadores(c) {
       uf: u => div(D.desp.ufs[u]?.[2], D.desp.ufs[u]?.[3]),
       mun: async u => porMun(u, m => { const a = D.desp.mun[m.cod]; return a ? div(a[2], a[3]) : null; })});
   }
+  if (D.siopsRes) {
+    const ix = D.siopsRes.campos.indexOf('pct_liquidado');
+    L.push({id: 'siops', ico: 'em', curto: 'Aplicação em saúde', rot: 'Mediana do percentual aplicado em saúde pelos municípios (mínimo de 15%)', rotM: 'Percentual da receita aplicado em saúde (mínimo de 15%)', fmt: v => decimal(v, 1) + '%', fonte: D.siopsRes.fonte,
+      uf: u => D.siopsRes.ufs[u]?.pct_mediano ?? null,
+      mun: async u => { const r = c.siopsUF ? await c.siopsUF(u) : null; if (!r) return null; return porMun(u, m => r.m?.[m.cod]?.anterior?.[ix] ?? null); }});
+  }
   if (D.cauc) {
     L.push({id: 'cauc', ico: 'em', curto: 'CAUC', rot: 'Municípios com pendência no CAUC (%)', rotM: 'Itens com pendência no CAUC (quantidade)', fmt: v => decimal(v, 0) + '%', fmtM: v => decimal(v, 0), fonte: D.cauc.fonte,
       uf: u => { const x = D.cauc.ufs[u]; return x?.municipios ? x.com_pendencia / x.municipios * 100 : null; },

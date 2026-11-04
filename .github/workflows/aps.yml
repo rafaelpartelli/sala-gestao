@@ -14,7 +14,7 @@ concurrency:
 jobs:
   coletar:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -33,11 +33,11 @@ jobs:
         env:
           TRABALHADORES: "6"
         run: python3 robo/coletar_despesa.py
-      - name: Coletar base de calculo dos 15 por cento (DCA I-C)
+      - name: Coletar aplicacao em saude, 15 por cento (SIOPS)
         if: always()
         env:
-          TRABALHADORES: "6"
-        run: python3 robo/coletar_base15.py
+          TRABALHADORES: "8"
+        run: python3 robo/coletar_siops.py
       - name: Publicar resultado
         if: always()
         run: |

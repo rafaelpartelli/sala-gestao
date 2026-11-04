@@ -35,7 +35,7 @@ const semana = se => se ? `${String(se).slice(4)}/${String(se).slice(0, 4)}` : '
 
 // ---------- carga ----------
 const ARQUIVOS = {terr: 'dados/territorio.json', dengueRes: 'dados/dengue_resumo.json', chikRes: 'dados/chikungunya_resumo.json', redeRes: 'dados/rede_resumo.json',
-  profRes: 'dados/profissionais_resumo.json', equipes: 'dados/equipes.json', equip: 'dados/equipamentos.json', base15: 'dados/base15.json', leitos: 'dados/leitos.json', fin: 'dados/financiamento.json', em: 'dados/emendas.json',
+  profRes: 'dados/profissionais_resumo.json', equipes: 'dados/equipes.json', equip: 'dados/equipamentos.json', siopsRes: 'dados/siops_resumo.json', leitos: 'dados/leitos.json', fin: 'dados/financiamento.json', em: 'dados/emendas.json',
   transf: 'dados/transferencias.json', desp: 'dados/despesa.json', cauc: 'dados/cauc.json', ans: 'dados/ans.json', aps: 'dados/aps_meta.json',
   notas: 'dados/notas.json', port: 'dados/portarias.json'};
 
@@ -238,6 +238,7 @@ function rEquipamentos(alvo) {
 // Metodologia do Radar de Recursos (partelli.pro/fundo): repasses fundo a fundo em valor bruto, divididos em Manutencao (custeio regular) e
 // Estruturacao da Rede (investimento); emendas parlamentares a parte, pelo ano da proposta (proposto, empenhado, pago). Fundo Estadual separado dos municipais.
 const recursosUF = uf => uf === 'BR' ? null : carregar(`dados/recursos/${uf}.json`);
+const siopsUF = uf => uf === 'BR' ? null : carregar(`dados/siops/${uf}.json`);
 const nomeComp = c => { const t = String(c || '').toLowerCase().replace(/ - fundo rio doce/, ' (Fundo Rio Doce)').replace(/\bsus\b/, 'SUS'); return t.charAt(0).toUpperCase() + t.slice(1); };
 const somaRec = lista => {
   const a = {fb: 0, fl: 0, fe: 0, fm: 0, s: 0, em: [0, 0, 0], eq: 0, comp: {}};
@@ -432,38 +433,13 @@ async function rLeitos() {
 }
 
 // ---------- 15% em saude (LC 141/2012): fontes que compoem a base e calculo do minimo ----------
-const FONTES15 = [['iptu', 'IPTU (Imposto Predial e Territorial Urbano)', 'CF art. 156, I'], ['itbi', 'ITBI (transmissão de bens imóveis)', 'CF art. 156, II'], ['iss', 'ISS (serviços de qualquer natureza)', 'CF art. 156, III'],
-  ['irrf', 'IRRF sobre rendimentos pagos pelo município', 'CF art. 158, I'], ['itr', 'Cota-parte do ITR', 'CF art. 158, II'], ['ipva', 'Cota-parte do IPVA (50%)', 'CF art. 158, III'],
-  ['icms', 'Cota-parte do ICMS (25%)', 'CF art. 158, IV'], ['ipi', 'Cota-parte do IPI exportação', 'CF art. 159, § 3º'], ['fpm', 'Fundo de Participação dos Municípios (FPM)', 'CF art. 159, I, b']];
-function bloco15(alvo, ufs) {
-  const B = D.base15;
-  alvo.append(el('h3', null, `Base de cálculo dos 15% em saúde: ${nomeTerritorio()}`),
-    el('p', null, 'O município deve aplicar em ações e serviços públicos de saúde, com recursos próprios, no mínimo 15% da arrecadação dos impostos municipais e das transferências constitucionais (LC 141/2012, art. 6 e 7). As fontes abaixo compõem esta base. Repasses do SUS (fundo a fundo), convênios e emendas não entram na base.'));
-  if (!B) {
-    alvo.append(tabelaSimples(['Fonte vinculada aos 15%', 'Base legal'], FONTES15.map(([, n, l]) => [n, l])), aviso('Os valores por município ainda não foram coletados. O cálculo aparece aqui quando a coleta da receita (SICONFI, DCA Anexo I-C) rodar.'));
-    return;
-  }
-  const ordem = B.ordem, v = S.mun ? B.mun[S.mun] : (() => { const a = new Array(ordem.length).fill(0); ufs.forEach(u => (B.ufs[u] || []).forEach((x, i) => { a[i] += x; })); return a; })();
-  if (!v) { alvo.append(aviso('Sem receita declarada no SICONFI para este município no exercício, por isso não foi possível calcular a base.')); return; }
-  const total = v.reduce((a, b) => a + b, 0), minimo = total * 0.15;
-  const linhas = FONTES15.map(([k, n, l]) => { const x = v[ordem.indexOf(k)] || 0; return [n, l, moeda(x), total ? pct(x / total, 0) : 'sem dado']; });
-  alvo.append(el('div', {class: 'kpis'}, kpi('Base de cálculo dos 15%', moeda(total), `Receitas realizadas em ${B.exercicio}`, 'em'), kpi('Mínimo a aplicar em saúde (15%)', moeda(minimo), 'Com recursos próprios', 'em')),
-    ranking(FONTES15.map(([k, n]) => ({nome: n, valor: v[ordem.indexOf(k)] || 0, rotulo: moeda(v[ordem.indexOf(k)] || 0)})).sort((a, b) => b.valor - a.valor).slice(0, 9)),
-    verTabela('Ver as fontes em tabela', ['Fonte', 'Base legal', 'Valor', '% da base'], linhas, [2, 3]));
-  const desp = S.mun ? D.desp?.mun?.[S.mun]?.[2] : (D.desp ? ufs.reduce((a, u) => a + (D.desp.ufs[u]?.[2] || 0), 0) : null);
-  if (desp && total) alvo.append(el('p', null, `Referência: a despesa paga em saúde (todas as fontes, exercício ${D.desp.exercicio}) equivale a ${pct(desp / total, 0)} desta base. Esse número não é o percentual da LC 141: a despesa total inclui os repasses do SUS, e o percentual legal considera só recursos próprios.`));
-  alvo.append(aviso('Cálculo preliminar. O percentual efetivamente aplicado, para comparar com o mínimo de 15%, está no SIOPS e ainda não foi integrado. Dívida ativa, multas e juros dos impostos ficam fora desta base até a conferência das contas.'),
-    el('p', {class: 'fonte'}, `Fonte: ${B.fonte}. Coleta em ${dataBR(B.gerado_em)}. ${inteiro(B.municipios_com_base)} de ${inteiro(B.municipios_consultados)} municípios com receita declarada.`));
-}
-const tabelaSimples = (cols, linhas) => verTabela('Ver as fontes em tabela', cols, linhas, []);
-
 // ---------- transferencias federais, despesa e regularidade ----------
 async function rRecursos() {
   const alvo = limpar($('rec')), fonte = $('fonte-rec');
-  if (!D.transf && !D.desp && !D.cauc && !D.base15) { fonte.textContent = ''; return indisponivel(alvo); }
+  if (!D.transf && !D.desp && !D.cauc && !D.siopsRes) { fonte.textContent = ''; return indisponivel(alvo); }
   const ufs = ufsAlvo(), pop = popAlvo();
   fonte.textContent = [D.transf && `Transferências: ${D.transf.fonte}, coleta em ${dataBR(D.transf.gerado_em)}`, D.desp && `Despesa: ${D.desp.fonte}, exercício ${D.desp.exercicio}`,
-    D.cauc && `CAUC: ${D.cauc.fonte}, pesquisa de ${dataBR(D.cauc.data_pesquisa)}`, D.base15 && `Base dos 15%: ${D.base15.fonte}, exercício ${D.base15.exercicio}`].filter(Boolean).join('. ') + '.';
+    D.cauc && `CAUC: ${D.cauc.fonte}, pesquisa de ${dataBR(D.cauc.data_pesquisa)}`, D.siopsRes && `Aplicação em saúde: ${D.siopsRes.fonte}, exercício ${D.siopsRes.exercicio_anterior}`].filter(Boolean).join('. ') + '.';
   if (D.transf) {
     const T = D.transf, n = T.meses.length, serie = S.mun ? (T.mun[S.mun] || new Array(n).fill(0)) : somaVet(T.ufs, ufs, n), soma = serie.reduce((a, b) => a + b, 0);
     alvo.append(el('h3', null, `Transferências da União em saúde: ${nomeTerritorio()}`),
@@ -513,7 +489,7 @@ async function rRecursos() {
     alvo.append(el('p', {class: 'fonte'}, 'O arquivo do CAUC mostra a situação de cada item (regular ou pendente). Não traz percentuais de aplicação nem a descrição dos itens. ',
       el('a', {href: 'https://www.gov.br/tesouronacional/pt-br/estados-e-municipios/cauc', rel: 'noopener'}, 'CAUC no Tesouro Nacional'), '.'));
   }
-  bloco15(alvo, ufs);
+  await bloco15(alvo, ufs);
 }
 
 // ---------- planos privados de saude ----------
@@ -642,7 +618,7 @@ async function rFicha() {
   const m = D.munAtual, uf = S.uf, nomeUF = UF_NOMES[uf];
   $('h-ficha-nome').textContent = `Ficha de ${m.nome} (${uf})`;
   $('fonte-ficha').textContent = 'Reúne em um lugar os números do município e compara com o estado. Cada bloco abaixo traz a fonte e o detalhe.';
-  const defs = indicadores({D, profUF, redeUF, dengueUF, chikUF, recursosUF});
+  const defs = indicadores({D, profUF, redeUF, dengueUF, chikUF, recursosUF, siopsUF});
   const cards = [kpi('População (SICONFI)', inteiro(m.pop), m.capital ? 'Capital do estado' : `${nomeUF}: ${inteiro(D.terr.por_uf[uf]?.pop_soma)} habitantes`, 'pessoal')];
   const [dg, rd, ps] = await Promise.all([dengueUF(uf), redeUF(uf), Promise.all(defs.map(async d => d.mun ? [d.id, await d.mun(uf).catch(() => null)] : [d.id, null]))]);
   const porId = Object.fromEntries(ps);
@@ -666,8 +642,9 @@ async function rFicha() {
     const rotM = d.rotM || d.rot;
     cards.push(kpi(rotM, fmtM(v), `${pos}º entre ${inteiro(vals.length)} municípios${ufv != null && !d.rotM ? `. ${nomeUF}: ${fmtU(ufv)}` : ''}`, d.ico));
   });
-  const base = D.base15?.mun?.[m.cod];
-  if (base) { const tot = base.reduce((a, b) => a + b, 0); cards.push(kpi('Mínimo de 15% da base em saúde', moeda(tot * 0.15), `Base: ${moeda(tot)} (receitas de impostos e transferências, LC 141/2012)`, 'em')); }
+  const su = await siopsUF(uf), sv = su?.m?.[m.cod]?.anterior;
+  if (sv && D.siopsRes) { const ix = Object.fromEntries(D.siopsRes.campos.map((c, i) => [c, i])), pl = sv[ix.pct_liquidado];
+    cards.push(kpi('Aplicação em saúde (mínimo de 15%)', decimal(pl, 1) + '%', `${pl >= 15 ? 'Acima' : 'Abaixo'} do mínimo. Base ${moeda(sv[ix.base])}, SIOPS ${sv[ix.ano]}`, 'em')); }
   const caucP = D.cauc?.mun?.[m.cod];
   if (D.cauc) cards.push(kpi('Pendências no CAUC', inteiro((caucP || []).length), caucP?.length ? `Itens: ${caucP.join(', ')}` : 'Nenhum item pendente', 'em'));
   alvo.append(el('div', {class: 'kpis'}, ...cards),
@@ -702,7 +679,7 @@ async function usarLocalizacao() {
   } finally { btn.disabled = false; }
 }
 
-const C = {D, MUN, S, UF_NOMES, dengueUF, chikUF, redeUF, profUF, recursosUF, selecionarUF, selecionarMun, minhaPos: null, aoMapa: () => jornada?.atualizar()};
+const C = {D, MUN, S, UF_NOMES, dengueUF, chikUF, redeUF, profUF, recursosUF, siopsUF, selecionarUF, selecionarMun, minhaPos: null, aoMapa: () => jornada?.atualizar()};
 
 async function render() {
   await Promise.all([mapa.atualizar(), rFicha(), rResumo(), rDengue(), rChik(), rRede(), rPessoal(), rLeitos(), rFin(), rEm(), rRecursos(), rPlanos()]);

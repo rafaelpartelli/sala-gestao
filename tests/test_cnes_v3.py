@@ -26,17 +26,7 @@ class TestEquipamentosENatureza(unittest.TestCase):
         self.assertEqual(hosp[0][7], "Privada")
 
 
-class TestRecursosEBase15(unittest.TestCase):
-    def test_base15(self):
-        import coletar_base15 as b
-        itens = [{"coluna": "Receitas Brutas Realizadas", "conta": "Imposto sobre a Propriedade Predial e Territorial Urbana", "valor": "1000"},
-                 {"coluna": "Receitas Brutas Realizadas", "conta": "IPTU - Pessoa Fisica", "valor": "400"},
-                 {"coluna": "Receitas Liquidas", "conta": "Imposto sobre a Propriedade Predial e Territorial Urbana", "valor": "9999"},
-                 {"coluna": "Receitas Brutas Realizadas", "conta": "Cota-Parte do Fundo de Participacao dos Municipios - Cota Mensal", "valor": "5000"},
-                 {"coluna": "Receitas Brutas Realizadas", "conta": "Cota-Parte do ICMS", "valor": "3000"}]
-        r, _ = b.extrair(itens)
-        self.assertEqual((r["iptu"], r["fpm"], r["icms"], r["ipi"]), (1000, 5000, 3000, 0))
-
+class TestRecursosESiops(unittest.TestCase):
     def test_recursos(self):
         import coletar_recursos as cr
         mun = [{"cod": "3200102", "nome": "Afonso Cláudio", "uf": "ES"}, {"cod": "3200201", "nome": "Água Doce do Norte", "uf": "ES"}]
@@ -55,3 +45,27 @@ class TestNomes(unittest.TestCase):
         self.assertEqual(cr.nome_estabelecimento({"NO_FANTASIA": "HEG", "NO_RAZAO_SOCIAL": "HOSPITAL ESPECIALIZADO GOIANIA S/A"}, "1"), "Hospital Especializado Goiania S/A")
         self.assertEqual(cr.nome_estabelecimento({"NO_FANTASIA": "SANTA CASA DE MISERICORDIA", "NO_RAZAO_SOCIAL": "IRMANDADE X"}, "1"), "Santa Casa de Misericordia")
         self.assertEqual(cr.nome_estabelecimento({"NO_FANTASIA": "", "NO_RAZAO_SOCIAL": ""}, "2569809"), "Estabelecimento CNES 2569809")
+
+
+TEXTO_SIOPS = ("Afonso Cláudio RELATÓRIO RESUMIDO 5º Bimestre de 2025 Dados Homologados em 15/12/25 08:44:45 RECEITAS RESULTANTES "
+    "RECEITA DE IMPOSTOS (I) 7.742.500,00 7.742.500,00 9.104.000,51 117,58 Receita Resultante do Imposto Predial e Territorial Urbano - IPTU 1.322.000,00 1.322.000,00 1.105.275,77 83,61 "
+    "Cota-Parte FPM 44.500.001,00 44.500.001,00 36.970.620,40 83,08 "
+    "RECEITA DE TRANSFERÊNCIAS CONSTITUCIONAIS E LEGAIS (II) 86.985.001,00 86.985.001,00 72.027.268,57 82,80 "
+    "TOTAL DAS RECEITAS RESULTANTES DE IMPOSTOS E TRANFERÊNCIAS CONSTITUCIONAIS E LEGAIS - (III) = (I) + (II) 94.727.501,00 94.727.501,00 81.131.269,08 85,65 "
+    "Total das Despesas com ASPS (XII) = (XI) 22.288.158,92 19.799.926,27 19.684.507,39 "
+    "(=) VALOR APLICADO EM ASPS (XVI) = (XII - XIII - XIV - XV) 22.288.158,92 19.799.926,27 19.684.507,39 "
+    "Despesa Mínima a ser Aplicada em ASPS (XVII) = (III) x 15% (LC 141/2012) 12.169.690,36 Despesa Mínima ... (Lei Orgânica Municipal) N/A "
+    "PERCENTUAL DA RECEITA DE IMPOSTOS E TRANSFERÊNCIAS CONSTITUCIONAIS E LEGAIS APLICADO EM ASPS (XVI / III)*100 (mínimo de 15% conforme LC n° 141/2012 ou % da Lei Orgânica Municipal) 27,47 24,40 24,26 CONTROLE")
+
+class TestSiops(unittest.TestCase):
+    def test_ler(self):
+        import coletar_siops as cs
+        r = cs.ler(TEXTO_SIOPS)
+        self.assertEqual((r["ano"], r["bim"], r["data"]), (2025, 5, "15/12/25"))
+        self.assertEqual((r["iptu"], r["fpm"], r["base"], r["minimo"]), (1105276, 36970620, 81131269, 12169690))
+        self.assertEqual(r["pct"], [27.47, 24.4, 24.26])
+        self.assertEqual(len(cs.compacto(r)), len(cs.CAMPOS))
+
+    def test_sem_dados(self):
+        import coletar_siops as cs
+        self.assertIsNone(cs.ler("pagina sem demonstrativo"))
