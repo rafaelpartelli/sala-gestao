@@ -1,5 +1,5 @@
 """Funcoes comuns dos coletores da Sala de Gestao em Saude. Somente biblioteca padrao."""
-import json, os, re, time, unicodedata, urllib.request, urllib.error
+import json, os, random, re, time, unicodedata, urllib.request, urllib.error
 from datetime import datetime, timezone, timedelta
 
 BRT = timezone(timedelta(hours=-3))
@@ -8,8 +8,22 @@ UA = "SalaGestaoSaude/1.0 (coleta de dados publicos; contato: partelli.pro)"
 def agora():
     return datetime.now(BRT).isoformat(timespec="seconds")
 
+ESPERA_MAXIMA = 120  # segundos: teto de qualquer espera entre tentativas
+
+def espera_para(erro, tentativa, pausa):
+    """Segundos a esperar antes da proxima tentativa.
+    Respeita o cabecalho Retry-After (429/503) e, sem ele, usa espera exponencial
+    (pausa, 2x, 4x...) com variacao pequena para evitar chamadas sincronizadas."""
+    if isinstance(erro, urllib.error.HTTPError) and erro.code in (429, 503):
+        ra = (erro.headers.get("Retry-After") if erro.headers else None) or ""
+        if ra.strip().isdigit():
+            return min(int(ra.strip()), ESPERA_MAXIMA)
+    base = pausa * (2 ** tentativa)
+    return min(base + random.uniform(0, base * 0.25), ESPERA_MAXIMA)
+
 def baixar(url, headers=None, timeout=60, tentativas=3, pausa=3, limite=None):
-    """GET com novas tentativas. Devolve bytes. Levanta a ultima excecao se todas falharem."""
+    """GET com novas tentativas e espera exponencial. Devolve bytes.
+    Levanta a ultima excecao se todas falharem. Nao repete 400, 401, 403 e 404."""
     h = {"User-Agent": UA, "Accept": "*/*"}
     h.update(headers or {})
     ultimo = None
@@ -22,7 +36,8 @@ def baixar(url, headers=None, timeout=60, tentativas=3, pausa=3, limite=None):
             ultimo = e
             if isinstance(e, urllib.error.HTTPError) and e.code in (400, 401, 403, 404):
                 break
-            time.sleep(pausa * (i + 1))
+            if i + 1 < tentativas:
+                time.sleep(espera_para(e, i, pausa))
     raise ultimo
 
 def baixar_json(url, **kw):
