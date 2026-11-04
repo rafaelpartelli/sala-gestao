@@ -46,3 +46,12 @@ class TestRecursosEBase15(unittest.TestCase):
         self.assertEqual(obj["m"]["3200102"]["em"], [50, 40, 30])
         self.assertEqual(obj["est"]["fm"], 900)
         self.assertEqual(nao, [])
+
+
+class TestNomes(unittest.TestCase):
+    def test_nomes(self):
+        self.assertEqual(cr.nome_curto("HOSPITAL E MATERNIDADE SANTA ROSA LTDA"), "Hospital e Maternidade Santa Rosa LTDA")
+        self.assertEqual(cr.nome_curto("HMS"), "HMS")
+        self.assertEqual(cr.nome_estabelecimento({"NO_FANTASIA": "HEG", "NO_RAZAO_SOCIAL": "HOSPITAL ESPECIALIZADO GOIANIA S/A"}, "1"), "Hospital Especializado Goiania S/A")
+        self.assertEqual(cr.nome_estabelecimento({"NO_FANTASIA": "SANTA CASA DE MISERICORDIA", "NO_RAZAO_SOCIAL": "IRMANDADE X"}, "1"), "Santa Casa de Misericordia")
+        self.assertEqual(cr.nome_estabelecimento({"NO_FANTASIA": "", "NO_RAZAO_SOCIAL": ""}, "2569809"), "Estabelecimento CNES 2569809")

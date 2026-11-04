@@ -39,9 +39,33 @@ def natureza(r):
     e = esfera_curta(r.get("DS_ESFERA_ADMINISTRATIVA"))
     return "Pública" if e in ("Municipal", "Estadual", "Federal") else ("Privada com fins lucrativos" if e == "Privada" else "Outra")
 
+LIGA = {"de", "da", "do", "das", "dos", "e", "em", "a", "o", "para", "no", "na"}
+SIGLAS = {"UPA", "CTI", "UTI", "APAE", "SUS", "CAPS", "HU", "CER", "UBS", "SAMU", "ONG", "II", "III", "IV", "VI", "VII", "VIII", "IX", "XI", "XII", "LTDA", "ME", "EPP", "SA", "SS", "CNPJ"}
+
 def nome_curto(t):
-    t = " ".join(str(t or "").split()).title()
-    return t[:80]
+    """Nome legivel: espacos corrigidos, caixa de titulo, siglas sem vogal (HMS) e siglas conhecidas mantidas em maiusculas."""
+    palavras = " ".join(str(t or "").split()).split(" ")
+    saida = []
+    for i, w in enumerate(palavras):
+        sem = re.sub(r"[^A-Za-zÀ-ÿ]", "", w)
+        if not sem:
+            saida.append(w)
+        elif sem.upper() in SIGLAS or (len(sem) <= 5 and not re.search(r"[AEIOUÁÉÍÓÚÂÊÔÃÕaeiouáéíóúâêôãõ]", sem)):
+            saida.append(w.upper())
+        elif i and w.lower() in LIGA:
+            saida.append(w.lower())
+        else:
+            saida.append(w[:1].upper() + w[1:].lower())
+    return " ".join(saida)[:90]
+
+def nome_estabelecimento(r, cnes):
+    """Todo estabelecimento tem nome: fantasia quando for um nome completo; senao a razao social; senao o codigo CNES."""
+    fan, raz = nome_curto(r.get("NO_FANTASIA")), nome_curto(r.get("NO_RAZAO_SOCIAL"))
+    if len(fan) >= 6 and " " in fan.strip() or (len(fan) >= 8 and not raz):
+        return fan
+    if len(raz) >= 6:
+        return raz
+    return fan if len(fan) >= 3 else f"Estabelecimento CNES {cnes}"
 
 def inativo(motivo):
     return motivo not in (None, "", "0", 0, "00")
@@ -102,7 +126,7 @@ def agregar(textos, mapa6, hosp=None):
             gg = d["gn"].setdefault(g, {})
             gg[n] = gg.get(n, 0) + 1
             if hosp is not None and tp in HOSPITAIS and n != "Pessoa física":
-                hosp.append([str(r.get("CO_CNES") or "").strip(), nome_curto(r.get("NO_FANTASIA") or r.get("NO_RAZAO_SOCIAL")), alvo[0], alvo[1], tp, n, str(r.get("CO_AMBULATORIAL_SUS") or "").strip() == "1", e])
+                hosp.append([str(r.get("CO_CNES") or "").strip(), nome_estabelecimento(r, str(r.get("CO_CNES") or "").strip()), alvo[0], alvo[1], tp, n, str(r.get("CO_AMBULATORIAL_SUS") or "").strip() == "1", e])
     return por, lidos, erros, sem
 
 def main():

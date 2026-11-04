@@ -213,7 +213,7 @@ async function rHospitais(alvo) {
   const ge = {}; lista.forEach(h => { const k = h[6] || 'Outra'; ge[k] = (ge[k] || 0) + 1; });
   const gestao = ['Municipal', 'Estadual', 'Federal', 'Privada'].filter(k => ge[k]).map(k => `${inteiro(ge[k])} ${k === 'Privada' ? 'privados' : k === 'Federal' ? 'federais' : k === 'Estadual' ? 'de gestão estadual' : 'de gestão municipal'}`).join(', ');
   alvo.append(el('h3', null, `Hospitais em ${nomeTerritorio()}`), el('p', null, `${inteiro(lista.length)} hospitais ativos: ${resumo}.`), gestao ? el('p', null, `Por esfera administrativa: ${gestao}.`) : null,
-    verTabela(`Ver os hospitais (${inteiro(lista.length)})`, ['Hospital', 'Município', 'Tipo', 'Natureza', 'Esfera', 'Atende SUS'], lista.slice(0, 500).map(h => [h[1], nomeMun(h[2]), TIPO_HOSP[h[3]] || 'Hospital', h[4], h[6] || '', h[5] ? 'Sim' : 'Não']), []));
+    verTabela(`Ver os hospitais (${inteiro(lista.length)})`, ['Hospital', 'Município', 'Tipo', 'Natureza', 'Esfera', 'Atende SUS'], lista.slice(0, 500).map(h => [(h[1] || '').trim().length >= 3 ? h[1] : `Estabelecimento CNES ${h[0]}`, nomeMun(h[2]), TIPO_HOSP[h[3]] || 'Hospital', h[4], h[6] || '', h[5] ? 'Sim' : 'Não']), []));
 }
 
 // Equipamentos (CNES, arquivos EQ): grupos, disponibilidade ao SUS e participacao por natureza.
@@ -605,8 +605,6 @@ function fatoArbo(res, rot) {
 let mapa, jornada;
 const PARADAS = [
   {id: 'mapa', rot: 'Mapa da saúde', ico: 'mapa', pergunta: 'Onde cada indicador é mais alto? Troque a camada e veja o mapa mudar.', disp: () => !!D.terr, fato: () => mapa?.fato || null},
-  {id: 'dengue', rot: 'Dengue', ico: 'dengue', pergunta: 'Qual estado tem a maior parte dos municípios em alerta alto?', disp: () => !!D.dengueRes, fato: () => fatoArbo(D.dengueRes, 'dengue')},
-  {id: 'chik', rot: 'Chikungunya', ico: 'chik', pergunta: 'A chikungunya segue o mesmo desenho da dengue?', disp: () => !!D.chikRes, fato: () => fatoArbo(D.chikRes, 'chikungunya')},
   {id: 'rede', rot: 'Rede assistencial', ico: 'rede', pergunta: 'Que tipo de unidade domina a rede do seu território?', disp: () => !!D.redeRes, fato: () => {
     const g = sumGrupos(ufsAlvo(), 'grupos'), tot = Object.values(g).reduce((a, b) => a + b, 0), top = Object.entries(g).sort((a, b) => b[1] - a[1])[0];
     return top && tot ? `${pct(top[1] / tot, 0)} dos estabelecimentos ativos de ${terr()} são do tipo "${top[0]}" (${inteiro(top[1])}).` : null; }},
@@ -629,6 +627,8 @@ const PARADAS = [
   {id: 'planos', rot: 'Planos de saúde', ico: 'planos', pergunta: 'Que parte da população não tem plano privado?', disp: () => !!D.ans, fato: () => {
     const v = somaVet(D.ans.ufs, ufsAlvo(), 2); return v[1] ? `${pct(v[0] / v[1], 1)} da população de ${terr()} tem plano de assistência médica; o restante depende do SUS na prática (estimativa).` : null; }},
   {id: 'aps', rot: 'Atenção Primária', ico: 'aps', pergunta: 'O que muda no cofinanciamento da Atenção Primária?', disp: () => true, fato: () => '15 indicadores de qualidade em três blocos de equipes, com desempenho de 0 a 100 (Portaria GM/MS nº 10.994/2026).'},
+  {id: 'dengue', rot: 'Dengue', ico: 'dengue', pergunta: 'Qual estado tem a maior parte dos municípios em alerta alto?', disp: () => !!D.dengueRes, fato: () => fatoArbo(D.dengueRes, 'dengue')},
+  {id: 'chik', rot: 'Chikungunya', ico: 'chik', pergunta: 'A chikungunya segue o mesmo desenho da dengue?', disp: () => !!D.chikRes, fato: () => fatoArbo(D.chikRes, 'chikungunya')},
   {id: 'notas', rot: 'Notas e portarias', ico: 'notas', pergunta: 'Saiu alguma norma nova que afeta o seu município?', disp: () => !!(D.notas || D.port), fato: () => `${inteiro(D.notas?.itens?.length || 0)} notas e informes e ${inteiro(D.port?.portarias?.length || 0)} portarias na última coleta.`}
 ];
 const popAlvoUF = () => ufsAlvo().reduce((a, u) => a + (D.terr?.por_uf[u]?.pop_soma || 0), 0);
