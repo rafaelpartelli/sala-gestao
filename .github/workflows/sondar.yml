@@ -1,16 +1,21 @@
 name: Coleta diaria (02:35)
 
-# Fila diaria as 02:35 de Brasilia (05:35 UTC; o Brasil nao tem horario de verao). Cada etapa so comeca quando a anterior termina.
+# Fila diaria, alvo 02:35 de Brasilia (05:35 UTC; o Brasil nao tem horario de verao). O GitHub atrasa agendamentos (em 05/11/2026 a fila
+# comecou 8 h depois), entao ha tres gatilhos na madrugada (01:17, 02:35 e 03:47 de Brasilia) e a fila roda uma unica vez por dia:
+# o primeiro gatilho que comecar executa, os demais encerram sem fazer nada. Cada etapa so comeca quando a anterior termina.
 # Se uma etapa falhar, as seguintes continuam. CNES roda as segundas; base territorial, Atencao Primaria e ANS, SIOPS e despesa (DCA) rodam no dia 1, nessa ordem.
 # Os workflows chamados tambem podem ser executados sozinhos (Run workflow).
 
 on:
   workflow_dispatch:
   schedule:
+    - cron: "17 4 * * *"
     - cron: "35 5 * * *"
+    - cron: "47 6 * * *"
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: coleta-diaria
@@ -21,65 +26,73 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
+      executar: ${{ steps.d.outputs.executar }}
       dia1: ${{ steps.d.outputs.dia1 }}
       segunda: ${{ steps.d.outputs.segunda }}
     steps:
       - id: d
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENTO: ${{ github.event_name }}
         run: |
           export TZ=America/Sao_Paulo
+          # Execucao manual sempre roda. Agendada: so se nenhuma outra fila comecou hoje (horario de Brasilia).
+          inicio="$(date -d "$(date +%F) 00:00" -u +%Y-%m-%dT%H:%M:%SZ)"
+          outras="$(gh run list -R "$GITHUB_REPOSITORY" --workflow sondar.yml --limit 30 --json databaseId,createdAt,event --jq "[.[] | select(.databaseId != $GITHUB_RUN_ID and .event == \"schedule\" and .createdAt >= \"$inicio\")] | length")"
+          if [ "$EVENTO" = "schedule" ] && [ "${outras:-0}" != "0" ]; then echo "executar=false" >> "$GITHUB_OUTPUT"; else echo "executar=true" >> "$GITHUB_OUTPUT"; fi
           echo "dia1=$([ "$(date +%d)" = "01" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
           echo "segunda=$([ "$(date +%u)" = "1" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
   territorio:
     needs: calendario
-    if: needs.calendario.outputs.dia1 == 'true'
+    if: needs.calendario.outputs.executar == 'true' && needs.calendario.outputs.dia1 == 'true'
     uses: ./.github/workflows/territorio.yml
     secrets: inherit
 
   notas:
     needs: [calendario, territorio]
-    if: ${{ !cancelled() }}
+    if: ${{ !cancelled() && needs.calendario.outputs.executar == 'true' }}
     uses: ./.github/workflows/notas.yml
     secrets: inherit
 
   emendas:
-    needs: notas
-    if: ${{ !cancelled() }}
+    needs: [calendario, notas]
+    if: ${{ !cancelled() && needs.calendario.outputs.executar == 'true' }}
     uses: ./.github/workflows/emendas.yml
     secrets: inherit
 
   financiamento:
-    needs: emendas
-    if: ${{ !cancelled() }}
+    needs: [calendario, emendas]
+    if: ${{ !cancelled() && needs.calendario.outputs.executar == 'true' }}
     uses: ./.github/workflows/financiamento.yml
     secrets: inherit
 
   dengue:
-    needs: financiamento
-    if: ${{ !cancelled() }}
+    needs: [calendario, financiamento]
+    if: ${{ !cancelled() && needs.calendario.outputs.executar == 'true' }}
     uses: ./.github/workflows/dengue.yml
     secrets: inherit
 
   rede:
     needs: [calendario, dengue]
-    if: ${{ !cancelled() && needs.calendario.outputs.segunda == 'true' }}
+    if: ${{ !cancelled() && needs.calendario.outputs.executar == 'true' && needs.calendario.outputs.segunda == 'true' }}
     uses: ./.github/workflows/rede.yml
     secrets: inherit
 
   aps:
     needs: [calendario, rede]
-    if: ${{ !cancelled() && needs.calendario.outputs.dia1 == 'true' }}
+    if: ${{ !cancelled() && needs.calendario.outputs.executar == 'true' && needs.calendario.outputs.dia1 == 'true' }}
     uses: ./.github/workflows/aps.yml
     secrets: inherit
 
   siops:
     needs: [calendario, aps]
-    if: ${{ !cancelled() && needs.calendario.outputs.dia1 == 'true' }}
+    if: ${{ !cancelled() && needs.calendario.outputs.executar == 'true' && needs.calendario.outputs.dia1 == 'true' }}
     uses: ./.github/workflows/siops.yml
     secrets: inherit
 
   despesa:
     needs: [calendario, siops]
-    if: ${{ !cancelled() && needs.calendario.outputs.dia1 == 'true' }}
+    if: ${{ !cancelled() && needs.calendario.outputs.executar == 'true' && needs.calendario.outputs.dia1 == 'true' }}
     uses: ./.github/workflows/despesa.yml
     secrets: inherit
