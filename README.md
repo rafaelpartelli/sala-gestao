@@ -19,8 +19,8 @@ Coletores em Python (somente biblioteca padrão) rodam no GitHub Actions, gravam
 | Profissionais (vínculos) | `robo/coletar_profissionais.py` | CNES, arquivos PF do FTP do DATASUS | junto com a rede (segunda) |
 | CAUC | `robo/coletar_cauc.py` | Tesouro Transparente | junto com o financiamento |
 | Transferências da União | `robo/coletar_transferencias.py` | Portal da Transparência (CSV mensal, sem chave) | junto com o financiamento |
-| Planos de saúde | `robo/coletar_ans.py` | ANS, Painel de Dados Abertos | dia 1, junto com a Atenção Primária |
-| Despesa municipal em saúde | `robo/coletar_despesa.py` | SICONFI, DCA Anexo I-E | dia 1, junto com a Atenção Primária |
+| Planos de saúde | `robo/coletar_ans.py` | ANS, Painel de Dados Abertos | dia 1, após o SIOPS (workflow próprio) |
+| Despesa municipal em saúde | `robo/coletar_despesa.py` | SICONFI, DCA Anexo I-E | dia 1, após o SIOPS (workflow próprio) |
 | Chikungunya | `robo/coletar_dengue.py` com `DOENCA=chikungunya` | InfoDengue | junto com a dengue |
 
 Os workflows ficam em `.github/workflows/`. Segredo necessário: `PORTAL_TRANSPARENCIA_KEY` (só para emendas). A chave nunca vai no código.
@@ -30,11 +30,11 @@ O coletor da rede (`coletar_rede.py`) classifica os estabelecimentos pela nature
 
 ## Recursos, gestão estadual e 15% em saúde
 - `coletar_recursos.py` lê os arquivos do Radar de Recursos (partelli.pro/fundo) e grava `dados/recursos/<UF>.json`: por município e para o Fundo Estadual, repasses fundo a fundo (Manutenção e Estruturação da rede, valor bruto) e emendas (proposto, empenhado e pago pelo ano da proposta), com a mesma metodologia do Radar. Emendas não se somam aos repasses ordinários.
-- `coletar_base15.py` (SICONFI, DCA Anexo I-C) grava `dados/base15.json` com as receitas que compõem a base dos 15% (LC 141/2012, art. 6 e 7): IPTU, ITBI, ISS, IRRF, cotas-partes de ITR, IPVA, ICMS e IPI-exportação e FPM. É preliminar: as contas são reconhecidas pelo texto e o log do primeiro município lista as contas usadas. O percentual aplicado de fato (recursos próprios) está no SIOPS e ainda não foi integrado.
+- `coletar_siops.py` (SIOPS, RREO Anexo 12) grava `dados/siops/<UF>.json` e `dados/siops_resumo.json`: receitas que compõem a base dos 15% (LC 141/2012, art. 6 e 7), mínimo, valor aplicado (empenhado, liquidado e pago) e percentual, por município, no último exercício (5º bimestre) e no atual. Se mais de 5% dos municípios falharem, nada é gravado. Na primeira coleta, 99,1% dos municípios tiveram dado.
 - A tela mostra a ficha do município ao escolhê-lo (no filtro ou no mapa), com comparação com o estado, e separa gestão municipal e estadual.
 
 ## Agenda (fila diária às 02:35)
-O workflow "Coleta diaria (02:35)" (`sondar.yml`) roda todo dia às 02:35 de Brasília (05:35 UTC) e chama os demais em fila, um após o outro: base territorial (só dia 1), notas, emendas, financiamento (com CAUC e transferências), dengue (com chikungunya), CNES (só segunda) e Atenção Primária, ANS e despesa (só dia 1). Se uma etapa falhar, as seguintes continuam. Cada workflow continua disponível para execução manual (Run workflow). A coluna "Agenda" da tabela acima vale para a periodicidade da fonte, e o horário é sempre o da fila.
+O workflow "Coleta diaria (02:35)" (`sondar.yml`) roda todo dia às 02:35 de Brasília (05:35 UTC) e chama os demais em fila, um após o outro: base territorial (só dia 1), notas, emendas, financiamento (com CAUC e transferências), dengue (com chikungunya), CNES (só segunda) e, só no dia 1, Atenção Primária com ANS, SIOPS e despesa (DCA), cada um em workflow próprio para que a falha de um não marque os outros como erro. Se uma etapa falhar, as seguintes continuam. Cada workflow continua disponível para execução manual (Run workflow). A coluna "Agenda" da tabela acima vale para a periodicidade da fonte, e o horário é sempre o da fila.
 
 ## Regras de dados
 - Somente dados públicos e agregados. Nenhum dado de pessoa é coletado ou publicado.

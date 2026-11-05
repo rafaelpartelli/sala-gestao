@@ -1,7 +1,7 @@
 name: Coleta diaria (02:35)
 
 # Fila diaria as 02:35 de Brasilia (05:35 UTC; o Brasil nao tem horario de verao). Cada etapa so comeca quando a anterior termina.
-# Se uma etapa falhar, as seguintes continuam. CNES roda as segundas; base territorial, Atencao Primaria, ANS e despesa rodam no dia 1.
+# Se uma etapa falhar, as seguintes continuam. CNES roda as segundas; base territorial, Atencao Primaria e ANS, SIOPS e despesa (DCA) rodam no dia 1, nessa ordem.
 # Os workflows chamados tambem podem ser executados sozinhos (Run workflow).
 
 on:
@@ -70,4 +70,16 @@ jobs:
     needs: [calendario, rede]
     if: ${{ !cancelled() && needs.calendario.outputs.dia1 == 'true' }}
     uses: ./.github/workflows/aps.yml
+    secrets: inherit
+
+  siops:
+    needs: [calendario, aps]
+    if: ${{ !cancelled() && needs.calendario.outputs.dia1 == 'true' }}
+    uses: ./.github/workflows/siops.yml
+    secrets: inherit
+
+  despesa:
+    needs: [calendario, siops]
+    if: ${{ !cancelled() && needs.calendario.outputs.dia1 == 'true' }}
+    uses: ./.github/workflows/despesa.yml
     secrets: inherit

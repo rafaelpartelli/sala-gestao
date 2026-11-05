@@ -1,4 +1,4 @@
-name: Coletar Atencao Primaria, planos (ANS) e despesa (DCA)
+name: Coletar Atencao Primaria e planos de saude (ANS)
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ concurrency:
 jobs:
   coletar:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -23,21 +23,10 @@ jobs:
       - name: Testes
         run: python3 -I -m unittest discover -s tests
       - name: Coletar
-        working-directory: .
         run: python3 robo/coletar_aps.py
       - name: Coletar planos de saude (ANS)
         if: always()
         run: python3 robo/coletar_ans.py
-      - name: Coletar despesa em saude (DCA)
-        if: always()
-        env:
-          TRABALHADORES: "6"
-        run: python3 robo/coletar_despesa.py
-      - name: Coletar aplicacao em saude, 15 por cento (SIOPS)
-        if: always()
-        env:
-          TRABALHADORES: "8"
-        run: python3 robo/coletar_siops.py
       - name: Publicar resultado
         if: always()
         run: |
