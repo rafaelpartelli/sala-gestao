@@ -1,7 +1,7 @@
-name: Coleta diaria (02:35)
+name: Coleta diaria (01:46)
 
-# Fila diaria, alvo 02:35 de Brasilia (05:35 UTC; o Brasil nao tem horario de verao). O GitHub atrasa agendamentos (em 05/11/2026 a fila
-# comecou 8 h depois), entao ha tres gatilhos na madrugada (01:17, 02:35 e 03:47 de Brasilia) e a fila roda uma unica vez por dia:
+# Fila diaria, alvo 01:46 de Brasilia (04:46 UTC; o cron do GitHub e sempre em UTC e o Brasil nao tem horario de verao). O GitHub atrasa agendamentos (em 05/11/2026 a fila
+# comecou 8 h depois), entao ha tres gatilhos na madrugada (01:46, 03:46 e 05:46 de Brasilia) e a fila roda uma unica vez por dia:
 # o primeiro gatilho que comecar executa, os demais encerram sem fazer nada. Cada etapa so comeca quando a anterior termina.
 # Se uma etapa falhar, as seguintes continuam. CNES roda as segundas; base territorial, Atencao Primaria e ANS, SIOPS e despesa (DCA) rodam no dia 1, nessa ordem.
 # Os workflows chamados tambem podem ser executados sozinhos (Run workflow).
@@ -9,9 +9,9 @@ name: Coleta diaria (02:35)
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 4 * * *"
-    - cron: "35 5 * * *"
-    - cron: "47 6 * * *"
+    - cron: "46 4 * * *"   # 01:46 Brasilia (principal)
+    - cron: "46 6 * * *"   # 03:46 Brasilia (reforco)
+    - cron: "46 8 * * *"   # 05:46 Brasilia (reforco)
 
 permissions:
   contents: write
@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   calendario:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
       executar: ${{ steps.d.outputs.executar }}

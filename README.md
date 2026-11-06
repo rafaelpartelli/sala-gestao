@@ -33,8 +33,8 @@ O coletor da rede (`coletar_rede.py`) classifica os estabelecimentos pela nature
 - `coletar_siops.py` (SIOPS, RREO Anexo 12) grava `dados/siops/<UF>.json` e `dados/siops_resumo.json`: receitas que compõem a base dos 15% (LC 141/2012, art. 6 e 7), mínimo, valor aplicado (empenhado, liquidado e pago) e percentual, por município, no último exercício (5º bimestre) e no atual. Se mais de 5% dos municípios falharem, nada é gravado. Na primeira coleta, 99,1% dos municípios tiveram dado.
 - A tela mostra a ficha do município ao escolhê-lo (no filtro ou no mapa), com comparação com o estado, e separa gestão municipal e estadual.
 
-## Agenda (fila diária às 02:35)
-O workflow "Coleta diaria (02:35)" (`sondar.yml`) roda todo dia às 02:35 de Brasília (05:35 UTC) e chama os demais em fila, um após o outro: base territorial (só dia 1), notas, emendas, financiamento (com CAUC e transferências), dengue (com chikungunya), CNES (só segunda) e, só no dia 1, Atenção Primária com ANS, SIOPS e despesa (DCA), cada um em workflow próprio para que a falha de um não marque os outros como erro. Se uma etapa falhar, as seguintes continuam. Cada workflow continua disponível para execução manual (Run workflow). A coluna "Agenda" da tabela acima vale para a periodicidade da fonte, e o horário é sempre o da fila.
+## Agenda (fila diária às 01:46)
+O workflow "Coleta diaria (01:46)" (`sondar.yml`) roda todo dia às 01:46 de Brasília (04:46 UTC), com reforços às 03:46 e 05:46 que só executam se o anterior não tiver começado e chama os demais em fila, um após o outro: base territorial (só dia 1), notas, emendas, financiamento (com CAUC e transferências), dengue (com chikungunya), CNES (só segunda) e, só no dia 1, Atenção Primária com ANS, SIOPS e despesa (DCA), cada um em workflow próprio para que a falha de um não marque os outros como erro. Se uma etapa falhar, as seguintes continuam. Cada workflow continua disponível para execução manual (Run workflow). A coluna "Agenda" da tabela acima vale para a periodicidade da fonte, e o horário é sempre o da fila.
 
 ## Regras de dados
 - Somente dados públicos e agregados. Nenhum dado de pessoa é coletado ou publicado.
