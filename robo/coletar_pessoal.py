@@ -3,10 +3,9 @@
 Fecha o exercicio pelo 3o quadrimestre (periodicidade Q) e, se o ente for semestral, pelo 2o semestre (S).
 Por padrao coleta o piloto (ES, TO, PA, PE); UFS=BR coleta o Brasil. Saida: dados/pessoal.json."""
 import os, sys, time
-from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from comum import escrever_json, ler_json, agora, resumo_actions, BRT
-from siconfi_comum import pedir, norm, valor, populacao, ufs_do_ambiente
+from siconfi_comum import pedir, norm, valor, populacao, ufs_do_ambiente, executar
 from coletar_receita import montar_entes
 
 TRABALHADORES = int(os.environ.get("TRABALHADORES", "6"))
@@ -75,25 +74,24 @@ def um(args):
         return ente, None, type(e).__name__
 
 def coletar(entes, exercicio):
-    t0, res, falhas = time.time(), [], 0
-    with ThreadPoolExecutor(max_workers=TRABALHADORES) as ex:
-        for ente, r, erro in ex.map(um, [(e, exercicio) for e in entes]):
-            falhas += 1 if erro else 0
-            res.append((ente, r))
-    return res, falhas, int(time.time() - t0)
+    t0 = time.time()
+    resultado, falhos, erros = executar(entes, lambda e: um((e, exercicio)), TRABALHADORES)
+    return [(e, resultado.get(e["cod"])) for e in entes], len(falhos), int(time.time() - t0), erros
 
 def main():
     ufs = ufs_do_ambiente()
     muni, est = montar_entes(ler_json("dados/territorio.json"), ufs)
     exercicio = int(os.environ.get("EXERCICIO", "0")) or datetime.now(BRT).year - 1
-    res_m, falhas, seg = coletar(muni, exercicio)
-    res_e, _, _ = coletar(est, exercicio)
+    res_m, falhas, seg, erros = coletar(muni, exercicio)
+    res_e, _, _, _ = coletar(est, exercicio)
     ok_m = [(m, r) for m, r in res_m if r]
     taxa = falhas / max(1, len(muni))
     contagem = {}
     for _, r in ok_m:
         contagem[faixa(r)] = contagem.get(faixa(r), 0) + 1
-    print(f"ufs={ufs} exercicio={exercicio} municipios={len(muni)} com_pessoal={len(ok_m)} falhas={falhas} ({taxa:.1%}) faixas={contagem} tempo={seg}s")
+    print(f"ufs={ufs} exercicio={exercicio} municipios={len(muni)} com_pessoal={len(ok_m)} falhas={falhas} ({taxa:.1%}) faixas={contagem} tempo={seg}s erros={dict(erros)}")
+    for m, r in [x for x in ok_m if faixa(x[1]) == "excedido"][:5]:
+        print("amostra excedido:", m["uf"], m["cod"], "dtp", r[0], "rcl", r[1], "limite", r[2], "pct", r[6])
     if taxa > 0.05 or (muni and len(ok_m) < 0.5 * len(muni)):
         print("validacao falhou: nada gravado")
         return 1

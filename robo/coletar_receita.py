@@ -3,10 +3,9 @@
 Por padrao coleta o piloto (ES, TO, PA, PE); UFS=BR coleta o Brasil. Municipio que nao entregou o RREO fica sem valor (nao e erro).
 Saida: dados/receita.json."""
 import os, sys, time
-from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from comum import escrever_json, ler_json, agora, resumo_actions, BRT
-from siconfi_comum import pedir, norm, valor, populacao, ufs_do_ambiente, UF_COD
+from siconfi_comum import pedir, norm, valor, populacao, ufs_do_ambiente, executar, UF_COD
 
 TRABALHADORES = int(os.environ.get("TRABALHADORES", "6"))
 
@@ -55,12 +54,9 @@ def um(args):
         return ente, None, type(e).__name__
 
 def coletar(entes, exercicio, periodo):
-    t0, res, falhas = time.time(), [], 0
-    with ThreadPoolExecutor(max_workers=TRABALHADORES) as ex:
-        for ente, r, erro in ex.map(um, [(e, exercicio, periodo) for e in entes]):
-            falhas += 1 if erro else 0
-            res.append((ente, r))
-    return res, falhas, int(time.time() - t0)
+    t0 = time.time()
+    resultado, falhos, erros = executar(entes, lambda e: um((e, exercicio, periodo)), TRABALHADORES)
+    return [(e, resultado.get(e["cod"])) for e in entes], len(falhos), int(time.time() - t0), erros
 
 def montar_entes(territorio, ufs):
     """Municipios das UFs pedidas (do territorio.json) e os governos estaduais."""
@@ -73,11 +69,11 @@ def main():
     muni, est = montar_entes(ler_json("dados/territorio.json"), ufs)
     exercicio = int(os.environ.get("EXERCICIO", "0")) or datetime.now(BRT).year - 1
     periodo = int(os.environ.get("PERIODO", "6"))
-    res_m, falhas, seg = coletar(muni, exercicio, periodo)
-    res_e, falhas_e, _ = coletar(est, exercicio, periodo)
+    res_m, falhas, seg, erros = coletar(muni, exercicio, periodo)
+    res_e, _, _, _ = coletar(est, exercicio, periodo)
     ok_m = [(m, r) for m, r in res_m if r]
     taxa = falhas / max(1, len(muni))
-    print(f"ufs={ufs} exercicio={exercicio} bimestre={periodo} municipios={len(muni)} com_receita={len(ok_m)} falhas={falhas} ({taxa:.1%}) estados_ok={sum(1 for _, r in res_e if r)} tempo={seg}s")
+    print(f"ufs={ufs} exercicio={exercicio} bimestre={periodo} municipios={len(muni)} com_receita={len(ok_m)} falhas={falhas} ({taxa:.1%}) estados_ok={sum(1 for _, r in res_e if r)} tempo={seg}s erros={dict(erros)}")
     if taxa > 0.05 or (muni and len(ok_m) < 0.5 * len(muni)):
         print("validacao falhou: nada gravado")
         return 1

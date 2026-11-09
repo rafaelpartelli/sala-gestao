@@ -1,6 +1,8 @@
 """Apoio aos coletores SICONFI de receita (RREO) e pessoal (RGF). Somente biblioteca padrao.
 Estrutura dos demonstrativos conferida na API do Tesouro Nacional em 09/11/2026 (Vitoria/ES, exercicio 2025)."""
-import os, re, urllib.parse
+import os, re, time, urllib.parse
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from comum import baixar_json
 
 API = "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/"
@@ -53,3 +55,24 @@ def populacao(itens):
             except (TypeError, ValueError):
                 pass
     return None
+
+def executar(entes, um, trabalhadores=6, rodadas=3):
+    """um(ente) -> (ente, resultado, erro). Repete somente os que deram erro, com menos trabalhadores e pausa entre as rodadas.
+    Devolve ({cod: resultado}, entes_que_continuam_com_erro, Counter dos erros da ultima rodada)."""
+    resultado, pendentes, erros = {}, list(entes), Counter()
+    for rodada in range(rodadas):
+        if not pendentes:
+            break
+        w = trabalhadores if rodada == 0 else max(1, trabalhadores // 3)
+        novos, erros = [], Counter()
+        with ThreadPoolExecutor(max_workers=w) as ex:
+            for ente, r, erro in ex.map(um, pendentes):
+                if erro:
+                    novos.append(ente)
+                    erros[erro] += 1
+                else:
+                    resultado[ente["cod"]] = r
+        pendentes = novos
+        if pendentes and rodada + 1 < rodadas:
+            time.sleep(15)
+    return resultado, pendentes, erros

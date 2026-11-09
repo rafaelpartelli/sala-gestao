@@ -101,6 +101,23 @@ class TesteComum(unittest.TestCase):
         with mock.patch.object(sc, "baixar_json", lambda *a, **k: next(paginas)):
             self.assertEqual(sc.pedir("rreo", {}), [1, 2, 3])
 
+class TesteExecutar(unittest.TestCase):
+    def test_repete_so_os_que_falharam(self):
+        chamadas = {}
+        def um(e):
+            chamadas[e["cod"]] = chamadas.get(e["cod"], 0) + 1
+            if e["cod"] == 2 and chamadas[2] < 2:
+                return e, None, "Timeout"
+            if e["cod"] == 3:
+                return e, None, "Erro"
+            return e, [e["cod"]], None
+        with mock.patch.object(sc.time, "sleep", lambda s: None):
+            res, falhos, erros = sc.executar([{"cod": 1}, {"cod": 2}, {"cod": 3}], um, trabalhadores=3, rodadas=3)
+        self.assertEqual(res, {1: [1], 2: [2]})
+        self.assertEqual([f["cod"] for f in falhos], [3])
+        self.assertEqual(chamadas, {1: 1, 2: 2, 3: 3})
+        self.assertEqual(dict(erros), {"Erro": 1})
+
 class TesteFluxo(unittest.TestCase):
     def test_montar_entes_filtra_ufs_e_inclui_estados(self):
         terr = {"municipios": [{"cod": 3205309, "uf": "ES"}, {"cod": 3550308, "uf": "SP"}]}
