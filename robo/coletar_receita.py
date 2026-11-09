@@ -42,9 +42,16 @@ def extrair(itens):
     out.append(round(prev) if prev is not None else None)
     return out + [populacao(itens)]
 
+# Municipios pequenos entregam o RREO simplificado (mesmo Anexo 01, mesma estrutura de colunas). Conferido na API em 09/11/2026.
+TIPOS_RREO = ("RREO", "RREO Simplificado")
+
 def pedir_ente(cod, exercicio, periodo):
-    return pedir("rreo", dict(an_exercicio=exercicio, nr_periodo=periodo, co_tipo_demonstrativo="RREO",
-                              no_anexo="RREO-Anexo 01", id_ente=cod))
+    for tipo in TIPOS_RREO:
+        itens = pedir("rreo", dict(an_exercicio=exercicio, nr_periodo=periodo, co_tipo_demonstrativo=tipo,
+                                   no_anexo="RREO-Anexo 01", id_ente=cod))
+        if itens:
+            return itens
+    return []
 
 def um(args):
     ente, exercicio, periodo = args

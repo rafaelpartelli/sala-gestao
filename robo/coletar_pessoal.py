@@ -9,7 +9,8 @@ from siconfi_comum import pedir, norm, valor, populacao, ufs_do_ambiente, execut
 from coletar_receita import montar_entes
 
 TRABALHADORES = int(os.environ.get("TRABALHADORES", "6"))
-TENTATIVAS_PERIODO = (("Q", 3), ("S", 2))
+# (tipo, periodicidade, periodo): RGF quadrimestral, RGF semestral e RGF Simplificado (municipios pequenos, semestral). Conferido na API em 09/11/2026.
+TENTATIVAS_PERIODO = (("RGF", "Q", 3), ("RGF", "S", 2), ("RGF Simplificado", "S", 2))
 CAMPOS = ["dtp", "rcl_ajustada", "limite_maximo", "limite_prudencial", "limite_alerta", "bruta", "pct_rcl"]
 
 def _valor_coluna(itens, cod):
@@ -59,9 +60,9 @@ def faixa(r):
     return "excedido" if uso > 1 else "prudencial" if uso >= 0.95 else "alerta" if uso >= 0.90 else "ok"
 
 def pedir_ente(cod, exercicio):
-    for periodicidade, periodo in TENTATIVAS_PERIODO:
+    for tipo, periodicidade, periodo in TENTATIVAS_PERIODO:
         itens = pedir("rgf", dict(an_exercicio=exercicio, in_periodicidade=periodicidade, nr_periodo=periodo,
-                                  co_tipo_demonstrativo="RGF", no_anexo="RGF-Anexo 01", co_poder="E", id_ente=cod))
+                                  co_tipo_demonstrativo=tipo, no_anexo="RGF-Anexo 01", co_poder="E", id_ente=cod))
         if itens:
             return itens
     return []

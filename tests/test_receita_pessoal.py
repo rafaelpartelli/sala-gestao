@@ -73,6 +73,24 @@ class TestePessoal(unittest.TestCase):
         self.assertIsNone(pes.extrair([]))
         self.assertIsNone(pes.extrair([rgf("DespesaComPessoalTotal", "Valor", 5.0)]))
 
+    def test_tenta_simplificado_por_ultimo(self):
+        tipos = []
+        def falso(endpoint, params):
+            tipos.append(params["co_tipo_demonstrativo"])
+            return ITENS_RGF if params["co_tipo_demonstrativo"] == "RGF Simplificado" else []
+        with mock.patch.object(pes, "pedir", falso):
+            self.assertTrue(pes.pedir_ente(3200102, 2025))
+        self.assertEqual(tipos, ["RGF", "RGF", "RGF Simplificado"])
+
+    def test_receita_tenta_simplificado_quando_rreo_vazio(self):
+        tipos = []
+        def falso(endpoint, params):
+            tipos.append(params["co_tipo_demonstrativo"])
+            return ITENS_RREO if params["co_tipo_demonstrativo"] == "RREO Simplificado" else []
+        with mock.patch.object(rec, "pedir", falso):
+            self.assertTrue(rec.pedir_ente(3200102, 2025, 6))
+        self.assertEqual(tipos, ["RREO", "RREO Simplificado"])
+
     def test_tenta_semestral_quando_nao_ha_quadrimestral(self):
         chamadas = []
         def falso(endpoint, params):
