@@ -1,0 +1,136 @@
+{
+ "gerado_em": "2026-11-09T15:43:12-03:00",
+ "paginas": [
+  {
+   "url": "http://siscebas.saude.gov.br/siscebas/",
+   "verificado_em": "2026-11-09T15:42:59-03:00",
+   "robots": "robots.txt indisponivel (RemoteDisconnected)",
+   "acessado": false,
+   "erro": "RemoteDisconnected",
+   "status": null
+  },
+  {
+   "url": "https://www.gov.br/saude/pt-br/composicao/saes/dcebas",
+   "verificado_em": "2026-11-09T15:43:01-03:00",
+   "robots": "robots.txt permite",
+   "acessado": true,
+   "status": 200,
+   "tipo": "text/html;charset=utf-8",
+   "url_final": "https://www.gov.br/saude/pt-br/composicao/saes/dcebas",
+   "titulo": "Certificação de Entidades Beneficentes de Assistência Social em Saúde — Ministério da Saúde",
+   "links_de_interesse": [
+    {
+     "texto": "Concessão de Recursos Financeiros ou Renúncia de Receitas",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/acoes-e-programas/concessao-de-recursos-financeiros-ou-renuncia-de-receitas"
+    },
+    {
+     "texto": "Dados Abertos",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/dados-abertos"
+    },
+    {
+     "texto": "Receitas e Despesas",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/receitas-e-despesas"
+    },
+    {
+     "texto": "Servidores",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/servidores"
+    },
+    {
+     "texto": "Avaliação de Desempenho",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/servidores/adind"
+    },
+    {
+     "texto": "Despesas das Ações de Desenvolvimento de Pessoas",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/servidores/despesas-das-acoes-de-desenvolvimento-de-pessoas"
+    },
+    {
+     "texto": "Programa de Gestão e Desempenho",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/servidores/pgd"
+    },
+    {
+     "texto": "Servidor Público",
+     "href": "https://www.gov.br/pt-br/servicos/listar_servicos_segmento?segmento=publico_alvo_servidor"
+    },
+    {
+     "texto": "Dados Abertos",
+     "href": "https://www.gov.br/governodigital/pt-br/dados-abertos"
+    },
+    {
+     "texto": "Painel Estatístico de Pessoal",
+     "href": "https://www.gov.br/gestao/pt-br/acesso-a-informacao/servidores/servidores-publicos/painel-estatistico-de-pessoal"
+    }
+   ]
+  },
+  {
+   "url": "https://www.gov.br/saude/pt-br/composicao/saes/dcebas/legislacao",
+   "verificado_em": "2026-11-09T15:43:03-03:00",
+   "robots": "robots.txt permite",
+   "acessado": true,
+   "status": 200,
+   "tipo": "text/html;charset=utf-8",
+   "url_final": "https://www.gov.br/saude/pt-br/composicao/saes/dcebas/legislacao",
+   "titulo": "Legislação — Ministério da Saúde",
+   "links_de_interesse": [
+    {
+     "texto": "Concessão de Recursos Financeiros ou Renúncia de Receitas",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/acoes-e-programas/concessao-de-recursos-financeiros-ou-renuncia-de-receitas"
+    },
+    {
+     "texto": "Dados Abertos",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/dados-abertos"
+    },
+    {
+     "texto": "Receitas e Despesas",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/receitas-e-despesas"
+    },
+    {
+     "texto": "Servidores",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/servidores"
+    },
+    {
+     "texto": "Avaliação de Desempenho",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/servidores/adind"
+    },
+    {
+     "texto": "Despesas das Ações de Desenvolvimento de Pessoas",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/servidores/despesas-das-acoes-de-desenvolvimento-de-pessoas"
+    },
+    {
+     "texto": "Programa de Gestão e Desempenho",
+     "href": "https://www.gov.br/saude/pt-br/acesso-a-informacao/servidores/pgd"
+    },
+    {
+     "texto": "Servidor Público",
+     "href": "https://www.gov.br/pt-br/servicos/listar_servicos_segmento?segmento=publico_alvo_servidor"
+    },
+    {
+     "texto": "Dados Abertos",
+     "href": "https://www.gov.br/governodigital/pt-br/dados-abertos"
+    },
+    {
+     "texto": "Painel Estatístico de Pessoal",
+     "href": "https://www.gov.br/gestao/pt-br/acesso-a-informacao/servidores/servidores-publicos/painel-estatistico-de-pessoal"
+    },
+    {
+     "texto": "Certificação de Entidades Beneficentes de Assistência Social em Saúde",
+     "href": "https://www.gov.br/saude/pt-br/composicao/saes/dcebas"
+    }
+   ]
+  }
+ ],
+ "dados_abertos": [
+  {
+   "termo": "cebas",
+   "erro": "JSONDecodeError"
+  },
+  {
+   "termo": "entidades beneficentes",
+   "erro": "JSONDecodeError"
+  },
+  {
+   "termo": "certificacao entidades",
+   "erro": "JSONDecodeError"
+  }
+ ],
+ "conclusao": "Nenhum conjunto de dados aberto sobre CEBAS foi encontrado nesta rodada. Coleta de dados do SisCEBAS segue bloqueada até haver fonte aberta."
+}

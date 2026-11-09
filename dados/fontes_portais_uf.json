@@ -1,0 +1,155 @@
+{
+ "gerado_em": "2026-11-09T15:42:58-03:00",
+ "portais": [
+  {
+   "url": "https://transparencia.es.gov.br/",
+   "verificado_em": "2026-11-09T15:40:12-03:00",
+   "robots": "robots.txt bloqueia o acesso automatico",
+   "acessado": false,
+   "uf": "ES",
+   "nome": "Espírito Santo",
+   "status_cadastro": "candidato, a validar",
+   "via_automatizavel": false
+  },
+  {
+   "url": "https://transparencia.to.gov.br/",
+   "verificado_em": "2026-11-09T15:40:52-03:00",
+   "robots": "robots.txt indisponivel (URLError)",
+   "acessado": false,
+   "erro": "URLError",
+   "status": null,
+   "uf": "TO",
+   "nome": "Tocantins",
+   "status_cadastro": "candidato, a validar",
+   "via_automatizavel": false
+  },
+  {
+   "url": "https://transparencia.pa.gov.br/",
+   "verificado_em": "2026-11-09T15:42:13-03:00",
+   "robots": "robots.txt indisponivel (URLError)",
+   "acessado": false,
+   "erro": "URLError",
+   "status": null,
+   "uf": "PA",
+   "nome": "Pará",
+   "status_cadastro": "candidato, a validar",
+   "via_automatizavel": false
+  },
+  {
+   "url": "https://www.transparencia.pe.gov.br/",
+   "verificado_em": "2026-11-09T15:42:52-03:00",
+   "robots": "robots.txt permite",
+   "acessado": true,
+   "status": 200,
+   "tipo": "text/html; charset=UTF-8",
+   "url_final": "https://transparencia.pe.gov.br/",
+   "titulo": "Portal da Transparência &#8211; Governo de Pernambuco",
+   "links_de_interesse": [
+    {
+     "texto": "Dados Abertos.PE",
+     "href": "https://dados.pe.gov.br/"
+    },
+    {
+     "texto": "Despesas",
+     "href": "https://transparencia.pe.gov.br/despesas/"
+    },
+    {
+     "texto": "Despesas",
+     "href": "https://transparencia.pe.gov.br/despesas/menu-despesas/"
+    },
+    {
+     "texto": "Despesas Gerais",
+     "href": "https://transparencia.pe.gov.br/despesas/menu-despesas/despesas-gerais/"
+    },
+    {
+     "texto": "Despesas Detalhadas",
+     "href": "https://transparencia.pe.gov.br/despesas/menu-despesas/despesas-detalhadas/"
+    },
+    {
+     "texto": "Pagamentos",
+     "href": "https://transparencia.pe.gov.br/despesas/menu-despesas/pagamentos/"
+    },
+    {
+     "texto": "Ordem Cronológica de Pagamentos",
+     "href": "https://transparencia.pe.gov.br/despesas/menu-despesas/ordem-cronologica-de-pagamentos/"
+    },
+    {
+     "texto": "Obras",
+     "href": "https://transparencia.pe.gov.br/despesas/obras/"
+    },
+    {
+     "texto": "Execução Orçamentária de Obras e Instalações Públicas",
+     "href": "https://transparencia.pe.gov.br/despesas/obras/execucao-orcamentaria-de-obras-e-instalacoes-publicas/"
+    },
+    {
+     "texto": "Painel de Obras (ObrasPE)",
+     "href": "https://transparencia.pe.gov.br/despesas/obras/painel-de-obras-obraspe/"
+    },
+    {
+     "texto": "Painel de Obras (TransfereGov)",
+     "href": "https://transparencia.pe.gov.br/despesas/obras/painel-de-obras/"
+    },
+    {
+     "texto": "Transferências",
+     "href": "https://transparencia.pe.gov.br/despesas/transferencias/"
+    },
+    {
+     "texto": "Transferências Voluntárias realizadas pelo Estado",
+     "href": "https://transparencia.pe.gov.br/despesas/transferencias/transferencias-voluntarias-realizadas-pelo-estado/"
+    },
+    {
+     "texto": "Recursos do Fundo Estadual de apoio ao desenvolvimento municipal (FEM)",
+     "href": "https://transparencia.pe.gov.br/despesas/transferencias/fem/"
+    },
+    {
+     "texto": "Transferências Constitucionais a Municípios",
+     "href": "https://transparencia.pe.gov.br/despesas/transferencias/transferencias-a-municipios/"
+    },
+    {
+     "texto": "Repasse para Organizações Sociais (OS) e Organizações da Sociedade Civil de Interesse Públ",
+     "href": "https://transparencia.pe.gov.br/despesas/transferencias/organizacoes-sociais-os-e-organizacoes-da-sociedade-civil-de-interesse-publico-oscip/"
+    },
+    {
+     "texto": "Repasse para Organizações Sociais de Saúde (OSS) e Unidades de Saúde",
+     "href": "https://transparencia.pe.gov.br/despesas/transferencias/repasse-as-organizacoes-sociais-de-saude-oss-e-unidades-de-saude/"
+    },
+    {
+     "texto": "Acordos sem Transferência de Recursos",
+     "href": "https://transparencia.pe.gov.br/despesas/transferencias/acordos-sem-transferencia-de-recursos/"
+    },
+    {
+     "texto": "Painel de Parcerias",
+     "href": "https://transparencia.pe.gov.br/despesas/transferencias/parcerias/"
+    },
+    {
+     "texto": "Receitas",
+     "href": "https://transparencia.pe.gov.br/receitas/"
+    },
+    {
+     "texto": "Receitas Totais",
+     "href": "https://transparencia.pe.gov.br/receitas/receitas-totais/"
+    },
+    {
+     "texto": "Transferências Legais e Voluntárias da União",
+     "href": "https://transparencia.pe.gov.br/receitas/transferencias-obrigatorias-da-uniao/"
+    },
+    {
+     "texto": "Inscritos em Dívida Ativa",
+     "href": "https://transparencia.pe.gov.br/receitas/inscritos-em-divida-ativa/"
+    },
+    {
+     "texto": "Benefícios Fiscais",
+     "href": "https://transparencia.pe.gov.br/receitas/beneficios-fiscais/"
+    },
+    {
+     "texto": "Renúncia de Receitas",
+     "href": "https://transparencia.pe.gov.br/receitas/renuncia-de-receita/"
+    }
+   ],
+   "uf": "PE",
+   "nome": "Pernambuco",
+   "status_cadastro": "candidato, a validar",
+   "via_automatizavel": true
+  }
+ ]
+}
