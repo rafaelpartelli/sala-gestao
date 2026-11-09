@@ -1,5 +1,5 @@
 """Sondagem educada de fontes publicas: respeita o robots.txt, nao faz login e nao baixa dados, so registra o que a pagina oferece."""
-import re, urllib.parse, urllib.request, urllib.robotparser
+import html, re, urllib.parse, urllib.request, urllib.robotparser
 from comum import UA, agora
 
 PALAVRAS = re.compile(r"dados abertos|api|csv|download|receita|despesa|pessoal|servidor|remunera|contrato de gest|certifica", re.I)
@@ -33,7 +33,7 @@ def sondar_pagina(url, timeout=30):
         out.update(acessado=False, erro=type(e).__name__, status=getattr(e, "code", None))
         return out
     t = re.search(r"<title[^>]*>(.*?)</title>", corpo, re.I | re.S)
-    out["titulo"] = re.sub(r"\s+", " ", t.group(1)).strip()[:160] if t else None
+    out["titulo"] = html.unescape(re.sub(r"\s+", " ", t.group(1)).strip())[:160] if t else None
     links = []
     for href, txt in re.findall(r'<a[^>]+href="([^"#]+)"[^>]*>(.*?)</a>', corpo, re.I | re.S):
         txt = re.sub(r"<[^>]+>|\s+", " ", txt).strip()

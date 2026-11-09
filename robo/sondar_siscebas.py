@@ -31,7 +31,9 @@ def main():
     paginas = [sondar_pagina(u) for u in PAGINAS]
     abertos = buscar_dados_abertos()
     uteis = [a for a in abertos if a.get("recursos")]
+    falhou = abertos and all(a.get("erro") for a in abertos)
     conclusao = ("Há conjunto de dados aberto sobre CEBAS: validar campos antes de coletar." if uteis else
+                 "A busca no OpenDataSUS falhou nesta rodada (resposta inesperada): sem conclusão sobre dados abertos de CEBAS. Verificar manualmente." if falhou else
                  "Nenhum conjunto de dados aberto sobre CEBAS foi encontrado nesta rodada. Coleta de dados do SisCEBAS segue bloqueada até haver fonte aberta.")
     escrever_json("dados/fontes_siscebas.json", {"gerado_em": agora(), "paginas": paginas, "dados_abertos": abertos, "conclusao": conclusao}, indent=1)
     for p in paginas:
