@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Receitas Municipais | Rafael Partelli</title>
+<meta name="description" content="Receita realizada, dependência de transferências, receita por habitante e despesa com pessoal (limites da LRF) dos municípios, com dados do SICONFI e data de cada coleta.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231351B4'/%3E%3Cpath d='M14 7h4v7h7v4h-7v7h-4v-7H7v-4h7z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../css/sala.css?v=2">
+<link rel="stylesheet" href="../css/receitas.css?v=1">
+</head>
+<body>
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+<header class="topo">
+  <div class="miolo">
+    <p class="marca">Rafael Partelli · Gestão em saúde pública</p>
+    <h1>Receitas Municipais</h1>
+    <p class="lead">Quanto o município arrecada, de onde vem o dinheiro e quanto a folha de pessoal consome do limite da Lei de Responsabilidade Fiscal.</p>
+  </div>
+</header>
+
+<nav class="filtros" aria-label="Escolha do estado">
+  <div class="miolo filtros-linha">
+    <label>Estado
+      <select id="selUF"></select>
+    </label>
+    <label>Ordenar por
+      <select id="selOrd">
+        <option value="total">Receita realizada</option>
+        <option value="percapita">Receita por habitante</option>
+        <option value="dep">Dependência de transferências</option>
+        <option value="trib">Receita tributária</option>
+        <option value="pes">Pessoal (% da RCL)</option>
+        <option value="nome">Nome</option>
+      </select>
+    </label>
+  </div>
+</nav>
+
+<main id="conteudo" class="miolo">
+  <p id="selo" class="pilula" role="status" aria-live="polite">Carregando dados...</p>
+  <section aria-labelledby="h-resumo">
+    <h2 id="h-resumo">Resumo do estado</h2>
+    <div id="kpis" class="kpis"></div>
+  </section>
+  <section aria-labelledby="h-tab" class="bloco">
+    <h2 id="h-tab">Municípios</h2>
+    <p class="fonte" id="fonte"></p>
+    <div class="tabela-rolavel" id="tabela"></div>
+    <div class="aviso">Dependência de transferências = transferências correntes sobre a receita total. Pessoal: despesa total com pessoal sobre a RCL ajustada (Poder Executivo). Faixas legais: alerta a partir de 90% do limite (art. 59 da LRF), prudencial a partir de 95% (art. 22) e excedido acima de 100% (art. 20). Município que não entregou o demonstrativo aparece sem valor.</div>
+  </section>
+</main>
+<script src="../js/receitas.js?v=1" defer></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "_aviso": "Enderecos CANDIDATOS, ainda nao validados por Rafael. A sondagem so registra o que cada portal oferece; nada daqui e publicado no painel. Corrigir a URL de cada UF aqui apos a validacao.",
+  "piloto": [
+    {"uf": "ES", "nome": "Espírito Santo", "url": "https://transparencia.es.gov.br/", "status": "candidato, a validar"},
+    {"uf": "TO", "nome": "Tocantins", "url": "https://transparencia.to.gov.br/", "status": "candidato, a validar"},
+    {"uf": "PA", "nome": "Pará", "url": "https://transparencia.pa.gov.br/", "status": "candidato, a validar"},
+    {"uf": "PE", "nome": "Pernambuco", "url": "https://www.transparencia.pe.gov.br/", "status": "candidato, a validar"}
+  ]
+}

@@ -1,0 +1,19 @@
+/* Complementa sala.css nas paginas de receitas e de organizacoes */
+.tabela-rolavel{overflow-x:auto;border:1px solid var(--linha);border-radius:10px;background:var(--superficie)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;font-variant-numeric:tabular-nums}
+th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--linha);white-space:nowrap}
+thead th{background:var(--barra-fundo);color:var(--texto);position:sticky;top:0;font-size:.8rem}
+tbody th{text-align:left;font-weight:600;position:sticky;left:0;background:var(--superficie)}
+thead th:first-child{text-align:left}
+.faixa{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;font-size:.75rem;font-weight:600;border:1px solid currentColor}
+.f-ok{color:var(--n1)}.f-alerta{color:var(--n2)}.f-prudencial{color:var(--n3)}.f-excedido{color:var(--n4)}
+.pilula{margin:0 0 14px;display:inline-block;padding:6px 12px;border-radius:999px;background:var(--barra-fundo);color:var(--texto2);font-size:.82rem}
+.abas{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}
+.abas button{font:inherit;padding:10px 16px;border:1px solid var(--linha);border-radius:8px;background:var(--superficie);color:var(--texto);min-height:44px;cursor:pointer}
+.abas button[aria-selected="true"]{background:var(--azul);color:#fff;border-color:var(--azul)}
+.cartao-fonte{border:1px solid var(--linha);border-radius:10px;padding:12px 14px;margin:10px 0;background:var(--superficie)}
+.cartao-fonte h3{margin:0 0 4px}
+.selo-estado{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.78rem;font-weight:600;border:1px solid currentColor}
+.e-aberta{color:var(--n1)}.e-validar{color:var(--n2)}.e-bloqueada{color:var(--n4)}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.kpi .val{overflow-wrap:anywhere;font-size:clamp(1.15rem,4.5vw,1.5rem)}

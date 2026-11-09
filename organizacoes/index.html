@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel das Organizações | Rafael Partelli</title>
+<meta name="description" content="Painel para organizações sociais de saúde e entidades com CEBAS: fontes públicas, situação de cada fonte e o que já está disponível.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231351B4'/%3E%3Cpath d='M14 7h4v7h7v4h-7v7h-4v-7H7v-4h7z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../css/sala.css?v=2">
+<link rel="stylesheet" href="../css/receitas.css?v=1">
+</head>
+<body>
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+<header class="topo">
+  <div class="miolo">
+    <p class="marca">Rafael Partelli · Gestão em saúde pública</p>
+    <h1>Painel das Organizações</h1>
+    <p class="lead">Organizações sociais de saúde e entidades beneficentes com CEBAS: o que existe de informação pública, de onde vem e em que situação está cada fonte.</p>
+  </div>
+</header>
+
+<main id="conteudo" class="miolo">
+  <p id="selo" class="pilula" role="status" aria-live="polite">Carregando situação das fontes...</p>
+  <div class="abas" role="tablist" aria-label="Perfil">
+    <button role="tab" id="t-os" aria-selected="true" aria-controls="p-os">OS de saúde</button>
+    <button role="tab" id="t-cebas" aria-selected="false" aria-controls="p-cebas">Entidades CEBAS</button>
+  </div>
+
+  <section id="p-os" role="tabpanel" aria-labelledby="t-os" class="bloco">
+    <h2>Organizações sociais de saúde</h2>
+    <p>Receita, repasses e despesa com pessoal ligados ao contrato de gestão. A base fiscal dos entes contratantes (estado e município) já está no painel <a href="../receitas/">Receitas Municipais</a>. A informação da própria organização depende de cada portal estadual de transparência.</p>
+    <div id="portais"></div>
+  </section>
+
+  <section id="p-cebas" role="tabpanel" aria-labelledby="t-cebas" class="bloco" hidden>
+    <h2>Entidades beneficentes com CEBAS Saúde</h2>
+    <p>Situação da certificação, validade e prazos de renovação. O SisCEBAS exige login do representante legal da entidade: o painel usa somente o que for público.</p>
+    <div id="siscebas"></div>
+  </section>
+
+  <div class="aviso">Este painel só publica informação de fonte oficial aberta, com a data da última verificação. Quando a fonte não permite leitura automática, o painel informa isso e não preenche com estimativa.</div>
+</main>
+<script src="../js/organizacoes.js?v=1" defer></script>
+</body>
+</html>

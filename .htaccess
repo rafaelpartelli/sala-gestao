@@ -1,6 +1,6 @@
 # Hostinger (Apache): esconde pastas internas e comprime os dados
 RewriteEngine On
-RewriteRule ^(robo|tests|scripts|_workflows_novos|\.github|\.git)(/|$) - [F,L]
+RewriteRule ^(robo|tests|config|scripts|_workflows_novos|\.github|\.git)(/|$) - [F,L]
 RewriteRule ^(README|GUIA_GITHUB)\.md$ - [F,L]
 RewriteRule ^dados/(sondagem.*|aps)(\.json|/) - [F,L]
 

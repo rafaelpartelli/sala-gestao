@@ -1,0 +1,50 @@
+name: Coletar receita e pessoal (SICONFI)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ufs:
+        description: "UFs separadas por virgula, ou BR para o Brasil (padrao: piloto ES,TO,PA,PE)"
+        required: false
+        default: "ES,TO,PA,PE"
+  schedule:
+    - cron: "46 4 * * *"   # 01:46 Brasilia, como os demais robos
+
+permissions:
+  contents: write
+
+concurrency:
+  group: coleta-receita-pessoal
+  cancel-in-progress: false
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      UFS: ${{ github.event.inputs.ufs || 'ES,TO,PA,PE' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Testes
+        run: python3 -I -m unittest discover -s tests
+      - name: Coletar receita
+        run: python3 robo/coletar_receita.py
+      - name: Coletar pessoal
+        if: always()
+        run: python3 robo/coletar_pessoal.py
+      - name: Publicar resultado
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dados
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "dados: receita e pessoal $(date -u +%d/%m/%Y\ %H:%M)"
+          for i in 1 2 3 4; do
+            if git pull --rebase -X theirs origin main && git push; then exit 0; fi
+            sleep 7
+          done
+          exit 1
