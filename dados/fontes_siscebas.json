@@ -1,17 +1,20 @@
 {
- "gerado_em": "2026-11-09T15:43:12-03:00",
+ "gerado_em": "2026-11-16T10:38:00-03:00",
  "paginas": [
   {
    "url": "http://siscebas.saude.gov.br/siscebas/",
-   "verificado_em": "2026-11-09T15:42:59-03:00",
-   "robots": "robots.txt indisponivel (RemoteDisconnected)",
-   "acessado": false,
-   "erro": "RemoteDisconnected",
-   "status": null
+   "verificado_em": "2026-11-16T10:37:52-03:00",
+   "robots": "robots.txt indisponivel (HTTPError)",
+   "acessado": true,
+   "status": 200,
+   "tipo": "text/html; charset=UTF-8",
+   "url_final": "https://siscebas.saude.gov.br/siscebas/",
+   "titulo": "SISCEBAS - SISTEMA DE GERENCIAMENTO DE INFORMAÇÕES",
+   "links_de_interesse": []
   },
   {
    "url": "https://www.gov.br/saude/pt-br/composicao/saes/dcebas",
-   "verificado_em": "2026-11-09T15:43:01-03:00",
+   "verificado_em": "2026-11-16T10:37:53-03:00",
    "robots": "robots.txt permite",
    "acessado": true,
    "status": 200,
@@ -63,7 +66,7 @@
   },
   {
    "url": "https://www.gov.br/saude/pt-br/composicao/saes/dcebas/legislacao",
-   "verificado_em": "2026-11-09T15:43:03-03:00",
+   "verificado_em": "2026-11-16T10:37:55-03:00",
    "robots": "robots.txt permite",
    "acessado": true,
    "status": 200,
@@ -132,5 +135,5 @@
    "erro": "JSONDecodeError"
   }
  ],
- "conclusao": "Nenhum conjunto de dados aberto sobre CEBAS foi encontrado nesta rodada. Coleta de dados do SisCEBAS segue bloqueada até haver fonte aberta."
+ "conclusao": "A busca no OpenDataSUS falhou nesta rodada (resposta inesperada): sem conclusão sobre dados abertos de CEBAS. Verificar manualmente."
 }
