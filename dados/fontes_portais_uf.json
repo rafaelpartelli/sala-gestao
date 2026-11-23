@@ -1,9 +1,9 @@
 {
- "gerado_em": "2026-11-16T10:37:50-03:00",
+ "gerado_em": "2026-11-23T12:58:00-03:00",
  "portais": [
   {
    "url": "https://transparencia.es.gov.br/",
-   "verificado_em": "2026-11-16T10:35:07-03:00",
+   "verificado_em": "2026-11-23T12:55:12-03:00",
    "robots": "robots.txt bloqueia o acesso automatico",
    "acessado": false,
    "uf": "ES",
@@ -13,7 +13,7 @@
   },
   {
    "url": "https://transparencia.to.gov.br/",
-   "verificado_em": "2026-11-16T10:35:48-03:00",
+   "verificado_em": "2026-11-23T12:55:52-03:00",
    "robots": "robots.txt indisponivel (URLError)",
    "acessado": false,
    "erro": "URLError",
@@ -25,7 +25,7 @@
   },
   {
    "url": "https://transparencia.pa.gov.br/",
-   "verificado_em": "2026-11-16T10:37:08-03:00",
+   "verificado_em": "2026-11-23T12:57:13-03:00",
    "robots": "robots.txt indisponivel (URLError)",
    "acessado": false,
    "erro": "URLError",
@@ -37,7 +37,7 @@
   },
   {
    "url": "https://www.transparencia.pe.gov.br/",
-   "verificado_em": "2026-11-16T10:37:46-03:00",
+   "verificado_em": "2026-11-23T12:57:52-03:00",
    "robots": "robots.txt permite",
    "acessado": true,
    "status": 200,
